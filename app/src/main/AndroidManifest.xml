@@ -476,7 +476,7 @@
             android:name=".utils.Preferences"
             android:configChanges="orientation|screenSize"
             android:label="@string/settings"
-            android:theme="@style/OldAppTheme" />
+            android:theme="@style/AppTheme" />
 
         <receiver android:name=".xDripWidget">
             <intent-filter>
@@ -788,6 +788,7 @@
             android:name=".MegaStatus"
             android:configChanges="orientation|screenSize"
             android:label="@string/system_status"
+            android:theme="@style/OldAppTheme"
             android:parentActivityName=".Home" />
         <activity
             android:name=".Reminders"
