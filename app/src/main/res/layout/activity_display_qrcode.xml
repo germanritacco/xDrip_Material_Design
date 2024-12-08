@@ -71,6 +71,7 @@
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <Button
+                    android:backgroundTint="@color/colorButton"
                     android:id="@+id/button3"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -81,6 +82,7 @@
 
 
                 <Button
+                    android:backgroundTint="@color/colorButton"
                     app:showIfTrue="@{prefs.getbool(`desert_sync_enabled`)}"
                     android:id="@+id/button44"
                     android:layout_width="match_parent"
@@ -91,6 +93,7 @@
                     android:text="@string/set_up_desert_sync_follower" />
 
                 <Button
+                    android:backgroundTint="@color/colorButton"
                     app:showIfTrue="@{viewmodel.showGkey}"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -101,6 +104,7 @@
 
 
                 <Button
+                    android:backgroundTint="@color/colorButton"
                     android:id="@+id/button"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -111,6 +115,7 @@
                     android:text="@string/show_general_and_collection_settings" />
 
                 <Button
+                    android:backgroundTint="@color/colorButton"
                     android:id="@+id/buttonallsettings"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -127,11 +132,12 @@
         android:id="@+id/imageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:layout_gravity="end"
+        android:backgroundTint="#1f1f1f "
         android:onClick="closeNow"
-        android:src="@android:drawable/ic_delete" />
+        android:src="@drawable/rounded_close_24" />
 
 </RelativeLayout>
 

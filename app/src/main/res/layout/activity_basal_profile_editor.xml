@@ -21,6 +21,7 @@
 
 
     <Button
+        android:backgroundTint="@color/colorButton"
         android:id="@+id/basalPlusButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -33,6 +34,7 @@
         tools:layout_editor_absoluteY="0dp" />
 
     <Button
+        android:backgroundTint="@color/colorButton"
         android:id="@+id/basalMinusButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -45,6 +47,7 @@
         tools:layout_editor_absoluteY="0dp" />
 
     <Button
+        android:backgroundTint="@color/colorButton"
         android:id="@+id/basalSetButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

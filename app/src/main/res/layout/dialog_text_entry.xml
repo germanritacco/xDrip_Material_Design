@@ -2,9 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#121212"
+    android:backgroundTint="#121212"
     android:orientation="vertical"
-    android:paddingEnd="15dp"
-    android:paddingStart="15dp">
+    android:paddingStart="15dp"
+    android:paddingEnd="15dp">
 
     <EditText
         android:id="@+id/dialogTextEntryeditText"

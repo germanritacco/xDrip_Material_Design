@@ -17,9 +17,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
         android:layout_marginTop="10dp"
+        android:layout_marginRight="5dp"
         android:background="@drawable/tick_thing"
+        android:backgroundTint="#A5D6A7"
         android:fontFamily="sans-serif-condensed"
         android:gravity="center"
         android:textColor="@android:color/white"
@@ -244,7 +245,7 @@
                 android:layout_marginLeft="2dp"
                 android:layout_marginRight="2dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_av_timer_white_36dp" />
+                android:src="@drawable/round_access_time_24" />
         </LinearLayout>
 
         <LinearLayout
@@ -258,14 +259,14 @@
             <ImageButton
                 android:id="@+id/btnKeypadSpeak"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="36dp"
                 android:layout_gravity="right"
                 android:background="@android:color/transparent"
                 android:longClickable="false"
-                android:paddingEnd="5dp"
                 android:paddingStart="5dp"
+                android:paddingEnd="5dp"
                 android:scaleType="center"
-                android:src="@android:drawable/ic_btn_speak_now" />
+                android:src="@drawable/rounded_mic_24" />
 
         </LinearLayout>
 
@@ -277,8 +278,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.05"
-        android:visibility="gone"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        android:visibility="gone">
 
         <Button
             android:id="@+id/multi_button1"

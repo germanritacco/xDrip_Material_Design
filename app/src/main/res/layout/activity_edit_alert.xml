@@ -3,10 +3,10 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:gravity="center_horizontal">
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center_horizontal">
         <TextView
             android:id="@+id/view_alert_header"
             android:layout_width="fill_parent"
@@ -35,9 +35,9 @@
                     android:layout_below="@+id/view_alert_header">
 
                     <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
                         <TextView
                             android:id="@+id/view_alert_text"
                             android:layout_width="wrap_content"
@@ -154,34 +154,35 @@
                         android:paddingTop="20dp">
 
                         <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
 
-                        <TextView
+                            <TextView
                                 android:id="@+id/view_alert_mp3_file"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="left"
                                 android:text="@string/alert_tone_colon"
                                 android:textSize="15sp"/>
-                        <EditText
-                            android:id="@+id/edit_alert_mp3_file"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:inputType="text"
-                            android:ems="10"
-                            android:autoText="false"
-                            android:text=""
-                            android:singleLine="true"
-                            android:textAlignment="center"
-                            android:textSize="15sp"
-                            android:layout_alignParentStart="true"
-                            android:editable="false" />
+                            <EditText
+                                android:id="@+id/edit_alert_mp3_file"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:inputType="text"
+                                android:ems="10"
+                                android:autoText="false"
+                                android:text=""
+                                android:singleLine="true"
+                                android:textAlignment="center"
+                                android:textSize="15sp"
+                                android:layout_alignParentStart="true"
+                                android:editable="false" />
 
                         </LinearLayout>
 
                         <Button
+                            android:backgroundTint="@color/colorButton"
                             android:id="@+id/Button_alert_mp3_file"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -415,63 +416,76 @@
 
                     </LinearLayout>
                 </LinearLayout>
-            <LinearLayout
-                android:id="@+id/linear_layout_test_buttons"
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/linear_layout_alert"
-                android:gravity="center_horizontal"
-                android:paddingTop="20dp">
-                <Button
-                    android:id="@+id/edit_alert_test"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/test_alert"
-                    android:layout_gravity="center_horizontal" />
-
-            </LinearLayout>
-
                 <LinearLayout
-                    android:id="@+id/linear_layout_buttons"
+                    android:id="@+id/linear_layout_test_buttons"
                     android:orientation="horizontal"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/linear_layout_alert"
                     android:gravity="center_horizontal"
                     android:paddingTop="20dp">
-
-
                     <Button
-                        android:id="@+id/edit_alert_save"
+                        android:backgroundTint="@color/colorButton"
+                        android:id="@+id/edit_alert_test"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/save_alert"
+                        android:text="@string/test_alert"
                         android:layout_gravity="center_horizontal" />
 
-                    <Button
-                        android:id="@+id/edit_alert_remove"
-                        android:layout_width="wrap_content"
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/linear_layout_buttons"
+                        android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/remove_alert"
-                        android:layout_gravity="center_horizontal" />
+                        android:layout_below="@+id/linear_layout_alert"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal"
+                        android:paddingTop="20dp">
+
+
+                        <Button
+                            android:backgroundTint="@color/colorButton"
+                            android:id="@+id/edit_alert_save"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:text="@string/save_alert" />
+
+                        <Button
+                            android:backgroundTint="@color/colorButton"
+                            android:id="@+id/edit_alert_remove"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:text="@string/remove_alert" />
+
+                    </LinearLayout>
 
                     <Button
+                        android:backgroundTint="@color/colorButton"
                         android:id="@+id/edit_alert_pre_snooze"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/snooze_alert_before_it_fires"
-                        android:layout_gravity="center_horizontal" />
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/snooze_alert_before_it_fires" />
+
                 </LinearLayout>
+
             </LinearLayout>
 
         </ScrollView>
     </LinearLayout>
 
     <fragment android:id="@+id/navigation_drawer"
-    android:layout_width="@dimen/navigation_drawer_width" android:layout_height="match_parent"
-    android:layout_gravity="start"
-    android:name="com.eveningoutpost.dexdrip.NavigationDrawerFragment"
-    tools:layout="@layout/fragment_navigation_drawer" />
+        android:layout_width="@dimen/navigation_drawer_width" android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:name="com.eveningoutpost.dexdrip.NavigationDrawerFragment"
+        tools:layout="@layout/fragment_navigation_drawer" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

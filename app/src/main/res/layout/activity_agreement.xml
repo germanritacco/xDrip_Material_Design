@@ -53,6 +53,7 @@
                 android:text="@string/pref_I_understand_title" />
 
             <Button
+                android:backgroundTint="@color/colorButton"
                 android:id="@+id/saveButton2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

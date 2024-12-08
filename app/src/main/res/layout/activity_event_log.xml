@@ -133,6 +133,7 @@
             app:layout_constraintStart_toStartOf="parent">
 
             <Button
+                android:backgroundTint="@color/colorButton"
                 android:id="@+id/event_upload_logs_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -143,16 +144,18 @@
                 android:textAlignment="center" />
 
             <Button
+                android:backgroundTint="@color/colorButton"
                 android:id="@+id/event_save_logs_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="saveEventLog"
-                android:text="Save Logs"
+                android:text="@string/save_logs"
                 android:textAllCaps="false"
                 android:textAlignment="center" />
 
             <Button
+                android:backgroundTint="@color/colorButton"
                 android:id="@+id/button28"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

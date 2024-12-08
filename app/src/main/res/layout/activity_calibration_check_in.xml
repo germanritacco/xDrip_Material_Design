@@ -15,6 +15,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/check_in_text" />
         <Button
+            android:backgroundTint="@color/colorButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/check_in_dexcom_calibrations"

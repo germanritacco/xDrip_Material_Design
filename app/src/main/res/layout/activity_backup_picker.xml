@@ -78,6 +78,7 @@
                 app:invisibleIfFalse="@{!vm.idle}" />
 
             <Button
+                android:backgroundTint="@color/colorButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
@@ -88,6 +89,7 @@
                 android:textAllCaps="false"/>
 
             <Button
+                android:backgroundTint="@color/colorButton"
                 android:id="@+id/button30"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -119,6 +121,7 @@
                 app:showIfTrueAnimatedFastOff="@{vm.showAuto}" />
 
             <Button
+                android:backgroundTint="@color/colorButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"

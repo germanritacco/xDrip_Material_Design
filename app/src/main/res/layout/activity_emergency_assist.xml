@@ -91,6 +91,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
+                    android:background="#00FFFFFF"
                     android:text="@{model.lastExtendedText, default=`Preview Text`}"
                     android:textColor="#000000"
                     android:textStyle="italic" />
@@ -127,8 +128,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:layout_weight="1"
+                android:backgroundTint="#1f1f1f"
                 android:onClick="chooseContact"
-                appx:srcCompat="@drawable/ic_group_add_grey_500_24dp" />
+                appx:srcCompat="@drawable/rounded_group_add_24" />
 
 
             <View
@@ -167,13 +169,14 @@
                     android:id="@+id/seekBar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="0dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_weight="1"
                     android:max="360"
-                    android:thumb="@drawable/ic_av_timer_white_36dp"
-                    android:thumbTint="@color/accent_material_dark"
+                    android:progressTint="#A5D6A7"
+                    android:thumb="@drawable/round_access_time_24"
+                    android:thumbTint="@color/colorAccent"
                     appx:progressString="@={sprefs[`emergency_assist_low_alert_minutes`]}" />
 
                 <TextView
@@ -206,13 +209,14 @@
                 <SeekBar
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="0dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_weight="1"
                     android:max="360"
-                    android:thumb="@drawable/ic_av_timer_white_36dp"
-                    android:thumbTint="@color/accent_material_dark"
+                    android:progressTint="#A5D6A7"
+                    android:thumb="@drawable/round_access_time_24"
+                    android:thumbTint="@color/colorAccent"
                     appx:progressString="@={sprefs[`emergency_assist_lowest_alert_minutes`]}" />
 
                 <TextView
@@ -246,13 +250,14 @@
                 <SeekBar
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="0dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_weight="1"
                     android:max="720"
-                    android:thumb="@drawable/ic_av_timer_white_36dp"
-                    android:thumbTint="@color/accent_material_dark"
+                    android:progressTint="#A5D6A7"
+                    android:thumb="@drawable/round_access_time_24"
+                    android:thumbTint="@color/colorAccent"
                     appx:progressString="@={sprefs[`emergency_assist_high_alert_minutes`]}" />
 
                 <TextView
@@ -288,13 +293,14 @@
                 <SeekBar
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="0dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_weight="1"
                     android:max="2880"
-                    android:thumb="@drawable/ic_av_timer_white_36dp"
-                    android:thumbTint="@color/accent_material_dark"
+                    android:progressTint="#A5D6A7"
+                    android:thumb="@drawable/round_access_time_24"
+                    android:thumbTint="@color/colorAccent"
                     appx:progressString="@={sprefs[`emergency_assist_inactivity_minutes`]}" />
 
                 <TextView
@@ -315,6 +321,7 @@
                 android:background="#484848" />
 
             <Button
+                android:backgroundTint="@color/colorButton"
                 android:id="@+id/button29"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

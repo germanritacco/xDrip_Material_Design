@@ -85,6 +85,7 @@
                 android:gravity="bottom">
 
                 <Button
+                    android:backgroundTint="@color/colorButton"
                     android:id="@+id/profileCancelbtn"
                     style="?android:attr/buttonStyleSmall"
                     android:layout_width="wrap_content"
@@ -96,6 +97,7 @@
                     android:text="@string/cancel" />
 
                 <Button
+                    android:backgroundTint="@color/colorButton"
                     android:id="@+id/profileSaveBtn"
                     style="?android:attr/buttonStyleSmall"
                     android:layout_width="wrap_content"
@@ -107,6 +109,7 @@
                     android:text="@string/save" />
 
                 <Button
+                    android:backgroundTint="@color/colorButton"
                     android:id="@+id/profileUndoBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

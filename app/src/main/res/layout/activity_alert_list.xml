@@ -18,6 +18,7 @@
             android:gravity="center_horizontal"
             android:weightSum="1">
             <Button
+                android:backgroundTint="@color/colorButton"
                 android:id="@+id/button_create_low"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -37,6 +38,7 @@
             android:layout_gravity="center_horizontal"
             android:gravity="center_horizontal">
             <Button
+                android:backgroundTint="@color/colorButton"
                 android:id="@+id/button_create_high"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

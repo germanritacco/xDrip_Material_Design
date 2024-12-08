@@ -37,6 +37,7 @@
         android:layout_below="@+id/yourText" />
 
     <Button
+        android:backgroundTint="@color/colorButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/send_message"
@@ -64,11 +65,12 @@
         android:textAlignment="center" />
 
     <ImageButton
+        android:id="@+id/closebutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/closebutton"
-        android:onClick="closeActivity"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:src="@android:drawable/ic_delete" />
+        android:layout_alignParentBottom="true"
+        android:backgroundTint="#1F1F1F"
+        android:onClick="closeActivity"
+        android:src="@drawable/rounded_close_24" />
 </RelativeLayout>

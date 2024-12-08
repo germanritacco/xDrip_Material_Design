@@ -26,6 +26,7 @@
         android:textSize="18sp"/>
 
     <Button
+        android:backgroundTint="@color/colorButton"
         android:id="@+id/savelogbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -41,6 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
+        android:backgroundTint="#1f1f1f"
         android:onClick="closeActivity"
-        android:src="@android:drawable/ic_delete" />
+        android:src="@drawable/rounded_close_24" />
 </RelativeLayout>

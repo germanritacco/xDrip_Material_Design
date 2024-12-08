@@ -55,6 +55,7 @@
                 android:layout_toStartOf="@+id/textView19" />
 
             <Button
+                android:backgroundTint="@color/colorButton"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
@@ -66,6 +67,7 @@
                 android:layout_alignTop="@+id/profileUndoBtn" />
 
             <Button
+                android:backgroundTint="@color/colorButton"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -77,6 +79,7 @@
                 android:onClick="profileSaveButton" />
 
             <Button
+                android:backgroundTint="@color/colorButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/reset"

@@ -38,6 +38,7 @@
                     android:orientation="horizontal">
 
                     <Button
+                        android:backgroundTint="@color/colorButton"
                         android:id="@+id/button27"
                         android:layout_width="0px"
                         android:layout_height="wrap_content"
@@ -46,6 +47,7 @@
                         android:text="Check DB quick" />
 
                     <Button
+                        android:backgroundTint="@color/colorButton"
                         android:layout_width="0px"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -62,6 +64,7 @@
                     android:orientation="horizontal">
 
                     <Button
+                        android:backgroundTint="@color/colorButton"
                         android:layout_width="0px"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
@@ -70,6 +73,7 @@
                         android:text="Statistics" />
 
                     <Button
+                        android:backgroundTint="@color/colorButton"
                         android:layout_width="0px"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"

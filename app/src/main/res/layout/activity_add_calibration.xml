@@ -28,6 +28,7 @@
         android:layout_marginTop="41dp" />
 
     <Button
+        android:backgroundTint="@color/colorButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/done"
@@ -43,5 +44,5 @@ android:layout_gravity="start"
 android:name="com.eveningoutpost.dexdrip.NavigationDrawerFragment"
 tools:layout="@layout/fragment_navigation_drawer" />
 
-    </androidx.drawerlayout.widget.DrawerLayout>
+</androidx.drawerlayout.widget.DrawerLayout>
 

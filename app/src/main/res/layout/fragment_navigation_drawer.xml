@@ -4,5 +4,5 @@
     android:divider="#ff000000" android:dividerHeight="1dp"
     android:paddingStart="5dp"
     android:paddingEnd="5dp"
-    android:background="@drawable/nav_drawer_background"
+    android:background="#121212"
     tools:context="com.eveningoutpost.dexdrip.NavigationDrawerFragment" />

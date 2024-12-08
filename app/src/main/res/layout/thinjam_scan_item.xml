@@ -22,6 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
+            android:background="#121212"
             android:onClick="@{item::onClick}"
             android:orientation="horizontal">
 
@@ -42,8 +43,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1"
-                android:text="@{item.mac, default=`00:00:00:00:00:00`}"
-                />
+                android:text="@{item.mac, default=`00:00:00:00:00:00`}" />
 
 
             <TextView
@@ -53,8 +53,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1"
-                android:text="@{item.name, default=`Test text`}"
-                />
+                android:text="@{item.name, default=`Test text`}" />
 
         </LinearLayout>
 

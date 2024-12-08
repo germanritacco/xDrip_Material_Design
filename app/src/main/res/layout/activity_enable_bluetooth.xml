@@ -38,6 +38,7 @@
 
 
         <Button
+            android:backgroundTint="@color/colorButton"
             android:id="@+id/enable_streaming_yes"
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
@@ -48,6 +49,7 @@
             android:text="@string/enable_streaming_dialog_yes" />
 
         <Button
+            android:backgroundTint="@color/colorButton"
             android:id="@+id/enable_streaming_no"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

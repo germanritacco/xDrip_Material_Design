@@ -9,10 +9,10 @@
     </data>
 
 
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#121212"
         android:orientation="vertical"
         android:padding="10dp">
 
@@ -24,6 +24,7 @@
             android:checked="@{safeUnbox(vs.included[`source_wizard`])}"
             android:onClick="@{() -> vs.ptoggle(`source_wizard`)}"
             android:text="@string/source_wizard_button" />
+
         <Switch
             android:id="@+id/pswitch1"
             android:layout_width="match_parent"
@@ -76,6 +77,7 @@
                 android:background="@android:color/transparent"
                 android:onClick="@{(v) -> home.showArrowConfigurator(v, safeUnbox(vs.included[`graphic_trend_arrow`]), false)}"
                 android:scaleType="fitCenter"
+                android:tint="#FFFFFF"
                 app:showIfTrue="@{safeUnbox(vs.included[`graphic_trend_arrow`])}"
                 app:srcCompat="@drawable/ic_wrench_grey600_48dp" />
 
@@ -90,7 +92,6 @@
                 android:text="Show Graphical Trend Arrow" />
 
 
-
         </LinearLayout>
 
         <Spinner
@@ -98,12 +99,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+            android:layout_weight="1"
             android:entries="@array/TrendArrows"
-            android:selection="@{home.arrowSelectionCurrent}"
-            app:showIfTrue="@{safeUnbox(vs.included[`arrow_configurator`])}"
             android:onItemSelected="@{(a,b,c,d) -> home.arrowSelectionChanged(a,b,c,d)}"
-            android:layout_weight="1" />
-
+            android:selection="@{home.arrowSelectionCurrent}"
+            app:showIfTrue="@{safeUnbox(vs.included[`arrow_configurator`])}" />
 
 
     </LinearLayout>

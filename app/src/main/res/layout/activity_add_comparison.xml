@@ -27,6 +27,7 @@
         android:hint="@string/enter_blood_glucose_value" />
 
     <Button
+        android:backgroundTint="@color/colorButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/done"

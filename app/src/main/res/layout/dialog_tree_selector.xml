@@ -12,8 +12,10 @@
     </data>
 
     <LinearLayout
+        style="@style/OldAppTheme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#121212"
         android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView
@@ -28,9 +30,13 @@
             android:id="@+id/imageButton8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="#121212"
             android:onClick="@{viewModel::goBack}"
+            android:scaleX="2"
+            android:scaleY="2"
+            android:tint="#FFFFFF"
             app:showIfTrue="@{viewModel.showBack()}"
-            app:srcCompat="@android:drawable/ic_media_rew" />
+            app:srcCompat="@drawable/rounded_keyboard_backspace_24" />
 
 
     </LinearLayout>
