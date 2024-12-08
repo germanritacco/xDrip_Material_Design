@@ -121,7 +121,7 @@ public class MegaStatus extends FloatingLocaleActivityWithScreenshot {
     }
 
     private static final String G4_STATUS = "BT Device";
-    public static final String G5_STATUS = "Dex Status";
+    public static final String G5_STATUS = "Dexcom Status";
     private static final String MEDTRUM_STATUS = "Medtrum Status";
     private static final String IP_COLLECTOR = "IP Collector";
     private static final String XDRIP_PLUS_SYNC = "Followers";
@@ -170,7 +170,7 @@ public class MegaStatus extends FloatingLocaleActivityWithScreenshot {
             }
             if (dexCollectionType.equals(DexcomG5)) {
                 if (Pref.getBooleanDefaultFalse(Ob1G5CollectionService.OB1G5_PREFS)) {
-                    addAsection(G5_STATUS, "G6/Dex1/G7/1+ Collector/Transmitter Status");
+                    addAsection(G5_STATUS, "G6/G7/One/One+ Collector/Transmitter Status");
                 } else {
                     addAsection(G5_STATUS, "G5 Collector and Transmitter Status");
                 }
