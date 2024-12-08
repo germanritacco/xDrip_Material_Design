@@ -32,6 +32,7 @@
     <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
 
     <uses-permission android:name="android.permission.FLASHLIGHT" />
+
     <uses-permission-sdk-23 android:name="android.permission.CAMERA" />
     <uses-permission-sdk-23 android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission-sdk-23 android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -62,48 +63,48 @@
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
     <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
 
-    <uses-permission android:name="android.permission.MANAGE_HEALTH_DATA"/>
-    <uses-permission android:name="android.permission.MANAGE_HEALTH_PERMISSIONS"/>
+    <uses-permission android:name="android.permission.MANAGE_HEALTH_DATA" />
+    <uses-permission android:name="android.permission.MANAGE_HEALTH_PERMISSIONS" />
 
-    <uses-permission android:name="android.permission.health.READ_HEART_RATE"/>
-    <uses-permission android:name="android.permission.health.READ_BLOOD_GLUCOSE"/>
-    <uses-permission android:name="android.permission.health.WRITE_BLOOD_GLUCOSE"/>
-    <uses-permission android:name="android.permission.health.READ_STEPS"/>
-    <uses-permission android:name="android.permission.health.READ_EXERCISE"/>
-    <uses-permission android:name="android.permission.health.READ_TOTAL_CALORIES_BURNED"/>
-    <uses-permission android:name="android.permission.health.READ_WEIGHT"/>
-    <uses-permission android:name="android.permission.health.READ_DISTANCE"/>
-    <uses-permission android:name="android.permission.health.READ_ELEVATION_GAINED"/>
-    <uses-permission android:name="android.permission.health.READ_FLOORS_CLIMBED"/>
-    <uses-permission android:name="android.permission.health.READ_HEART_RATE_VARIABILITY"/>
-    <uses-permission android:name="android.permission.health.READ_HEIGHT"/>
-    <uses-permission android:name="android.permission.health.READ_HYDRATION"/>
-    <uses-permission android:name="android.permission.health.READ_NUTRITION"/>
-    <uses-permission android:name="android.permission.health.WRITE_NUTRITION"/>
-    <uses-permission android:name="android.permission.health.READ_POWER"/>
-    <uses-permission android:name="android.permission.health.READ_RESTING_HEART_RATE"/>
-    <uses-permission android:name="android.permission.health.READ_SLEEP"/>
-    <uses-permission android:name="android.permission.health.READ_SPEED"/>
-    <uses-permission android:name="android.permission.health.READ_WHEELCHAIR_PUSHES"/>
+    <uses-permission android:name="android.permission.health.READ_HEART_RATE" />
+    <uses-permission android:name="android.permission.health.READ_BLOOD_GLUCOSE" />
+    <uses-permission android:name="android.permission.health.WRITE_BLOOD_GLUCOSE" />
+    <uses-permission android:name="android.permission.health.READ_STEPS" />
+    <uses-permission android:name="android.permission.health.READ_EXERCISE" />
+    <uses-permission android:name="android.permission.health.READ_TOTAL_CALORIES_BURNED" />
+    <uses-permission android:name="android.permission.health.READ_WEIGHT" />
+    <uses-permission android:name="android.permission.health.READ_DISTANCE" />
+    <uses-permission android:name="android.permission.health.READ_ELEVATION_GAINED" />
+    <uses-permission android:name="android.permission.health.READ_FLOORS_CLIMBED" />
+    <uses-permission android:name="android.permission.health.READ_HEART_RATE_VARIABILITY" />
+    <uses-permission android:name="android.permission.health.READ_HEIGHT" />
+    <uses-permission android:name="android.permission.health.READ_HYDRATION" />
+    <uses-permission android:name="android.permission.health.READ_NUTRITION" />
+    <uses-permission android:name="android.permission.health.WRITE_NUTRITION" />
+    <uses-permission android:name="android.permission.health.READ_POWER" />
+    <uses-permission android:name="android.permission.health.READ_RESTING_HEART_RATE" />
+    <uses-permission android:name="android.permission.health.READ_SLEEP" />
+    <uses-permission android:name="android.permission.health.READ_SPEED" />
+    <uses-permission android:name="android.permission.health.READ_WHEELCHAIR_PUSHES" />
 
-    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"/>
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
 
     <application
         android:name=".xdrip"
         android:allowBackup="false"
+        android:appComponentFactory="android.support.v4.app.CoreComponentFactory"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
         android:maxAspectRatio="2.1"
-        android:theme="@style/AppTheme"
-        tools:replace="android:appComponentFactory"
-        android:appComponentFactory="android.support.v4.app.CoreComponentFactory"
         android:requestLegacyExternalStorage="true"
-        android:usesCleartextTraffic="true">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
+        tools:replace="android:appComponentFactory">
         <activity
             android:name=".HealthPrivacy"
-            android:label="xDrip Privacy Policy"
-            android:exported="true">
+            android:exported="true"
+            android:label="xDrip Privacy Policy">
             <intent-filter>
                 <action android:name="androidx.health.ACTION_SHOW_PERMISSIONS_RATIONALE" />
             </intent-filter>
@@ -117,8 +118,8 @@
             </intent-filter>
             <!-- Permission handling for Android 14 -->
             <intent-filter>
-                <action android:name="android.intent.action.VIEW_PERMISSION_USAGE"/>
-                <category android:name="android.intent.category.HEALTH_PERMISSIONS"/>
+                <action android:name="android.intent.action.VIEW_PERMISSION_USAGE" />
+                <category android:name="android.intent.category.HEALTH_PERMISSIONS" />
             </intent-filter>
         </activity-alias>
 
@@ -155,8 +156,7 @@
             android:name=".receiver.InfoContentProvider"
             android:authorities="${applicationId}.contentprovider"
             android:enabled="true"
-            android:exported="true">
-        </provider>
+            android:exported="true" />
 
         <activity
             android:name=".Home"
@@ -174,14 +174,19 @@
             android:exported="true"
             tools:node="replace">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:scheme="xdrip"
-                    android:path="/callback/tidepool"/>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:path="/callback/tidepool"
+                    android:scheme="xdrip" />
             </intent-filter>
         </activity>
-        <activity android:name=".tidepool.AuthFlowIn" android:exported="true"/>
+        <activity
+            android:name=".tidepool.AuthFlowIn"
+            android:exported="true" />
         <activity
             android:name=".BluetoothScan"
             android:configChanges="orientation|screenSize"
@@ -362,8 +367,16 @@
         </service>
 
         <!-- below fixes regression bugs with google play services where it crashes if play is not installed on a device -->
-        <receiver android:name="com.google.android.gms.measurement.AppMeasurementReceiver" android:enabled="true" android:exported="false" tools:node="remove"/>
-        <service android:name="com.google.android.gms.measurement.AppMeasurementService" android:enabled="true" android:exported="false" tools:node="remove"/>
+        <receiver
+            android:name="com.google.android.gms.measurement.AppMeasurementReceiver"
+            android:enabled="true"
+            android:exported="false"
+            tools:node="remove" />
+        <service
+            android:name="com.google.android.gms.measurement.AppMeasurementService"
+            android:enabled="true"
+            android:exported="false"
+            tools:node="remove" />
 
         <activity
             android:name=".stats.StatsActivity"
@@ -635,7 +648,7 @@
         <receiver
             android:name=".receiver.ReminderReceiver"
             android:enabled="true"
-            android:exported="true"></receiver>
+            android:exported="true" />
 
         <service
             android:name=".services.AlwaysOnDisplayService"
@@ -700,8 +713,7 @@
             android:name=".utilitymodels.SaveLogs"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_save_logs"
-            android:noHistory="true">
-        </activity>
+            android:noHistory="true" />
         <activity android:name=".deposit.DepositActivity" />
         <activity android:name=".utils.AndroidBarcode" />
         <activity
@@ -788,8 +800,8 @@
             android:name=".MegaStatus"
             android:configChanges="orientation|screenSize"
             android:label="@string/system_status"
-            android:theme="@style/OldAppTheme"
-            android:parentActivityName=".Home" />
+            android:parentActivityName=".Home"
+            android:theme="@style/AppThemeStatus" />
         <activity
             android:name=".Reminders"
             android:configChanges="orientation|screenSize"
@@ -820,8 +832,9 @@
         <meta-data
             android:name="com.sec.android.multiwindow.MINIMUM_SIZE_H"
             android:value="598.0dip" />
-        <meta-data android:name="delivery_metrics_exported_to_big_query_enabled"
-            android:value="false"/>
+        <meta-data
+            android:name="delivery_metrics_exported_to_big_query_enabled"
+            android:value="false" />
 
         <activity android:name=".utilitymodels.XDripDreamSettingsActivity" />
 
