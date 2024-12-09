@@ -110,6 +110,7 @@ android {
         manifestPlaceholders = [google_maps_key:getLocalProperty('google_maps_key'),
                                 'appAuthRedirectScheme': 'xdrip'
         ]
+        resConfigs "ar", "cs", "de", "el", "en", "es", "fi", "fr", "he", "hr", "it", "iw", "ja", "ko", "nb", "nl", "pl", "pt", "ro", "ru", "sk", "sl", "sv", "tr", "zh" // Asegúrate de incluir los idiomas soportados
     }
 
     // The defaultConfig values above are fixed, so your incremental builds don't
