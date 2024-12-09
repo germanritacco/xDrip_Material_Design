@@ -14,17 +14,23 @@
      limitations under the License.
 -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/menu_refresh"
-        android:title="@string/menu_refresh"
+    <item
+        android:id="@+id/menu_refresh"
         android:checkable="false"
+        android:icon="@drawable/rounded_refresh_24"
         android:orderInCategory="1"
-        android:showAsAction="ifRoom"/>
-    <item android:id="@+id/menu_scan"
-        android:title="@string/menu_scan"
+        android:showAsAction="ifRoom"
+        android:title="@string/menu_refresh" />
+    <item
+        android:id="@+id/menu_scan"
+        android:icon="@drawable/rounded_search_24"
         android:orderInCategory="100"
-        android:showAsAction="ifRoom|withText"/>
-    <item android:id="@+id/menu_stop"
-        android:title="@string/menu_stop"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/menu_scan" />
+    <item
+        android:id="@+id/menu_stop"
+        android:icon="@drawable/rounded_stop_circle_24"
         android:orderInCategory="101"
-        android:showAsAction="ifRoom|withText"/>
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/menu_stop" />
 </menu>

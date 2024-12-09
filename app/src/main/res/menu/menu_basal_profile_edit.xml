@@ -4,7 +4,7 @@
     <item
         android:id="@+id/basalLoad"
         android:checkable="false"
-        android:icon="@drawable/ic_open_in_app_grey600_48dp"
+        android:icon="@drawable/rounded_upload_file_24"
         android:onClick="basalEditLoad"
         android:orderInCategory="1"
         android:title="Load"
@@ -13,7 +13,7 @@
     <item
         android:id="@+id/basalSave"
         android:checkable="false"
-        android:icon="@drawable/ic_content_save_grey600_48dp"
+        android:icon="@drawable/rounded_save_24"
         android:onClick="basalEditSave"
         android:orderInCategory="1"
         android:title="Save"
@@ -22,7 +22,7 @@
     <item
         android:id="@+id/basalPlus"
         android:checkable="false"
-        android:icon="@drawable/up_arrow_circle"
+        android:icon="@drawable/rounded_arrow_circle_up_24"
         android:onClick="basalEditPlus"
         android:orderInCategory="1"
         android:title="+"
@@ -31,7 +31,7 @@
     <item
         android:id="@+id/basalMinus"
         android:checkable="false"
-        android:icon="@drawable/down_arrow_circle"
+        android:icon="@drawable/rounded_arrow_circle_down_24"
         android:onClick="basalEditMinus"
         android:orderInCategory="1"
         android:title="-"
