@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory
         android:key="xdrip_plus_category"
@@ -34,14 +35,14 @@
                         android:title="@string/high_glucose_values"
                         app:colorpicker_noneSelectedSummaryText="@string/default_color_selected"
                         app:colorpicker_selectNoneButtonText="@string/revert_to_default"
-                        app:colorpicker_showHex="false" />
+                        app:colorpicker_showHex="true" />
                     <com.eveningoutpost.dexdrip.utilitymodels.ColorPicker
                         android:defaultValue="#33B5E6"
                         android:key="color_inrange_values"
                         android:title="@string/in_range_glucose_values"
                         app:colorpicker_noneSelectedSummaryText="@string/default_color_selected"
                         app:colorpicker_selectNoneButtonText="@string/revert_to_default"
-                        app:colorpicker_showHex="false" />
+                        app:colorpicker_showHex="true" />
 
                     <com.eveningoutpost.dexdrip.utilitymodels.ColorPicker
                         android:defaultValue="#C30909"
@@ -49,7 +50,7 @@
                         android:title="@string/low_glucose_values"
                         app:colorpicker_noneSelectedSummaryText="@string/default_color_selected"
                         app:colorpicker_selectNoneButtonText="@string/revert_to_default"
-                        app:colorpicker_showHex="false" />
+                        app:colorpicker_showHex="true" />
 
                     <com.eveningoutpost.dexdrip.utilitymodels.ColorPicker
                         android:defaultValue="#ffffff"
@@ -57,7 +58,7 @@
                         android:title="@string/bad_glucose_values"
                         app:colorpicker_noneSelectedSummaryText="@string/default_color_selected"
                         app:colorpicker_selectNoneButtonText="@string/revert_to_default"
-                        app:colorpicker_showHex="false" />
+                        app:colorpicker_showHex="true" />
 
                     <com.eveningoutpost.dexdrip.utilitymodels.ColorPicker
                         android:defaultValue="#a0a0a0"
@@ -65,7 +66,7 @@
                         android:title="@string/filtered_values"
                         app:colorpicker_noneSelectedSummaryText="@string/default_color_selected"
                         app:colorpicker_selectNoneButtonText="@string/revert_to_default"
-                        app:colorpicker_showHex="false" />
+                        app:colorpicker_showHex="true" />
                 </PreferenceCategory>
 
                 <PreferenceCategory
@@ -77,14 +78,14 @@
                         android:title="@string/high_glucose_values"
                         app:colorpicker_noneSelectedSummaryText="@string/default_color_selected"
                         app:colorpicker_selectNoneButtonText="@string/revert_to_default"
-                        app:colorpicker_showHex="false" />
+                        app:colorpicker_showHex="true" />
                     <com.eveningoutpost.dexdrip.utilitymodels.ColorPicker
                         android:defaultValue="#FFFFFF"
                         android:key="color_inrange_bg_values"
                         android:title="@string/in_range_glucose_values"
                         app:colorpicker_noneSelectedSummaryText="@string/default_color_selected"
                         app:colorpicker_selectNoneButtonText="@string/revert_to_default"
-                        app:colorpicker_showHex="false" />
+                        app:colorpicker_showHex="true" />
 
                     <com.eveningoutpost.dexdrip.utilitymodels.ColorPicker
                         android:defaultValue="#C30909"
@@ -92,7 +93,7 @@
                         android:title="@string/low_glucose_values"
                         app:colorpicker_noneSelectedSummaryText="@string/default_color_selected"
                         app:colorpicker_selectNoneButtonText="@string/revert_to_default"
-                        app:colorpicker_showHex="false" />
+                        app:colorpicker_showHex="true" />
                 </PreferenceCategory>
 
                 <PreferenceCategory
@@ -104,28 +105,28 @@
                         android:title="@string/treatment_color"
                         app:colorpicker_noneSelectedSummaryText="@string/default_color_selected"
                         app:colorpicker_selectNoneButtonText="@string/revert_to_default"
-                        app:colorpicker_showHex="false" />
+                        app:colorpicker_showHex="true" />
                     <com.eveningoutpost.dexdrip.utilitymodels.ColorPicker
                         android:defaultValue="#334400"
                         android:key="color_treatment_dark"
                         android:title="@string/treatment_color_dark"
                         app:colorpicker_noneSelectedSummaryText="@string/default_color_selected"
                         app:colorpicker_selectNoneButtonText="@string/revert_to_default"
-                        app:colorpicker_showHex="false" />
+                        app:colorpicker_showHex="true" />
                     <com.eveningoutpost.dexdrip.utilitymodels.ColorPicker
                         android:defaultValue="#AA66CC"
                         android:key="color_predictive"
                         android:title="@string/predictive_color"
                         app:colorpicker_noneSelectedSummaryText="@string/default_color_selected"
                         app:colorpicker_selectNoneButtonText="@string/revert_to_default"
-                        app:colorpicker_showHex="false" />
+                        app:colorpicker_showHex="true" />
                     <com.eveningoutpost.dexdrip.utilitymodels.ColorPicker
                         android:defaultValue="#7700aa"
                         android:key="color_predictive_dark"
                         android:title="@string/predictive_color_dark"
                         app:colorpicker_noneSelectedSummaryText="@string/default_color_selected"
                         app:colorpicker_selectNoneButtonText="@string/revert_to_default"
-                        app:colorpicker_showHex="false" />
+                        app:colorpicker_showHex="true" />
                 </PreferenceCategory>
 
                 <PreferenceCategory
@@ -138,21 +139,21 @@
                         android:title="@string/eight_hour_average_line"
                         app:colorpicker_noneSelectedSummaryText="@string/default_color_selected"
                         app:colorpicker_selectNoneButtonText="@string/revert_to_default"
-                        app:colorpicker_showHex="false" />
+                        app:colorpicker_showHex="true" />
                     <com.eveningoutpost.dexdrip.utilitymodels.ColorPicker
                         android:defaultValue="#c56f9d"
                         android:key="color_average2_line"
                         android:title="@string/twenty_four_hour_average_line"
                         app:colorpicker_noneSelectedSummaryText="@string/default_color_selected"
                         app:colorpicker_selectNoneButtonText="@string/revert_to_default"
-                        app:colorpicker_showHex="false" />
+                        app:colorpicker_showHex="true" />
                     <com.eveningoutpost.dexdrip.utilitymodels.ColorPicker
                         android:defaultValue="#a4a409"
                         android:key="color_target_line"
                         android:title="@string/glucose_target_line"
                         app:colorpicker_noneSelectedSummaryText="@string/default_color_selected"
                         app:colorpicker_selectNoneButtonText="@string/revert_to_default"
-                        app:colorpicker_showHex="false" />
+                        app:colorpicker_showHex="true" />
                 </PreferenceCategory>
 
                 <PreferenceCategory
@@ -165,7 +166,7 @@
                         android:title="@string/blood_test_background"
                         app:colorpicker_noneSelectedSummaryText="@string/default_color_selected"
                         app:colorpicker_selectNoneButtonText="@string/revert_to_default"
-                        app:colorpicker_showHex="false" />
+                        app:colorpicker_showHex="true" />
 
                     <com.eveningoutpost.dexdrip.utilitymodels.ColorPicker
                         android:defaultValue="#FF4444"
@@ -173,7 +174,7 @@
                         android:title="@string/blood_test_foreground"
                         app:colorpicker_noneSelectedSummaryText="@string/default_color_selected"
                         app:colorpicker_selectNoneButtonText="@string/revert_to_default"
-                        app:colorpicker_showHex="false" />
+                        app:colorpicker_showHex="true" />
 
                     <com.eveningoutpost.dexdrip.utilitymodels.ColorPicker
                         android:defaultValue="#FFFFFF"
@@ -181,7 +182,7 @@
                         android:title="@string/treatment_background"
                         app:colorpicker_noneSelectedSummaryText="@string/default_color_selected"
                         app:colorpicker_selectNoneButtonText="@string/revert_to_default"
-                        app:colorpicker_showHex="false" />
+                        app:colorpicker_showHex="true" />
 
                     <com.eveningoutpost.dexdrip.utilitymodels.ColorPicker
                         android:defaultValue="#77aa00"
@@ -189,18 +190,18 @@
                         android:title="@string/treatment_foreground"
                         app:colorpicker_noneSelectedSummaryText="@string/default_color_selected"
                         app:colorpicker_selectNoneButtonText="@string/revert_to_default"
-                        app:colorpicker_showHex="false" />
+                        app:colorpicker_showHex="true" />
                 </PreferenceCategory>
                 <PreferenceCategory
                     android:key="xdrip_plus_display_colorset5"
                     android:title="@string/backgrounds">
                     <com.eveningoutpost.dexdrip.utilitymodels.ColorPicker
-                        android:defaultValue="#212121"
+                        android:defaultValue="#121212"
                         android:key="color_home_chart_background"
                         android:title="@string/main_chart_background"
                         app:colorpicker_noneSelectedSummaryText="@string/default_color_selected"
                         app:colorpicker_selectNoneButtonText="@string/revert_to_default"
-                        app:colorpicker_showHex="false" />
+                        app:colorpicker_showHex="true" />
 
                     <com.eveningoutpost.dexdrip.utilitymodels.ColorPicker
                         android:defaultValue="#00000000"
@@ -208,7 +209,7 @@
                         android:title="@string/notification_chart_background"
                         app:colorpicker_noneSelectedSummaryText="@string/default_color_selected"
                         app:colorpicker_selectNoneButtonText="@string/revert_to_default"
-                        app:colorpicker_showHex="false" />
+                        app:colorpicker_showHex="true" />
 
                     <com.eveningoutpost.dexdrip.utilitymodels.ColorPicker
                         android:defaultValue="#B3000000"
@@ -216,7 +217,7 @@
                         android:title="@string/widget_chart_background"
                         app:colorpicker_noneSelectedSummaryText="@string/default_color_selected"
                         app:colorpicker_selectNoneButtonText="@string/revert_to_default"
-                        app:colorpicker_showHex="false" />
+                        app:colorpicker_showHex="true" />
                 </PreferenceCategory>
 
                 <PreferenceCategory
@@ -230,7 +231,7 @@
                         android:title="@string/secondary_plugin_glucose_value"
                         app:colorpicker_noneSelectedSummaryText="@string/default_color_selected"
                         app:colorpicker_selectNoneButtonText="@string/revert_to_default"
-                        app:colorpicker_showHex="false" />
+                        app:colorpicker_showHex="true" />
 
                     <com.eveningoutpost.dexdrip.utilitymodels.ColorPicker
                         android:defaultValue="#3e29937b"
@@ -238,7 +239,7 @@
                         android:title="@string/step_counter_1st_color"
                         app:colorpicker_noneSelectedSummaryText="@string/default_color_selected"
                         app:colorpicker_selectNoneButtonText="@string/revert_to_default"
-                        app:colorpicker_showHex="false" />
+                        app:colorpicker_showHex="true" />
 
                     <com.eveningoutpost.dexdrip.utilitymodels.ColorPicker
                         android:defaultValue="#3c72c3c0"
@@ -246,7 +247,7 @@
                         android:title="@string/step_counter_2nd_color"
                         app:colorpicker_noneSelectedSummaryText="@string/default_color_selected"
                         app:colorpicker_selectNoneButtonText="@string/revert_to_default"
-                        app:colorpicker_showHex="false" />
+                        app:colorpicker_showHex="true" />
 
                     <com.eveningoutpost.dexdrip.utilitymodels.ColorPicker
                         android:defaultValue="#2B212FDE"
@@ -254,7 +255,7 @@
                         android:title="@string/title_color_heart_rate1"
                         app:colorpicker_noneSelectedSummaryText="@string/default_color_selected"
                         app:colorpicker_selectNoneButtonText="@string/revert_to_default"
-                        app:colorpicker_showHex="false" />
+                        app:colorpicker_showHex="true" />
                 </PreferenceCategory>
                 <PreferenceCategory
                     android:key="xdrip_plus_display_colorset12"
@@ -273,14 +274,14 @@
                         android:title="@string/title_color_smb_icon"
                         app:colorpicker_noneSelectedSummaryText="@string/default_color_selected"
                         app:colorpicker_selectNoneButtonText="@string/revert_to_default"
-                        app:colorpicker_showHex="false" />
+                        app:colorpicker_showHex="true" />
                     <com.eveningoutpost.dexdrip.utilitymodels.ColorPicker
                         android:defaultValue="#D6597FCC"
                         android:key="color_smb_line"
                         android:title="@string/title_color_smb_line"
                         app:colorpicker_noneSelectedSummaryText="@string/default_color_selected"
                         app:colorpicker_selectNoneButtonText="@string/revert_to_default"
-                        app:colorpicker_showHex="false" />
+                        app:colorpicker_showHex="true" />
                 </PreferenceCategory>
                 <PreferenceCategory
                     android:key="xdrip_plus_display_colorset9_android5plus"
@@ -298,14 +299,14 @@
                         android:title="@string/upper_title_bar_flair"
                         app:colorpicker_noneSelectedSummaryText="@string/default_color_selected"
                         app:colorpicker_selectNoneButtonText="@string/revert_to_default"
-                        app:colorpicker_showHex="false" />
+                        app:colorpicker_showHex="true" />
                     <com.eveningoutpost.dexdrip.utilitymodels.ColorPicker
                         android:defaultValue="#FF000000"
                         android:key="color_lower_flair_bar"
                         android:title="@string/lower_button_bar_falir"
                         app:colorpicker_noneSelectedSummaryText="@string/default_color_selected"
                         app:colorpicker_selectNoneButtonText="@string/revert_to_default"
-                        app:colorpicker_showHex="false" />
+                        app:colorpicker_showHex="true" />
                 </PreferenceCategory>
             </PreferenceScreen>
 
@@ -473,24 +474,24 @@
                     <CheckBoxPreference
                         android:defaultValue="false"
                         android:key="Customize_yRange"
-                        android:title="@string/titleInside_yRange"
-                        android:summary="@string/summaryInside_yRange" />
+                        android:summary="@string/summaryInside_yRange"
+                        android:title="@string/titleInside_yRange" />
                     <ListPreference
-                        android:key="default_ymax"
-                        android:summary="@string/summary_ymax"
-                        android:title="@string/title_ymax"
+                        android:defaultValue="250"
+                        android:dependency="Customize_yRange"
                         android:entries="@array/ymax_entries"
                         android:entryValues="@array/ymax_values"
-                        android:defaultValue="250"
-                        android:dependency="Customize_yRange"/>
+                        android:key="default_ymax"
+                        android:summary="@string/summary_ymax"
+                        android:title="@string/title_ymax" />
                     <ListPreference
-                        android:key="default_ymin"
-                        android:summary="@string/summary_ymin"
-                        android:title="@string/title_ymin"
+                        android:defaultValue="40"
+                        android:dependency="Customize_yRange"
                         android:entries="@array/ymin_entries"
                         android:entryValues="@array/ymin_values"
-                        android:defaultValue="40"
-                        android:dependency="Customize_yRange"/>
+                        android:key="default_ymin"
+                        android:summary="@string/summary_ymin"
+                        android:title="@string/title_ymin" />
                 </PreferenceScreen>
             </PreferenceScreen>
 
@@ -537,9 +538,7 @@
                     android:key="show_accessibility_settings"
                     android:summary="@string/summary_show_accessibility_settings"
                     android:title="@string/title_show_accessibility_settings">
-                    <intent
-                        android:action="android.settings.ACCESSIBILITY_SETTINGS"
-                        />
+                    <intent android:action="android.settings.ACCESSIBILITY_SETTINGS" />
                 </Preference>
                 <CheckBoxPreference
                     android:defaultValue="true"
@@ -592,14 +591,14 @@
                     android:title="@string/title_color_number_wall"
                     app:colorpicker_noneSelectedSummaryText="@string/default_color_selected"
                     app:colorpicker_selectNoneButtonText="@string/revert_to_default"
-                    app:colorpicker_showHex="false" />
+                    app:colorpicker_showHex="true" />
                 <com.eveningoutpost.dexdrip.utilitymodels.ColorPicker
                     android:defaultValue="#FF000000"
                     android:key="color_number_wall_shadow"
                     android:title="@string/title_color_number_wall_shadow"
                     app:colorpicker_noneSelectedSummaryText="@string/default_color_selected"
                     app:colorpicker_selectNoneButtonText="@string/revert_to_default"
-                    app:colorpicker_showHex="false" />
+                    app:colorpicker_showHex="true" />
                 <Preference
                     android:key="pick_numberwall_start"
                     android:summary="@string/summary_pick_numberwall_start"
@@ -708,8 +707,8 @@
 
             <PreferenceScreen
                 android:key="xdrip_plus_multiple_insulin_types_settings"
-                android:title="@string/title_multiple_insulin_types_settings"
-                android:summary="@string/summary_multiple_insulin_types_settings">
+                android:summary="@string/summary_multiple_insulin_types_settings"
+                android:title="@string/title_multiple_insulin_types_settings">
                 <SwitchPreference
                     android:defaultValue="false"
                     android:key="multiple_insulin_types"
@@ -717,8 +716,8 @@
                     android:switchTextOn="@string/short_on_text_for_switches"
                     android:title="@string/title_multiple_insulin_types" />
                 <Preference
-                    android:key="insulin_profiles"
                     android:dependency="multiple_insulin_types"
+                    android:key="insulin_profiles"
                     android:summary="@string/desc_enable_dedicated_insulin_profiles"
                     android:title="@string/enable_dedicated_insulin_profiles">
                     <intent
@@ -730,7 +729,7 @@
                     android:defaultValue="false"
                     android:key="multiple_insulin_use_basal_activity"
                     android:summary="@string/summary_multiple_insulin_use_basal_activity"
-                    android:title="@string/title_multiple_insulin_use_basal_activity"/>
+                    android:title="@string/title_multiple_insulin_use_basal_activity" />
             </PreferenceScreen>
 
             <Preference
@@ -769,8 +768,7 @@
                 <intent
                     android:action="android.intent.action.MAIN"
                     android:targetClass="com.eveningoutpost.dexdrip.profileeditor.BasalProfileEditor"
-                    android:targetPackage="@string/local_target_package">
-                </intent>
+                    android:targetPackage="@string/local_target_package"></intent>
             </Preference>
         </PreferenceCategory>
 
@@ -1172,8 +1170,8 @@
                     android:title="Hide priming doses" />
 
                 <EditTextPreference
-                    android:dependency="opennov_enabled"
                     android:defaultValue="2.0"
+                    android:dependency="opennov_enabled"
                     android:inputType="numberPassword|textVisiblePassword"
                     android:key="opennov_prime_units"
                     android:maxLength="3"
@@ -1181,8 +1179,8 @@
                     android:title="@string/title_inpen_prime_units" />
 
                 <EditTextPreference
-                    android:dependency="opennov_enabled"
                     android:defaultValue="2"
+                    android:dependency="opennov_enabled"
                     android:inputType="numberPassword|textVisiblePassword"
                     android:key="opennov_prime_minutes"
                     android:maxLength="3"
@@ -1198,94 +1196,94 @@
             </PreferenceScreen>
 
             <PreferenceScreen
-            android:icon="@drawable/ic_mode_edit_grey_600_48dp"
-            android:key="inpen_screen"
-            android:summary="@string/summary_inpen_screen"
-            android:title="@string/title_inpen_screen">
-            <SwitchPreference
-                android:defaultValue="false"
-                android:key="inpen_enabled"
-                android:switchTextOff="@string/short_off_text_for_switches"
-                android:switchTextOn="@string/short_on_text_for_switches"
-                android:title="@string/title_inpen_enabled" />
+                android:icon="@drawable/ic_mode_edit_grey_600_48dp"
+                android:key="inpen_screen"
+                android:summary="@string/summary_inpen_screen"
+                android:title="@string/title_inpen_screen">
+                <SwitchPreference
+                    android:defaultValue="false"
+                    android:key="inpen_enabled"
+                    android:switchTextOff="@string/short_off_text_for_switches"
+                    android:switchTextOn="@string/short_on_text_for_switches"
+                    android:title="@string/title_inpen_enabled" />
 
-            <CheckBoxPreference
-                android:defaultValue="true"
-                android:key="inpen_detect_priming"
-                android:summary="@string/summary_inpen_detect_priming"
-                android:title="@string/title_inpen_detect_priming" />
+                <CheckBoxPreference
+                    android:defaultValue="true"
+                    android:key="inpen_detect_priming"
+                    android:summary="@string/summary_inpen_detect_priming"
+                    android:title="@string/title_inpen_detect_priming" />
 
-            <EditTextPreference
-                android:defaultValue="2.0"
-                android:inputType="numberPassword|textVisiblePassword"
-                android:key="inpen_prime_units"
-                android:maxLength="4"
-                android:title="@string/title_inpen_prime_units" />
+                <EditTextPreference
+                    android:defaultValue="2.0"
+                    android:inputType="numberPassword|textVisiblePassword"
+                    android:key="inpen_prime_units"
+                    android:maxLength="4"
+                    android:title="@string/title_inpen_prime_units" />
 
-            <EditTextPreference
-                android:defaultValue="2"
-                android:inputType="numberPassword|textVisiblePassword"
-                android:key="inpen_prime_minutes"
-                android:maxLength="3"
-                android:title="@string/title_inpen_prime_minutes" />
+                <EditTextPreference
+                    android:defaultValue="2"
+                    android:inputType="numberPassword|textVisiblePassword"
+                    android:key="inpen_prime_minutes"
+                    android:maxLength="3"
+                    android:title="@string/title_inpen_prime_minutes" />
 
-            <CheckBoxPreference
-                android:defaultValue="true"
-                android:key="inpen_orphan_primes_ignored"
-                android:summary="@string/summary_inpen_orphan_primes_ignored"
-                android:title="@string/title_inpen_orphan_primes_ignored" />
+                <CheckBoxPreference
+                    android:defaultValue="true"
+                    android:key="inpen_orphan_primes_ignored"
+                    android:summary="@string/summary_inpen_orphan_primes_ignored"
+                    android:title="@string/title_inpen_orphan_primes_ignored" />
 
-            <CheckBoxPreference
-                android:defaultValue="true"
-                android:key="inpen_sounds"
-                android:summary="@string/summary_inpen_sounds"
-                android:title="@string/title_inpen_sounds" />
+                <CheckBoxPreference
+                    android:defaultValue="true"
+                    android:key="inpen_sounds"
+                    android:summary="@string/summary_inpen_sounds"
+                    android:title="@string/title_inpen_sounds" />
 
-            <Preference
-                android:key="inpen_reset"
-                android:summary="@string/summary_inpen_reset"
-                android:title="@string/title_inpen_reset">
-                <intent
-                    android:action="android.intent.action.MAIN"
-                    android:targetClass="com.eveningoutpost.dexdrip.Home"
-                    android:targetPackage="@string/local_target_package">
-                    <extra
-                        android:name="inpen-reset"
-                        android:value="inpen-reset" />
-                </intent>
-            </Preference>
-        </PreferenceScreen>
+                <Preference
+                    android:key="inpen_reset"
+                    android:summary="@string/summary_inpen_reset"
+                    android:title="@string/title_inpen_reset">
+                    <intent
+                        android:action="android.intent.action.MAIN"
+                        android:targetClass="com.eveningoutpost.dexdrip.Home"
+                        android:targetPackage="@string/local_target_package">
+                        <extra
+                            android:name="inpen-reset"
+                            android:value="inpen-reset" />
+                    </intent>
+                </Preference>
+            </PreferenceScreen>
 
-        <PreferenceScreen
-            android:icon="@drawable/ic_mode_edit_grey_600_48dp"
-            android:key="pendiq_screen"
-            android:summary="@string/summary_pendiq_screen"
-            android:title="@string/title_pendiq_screen">
-            <SwitchPreference
-                android:defaultValue="false"
-                android:key="use_pendiq"
-                android:switchTextOff="@string/short_off_text_for_switches"
-                android:switchTextOn="@string/short_on_text_for_switches"
-                android:title="@string/title_use_pendiq" />
+            <PreferenceScreen
+                android:icon="@drawable/ic_mode_edit_grey_600_48dp"
+                android:key="pendiq_screen"
+                android:summary="@string/summary_pendiq_screen"
+                android:title="@string/title_pendiq_screen">
+                <SwitchPreference
+                    android:defaultValue="false"
+                    android:key="use_pendiq"
+                    android:switchTextOff="@string/short_off_text_for_switches"
+                    android:switchTextOn="@string/short_on_text_for_switches"
+                    android:title="@string/title_use_pendiq" />
 
-            <SwitchPreference
-                android:defaultValue="false"
-                android:dependency="use_pendiq"
-                android:key="pendiq_send_treatments"
-                android:summary="@string/summary_pendiq_send_treatments"
-                android:switchTextOff="@string/short_off_text_for_switches"
-                android:switchTextOn="@string/short_on_text_for_switches"
-                android:title="@string/title_pendiq_send_treatments" />
+                <SwitchPreference
+                    android:defaultValue="false"
+                    android:dependency="use_pendiq"
+                    android:key="pendiq_send_treatments"
+                    android:summary="@string/summary_pendiq_send_treatments"
+                    android:switchTextOff="@string/short_off_text_for_switches"
+                    android:switchTextOn="@string/short_on_text_for_switches"
+                    android:title="@string/title_pendiq_send_treatments" />
 
-            <EditTextPreference
-                android:defaultValue="@string/zero_zero_zero_zero"
-                android:dependency="use_pendiq"
-                android:inputType="numberPassword|textVisiblePassword"
-                android:key="pendiq_pin"
-                android:maxLength="4"
-                android:title="@string/title_pendiq_pin" />
+                <EditTextPreference
+                    android:defaultValue="@string/zero_zero_zero_zero"
+                    android:dependency="use_pendiq"
+                    android:inputType="numberPassword|textVisiblePassword"
+                    android:key="pendiq_pin"
+                    android:maxLength="4"
+                    android:title="@string/title_pendiq_pin" />
 
-        </PreferenceScreen>
+            </PreferenceScreen>
         </PreferenceScreen>
 
     </PreferenceCategory>
