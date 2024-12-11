@@ -598,63 +598,69 @@
 
             <LinearLayout
                 android:id="@+id/time_buttons"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:gravity="center_horizontal"
                 android:orientation="horizontal"
                 android:visibility="@{safeUnbox(vs.included[`time_buttons`]) ? View.VISIBLE: View.GONE}">
 
                 <Button
-                    android:backgroundTint="@color/colorButton"
                     android:id="@+id/hourbutton24"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/colorButton"
                     android:longClickable="true"
-                    android:textSize="13sp"
                     android:minWidth="0dp"
                     android:onClick="timeButtonClick"
                     android:onLongClick="@{home::timeButtonLongClick}"
                     android:text="@{@string/hour_format(24)}"
+                    android:textSize="13sp"
                     app:button_indicate="@{home.isHourLocked(24, ui.ping)}" />
 
                 <Button
-                    android:backgroundTint="@color/colorButton"
                     android:id="@+id/hourbutton12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/colorButton"
                     android:longClickable="true"
-                    android:textSize="13sp"
-                    android:onClick="timeButtonClick"
                     android:minWidth="0dp"
+                    android:onClick="timeButtonClick"
                     android:onLongClick="@{home::timeButtonLongClick}"
                     android:text="@{@string/hour_format(12)}"
+                    android:textSize="13sp"
                     app:button_indicate="@{home.isHourLocked(12, ui.ping)}" />
 
                 <Button
-                    android:backgroundTint="@color/colorButton"
                     android:id="@+id/hourbutton6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/colorButton"
                     android:longClickable="true"
-                    android:textSize="13sp"
                     android:minWidth="0dp"
                     android:onClick="timeButtonClick"
                     android:onLongClick="@{home::timeButtonLongClick}"
                     android:text="@{@string/hour_format(6)}"
+                    android:textSize="13sp"
                     app:button_indicate="@{home.isHourLocked(6, ui.ping)}" />
 
                 <Button
-                    android:backgroundTint="@color/colorButton"
                     android:id="@+id/hourbutton3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/colorButton"
                     android:longClickable="true"
-                    android:textSize="13sp"
                     android:minWidth="0dp"
                     android:onClick="timeButtonClick"
                     android:onLongClick="@{home::timeButtonLongClick}"
                     android:text="@{@string/hour_format(3)}"
+                    android:textSize="13sp"
                     app:button_indicate="@{home.isHourLocked(3, ui.ping)}" />
 
             </LinearLayout>
