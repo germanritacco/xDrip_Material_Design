@@ -168,7 +168,8 @@
     <string name="signal_missed">Señal Perdida</string>
     <string name="minutes_ago">{0, choice,0#{0, number, integer} Minutos antes|1#{0, number, integer} Minuto antes|1&lt;{0, number, integer} Minutos antes}</string>
     <string name="expires_days">{0, choice,0#¡El sensor expiró!|1#Termina en {0, number} día|1&lt;Termina en {0, number} días}</string>
-    <string name="expires_at">Termina el {0}</string>
+    <string name="expires_at">Termina a las {0}</string>
+    <string name="expires_on">Termina el {0}</string>
     <string name="space_minutes_ago">" Minutos antes"</string>
     <string name="in_libre_all_house_mode_no_readings_collected_yet">"En modo Libre red casera: no se han recogido lecturas"</string>
     <string name="in_libre_all_house_mode_last_data_collected">"En modo Libre red casera: Última lectura "</string>
@@ -324,8 +325,8 @@
     <string name="low">bajo</string>
     <string name="space_units">" Unidades"</string>
     <string name="units">UI</string>
-    <string name="carbs">carbohidratos</string>
-    <string name="when">cuando (HHMM)</string>
+    <string name="carbs">Carbohidratos</string>
+    <string name="when">Hora (HHMM)</string>
     <string name="speak_your_treatment">Diga su tratamiento p.ej. \nx.x unidades insulina / xx gramos de carbohidratos</string>
     <string name="speech_recognition_is_not_supported">El reconocimiento de voz no es compatible</string>
     <string name="treatment_note">Nota de Tratamiento</string>
