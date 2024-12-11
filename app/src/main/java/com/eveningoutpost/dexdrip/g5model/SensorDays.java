@@ -101,7 +101,7 @@ public class SensorDays {
             if (vr3 != null) {
                 ths.warmupMs = Math.min(Constants.SECOND_IN_MS * vr3.warmupSeconds, 2 * HOUR_IN_MS);
             } else {
-               ths.warmupMs = 2 * HOUR_IN_MS;
+                ths.warmupMs = 2 * HOUR_IN_MS;
             }
 
             if (getBestCollectorHardwareName().equals("G7")) {
@@ -205,8 +205,13 @@ public class SensorDays {
                 return new SpannableString(MessageFormat.format(fmt, roundDouble((double) expiryMs / DAY_IN_MS, 1)));
             } else {
                 // expiring soon
-                val niceTime = new SimpleDateFormat(expiryMs < CAL_THRESHOLD2 ? "h:mm a" : "EEE, h:mm a", Locale.getDefault()).format(getSensorEndTimestamp());
-                return Span.colorSpan(MessageFormat.format(xdrip.gs(R.string.expires_at), niceTime), expiryMs < CAL_THRESHOLD2 ? Highlight.BAD.color() : Highlight.NOTICE.color());
+                if (expiryMs < CAL_THRESHOLD2) {
+                    val niceTime = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(getSensorEndTimestamp());
+                    return Span.colorSpan(MessageFormat.format(xdrip.gs(R.string.expires_at), niceTime), Highlight.BAD.color());
+                } else {
+                    val niceTime = new SimpleDateFormat("EEE, HH:mm", Locale.getDefault()).format(getSensorEndTimestamp());
+                    return Span.colorSpan(MessageFormat.format(xdrip.gs(R.string.expires_on), niceTime), Highlight.NOTICE.color());
+                }
             }
         }
         return new SpannableString("");
