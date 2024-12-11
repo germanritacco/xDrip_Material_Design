@@ -5,12 +5,12 @@
     <color name="percentile_median">#bce6ff</color>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303f9f</color>
-    <color name="colorAccent">#8BC34A</color>
+    <color name="colorAccent">#A5D6A7</color>
     <color name="year">#999999</color>
     <color name="title">#62a262</color>
     <color name="yellow100">#fff9c4</color>
     <color name="darker_white">#d3d3d3</color>
-    <color name="colorButton">#3F51B5</color>
+    <color name="colorButton">#9FA8DA</color>
     <color name="colorMaterialGrey">#1f1f1f</color>
     <color name="colorHint">#a8a8a8</color>
 </resources>

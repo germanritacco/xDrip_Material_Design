@@ -1,71 +1,71 @@
 <resources>
 
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight">
-        <item name="android:windowBackground">#FFFFFF</item>
+        <item name="android:windowBackground">#121212</item>
         <item name="android:actionBarStyle">@style/MyActionBar</item>
-        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textColor">@android:color/white</item>
 
         <item name="android:colorPrimary">@color/colorButton</item>
         <item name="colorPrimary">@color/colorButton</item>
 
-        <item name="android:colorAccent">#4CAF50</item>
-        <item name="colorAccent">#4CAF50</item>
+        <item name="android:colorAccent">#A5D6A7</item>
+        <item name="colorAccent">#A5D6A7</item>
 
-        <item name="buttonTint">#4CAF50</item>
-        <item name="android:buttonTint">#4CAF50</item>
+        <item name="buttonTint">#A5D6A7</item>
+        <item name="android:buttonTint">#A5D6A7</item>
 
-        <item name="colorControlActivated">#4CAF50</item>
-        <item name="android:colorControlActivated">#4CAF50</item>
+        <item name="colorControlActivated">#A5D6A7</item>
+        <item name="android:colorControlActivated">#A5D6A7</item>
 
-        <item name="colorSecondary">#4CAF50</item>
-        <item name="colorSecondaryVariant">#4CAF50</item>
+        <item name="colorSecondary">#A5D6A7</item>
+        <item name="colorSecondaryVariant">#A5D6A7</item>
     </style>
 
     <style name="AppThemeStatus" parent="Theme.MaterialComponents.DayNight">
-        <item name="android:windowBackground">#FFFFFF</item>
+        <item name="android:windowBackground">#121212</item>
         <item name="android:actionBarStyle">@style/MyActionBar</item>
-        <item name="android:textColor">@android:color/black</item>
-        <item name="colorSecondary">#3F51B5</item>
-        <item name="backgroundTint">#3F51B5</item> <!-- Cambia el color del botón de acción -->
-        <item name="colorControlActivated">#4CAF50</item>
-        <item name="android:colorControlActivated">#4CAF50</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="colorSecondary">#9FA8DA</item>
+        <item name="backgroundTint">#9FA8DA</item>
+        <item name="colorControlActivated">#A5D6A7</item>
+        <item name="android:colorControlActivated">#A5D6A7</item>
     </style>
 
     <style name="AppThemeReference" parent="Theme.MaterialComponents.DayNight">
-        <item name="android:background">#FFFFFF</item>
+        <item name="android:background">#121212</item>
         <item name="android:actionBarStyle">@style/MyActionBar</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="StatisticsWhiteTheme" parent="Theme.MaterialComponents.Light">
+        <item name="android:background">@android:color/white</item>
         <item name="android:textColor">@android:color/black</item>
     </style>
 
-    <style name="StatisticsWhiteTheme" parent="Theme.MaterialComponents.DayNight">
+    <style name="AppThemeToolBar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:background">#121212</item>
         <item name="android:textColor">@android:color/white</item>
     </style>
 
-    <style name="AppThemeToolBar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="android:background">#FFFFFF</item>
-        <item name="android:textColor">@android:color/black</item>
-    </style>
-
     <style name="AppThemeToolBarLite" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="android:background">#FFFFFF</item>
+        <item name="android:background">#121212</item>
         <item name="android:actionBarStyle">@style/MyActionBar</item>
-        <item name="android:textColor">@android:color/black</item>
-        <item name="colorSecondary">#4CAF50</item>
-        <item name="colorSecondaryVariant">#4CAF50</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="colorSecondary">#A5D6A7</item>
+        <item name="colorSecondaryVariant">#A5D6A7</item>
         <item name="android:colorPrimary">@color/colorButton</item>
         <item name="colorPrimary">@color/colorButton</item>
     </style>
 
     <style name="Toolbar">
-        <item name="android:background">#FFFFFF</item>
-        <item name="theme">@style/ThemeOverlay.AppCompat.DayNight.ActionBar</item>
+        <item name="android:background">#121212</item>
+        <item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
     </style>
 
     <style name="OldAppTheme" parent="android:Theme.Holo">
         <item name="android:actionBarStyle">@style/MyActionBar</item>
-        <item name="android:textColor">@android:color/black</item>
-        <item name="android:windowBackground">#FFFFFF</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:windowBackground">#121212</item>
     </style>
 
     <style name="OldAppThemeNoTitleBar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
@@ -125,22 +125,22 @@
 
     <!-- ActionBar styles -->
     <style name="MyActionBar" parent="android:style/Widget.Holo.ActionBar">
-        <item name="android:background">#FFFFFF</item>
+        <item name="android:background">#121212</item>
     </style>
 
     <style name="WhiteActionBar" parent="Widget.MaterialComponents.Toolbar">
         <item name="android:colorForeground">@style/WhiteActionBar.Title</item>
-        <item name="android:background">#121212</item>
+        <item name="android:background">@android:color/white</item>
         <item name="android:titleTextStyle">@style/WhiteActionBar.Title</item>
         <item name="android:subtitleTextStyle">@style/WhiteActionBar.Subtitle</item>
     </style>
 
     <style name="WhiteActionBar.Title">
-        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textColor">@android:color/white</item>
     </style>
 
     <style name="WhiteActionBar.Subtitle">
-        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textColor">@android:color/white</item>
     </style>
 
 </resources>
