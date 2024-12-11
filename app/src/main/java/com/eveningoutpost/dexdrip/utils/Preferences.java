@@ -510,7 +510,7 @@ public class Preferences extends BasePreferenceActivity implements SearchPrefere
     @Override
     public void onCreate(Bundle savedInstanceState) {
         try {
-            setTheme(R.style.AppTheme); // TODO Change to OldAppTheme to show search button
+            setTheme(R.style.AppThemeStatus); // TODO Change to OldAppTheme to show search button
         } catch (Exception e) {
             Log.e(TAG, "Failed to set theme");
         }
