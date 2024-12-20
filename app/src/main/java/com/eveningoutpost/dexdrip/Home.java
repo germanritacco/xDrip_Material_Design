@@ -3655,7 +3655,9 @@ public class Home extends ActivityWithMenu implements ActivityCompat.OnRequestPe
                 activity.findViewById(android.R.id.content),
                 message, Snackbar.LENGTH_LONG)
                 .setAction(buttonString, mOnClickListener)
-                //.setActionTextColor(Color.RED)
+                .setActionTextColor(ContextCompat.getColor(activity, R.color.colorButton))
+                .setTextColor(Color.WHITE)
+                .setBackgroundTint(0xFF121212)
                 .show();
     }
 
