@@ -111,7 +111,6 @@ public class NavigationDrawerFragment extends Fragment {
         mDrawerLayout = drawerLayout;
         mCurrentSelectedPosition = menu_position;
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
-        // mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
 
         ActionBar actionBar = getActionBar();
         if (actionBar != null) {
@@ -163,7 +162,6 @@ public class NavigationDrawerFragment extends Fragment {
         mDrawerToggle = new ActionBarDrawerToggle(
                 getActivity(),
                 mDrawerLayout,
-                // R.drawable.ic_drawer,
                 R.string.navigation_drawer_open,
                 R.string.navigation_drawer_close
         ) {
