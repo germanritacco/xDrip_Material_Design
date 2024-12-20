@@ -67,7 +67,12 @@ public class PhoneKeypadInputActivity extends BaseActivity {
         int height = dm.heightPixels;
         final int refdpi = 320;
         Log.d(TAG, "Width height: " + width + " " + height + " DPI:" + dm.densityDpi);
-        getWindow().setLayout((int) Math.min(((520 * dm.densityDpi) / refdpi), width), (int) Math.min((650 * dm.densityDpi) / refdpi, height));
+        if (currenttab.split("-")[0].equals("insulin")) {
+            getWindow().setLayout((int) Math.min(((520 * dm.densityDpi) / refdpi), width), (int) Math.min((850 * dm.densityDpi) / refdpi, height));
+        } else {
+            getWindow().setLayout((int) Math.min(((520 * dm.densityDpi) / refdpi), width), (int) Math.min((750 * dm.densityDpi) / refdpi, height));
+        }
+
         getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         WindowManager.LayoutParams lp = getWindow().getAttributes();
         lp.dimAmount = 0.5f;
@@ -266,6 +271,7 @@ public class PhoneKeypadInputActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 currenttab = "bloodtest";
+                getWindow().setLayout((int) Math.min(((520 * dm.densityDpi) / refdpi), width), (int) Math.min((750 * dm.densityDpi) / refdpi, height));
                 updateTab();
             }
         });
@@ -273,6 +279,7 @@ public class PhoneKeypadInputActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 currenttab = "insulin-1";
+                getWindow().setLayout((int) Math.min(((520 * dm.densityDpi) / refdpi), width), (int) Math.min(((850 * dm.densityDpi) / refdpi), height));
                 updateTab();
             }
         });
@@ -280,6 +287,7 @@ public class PhoneKeypadInputActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 currenttab = "carbs";
+                getWindow().setLayout((int) Math.min(((520 * dm.densityDpi) / refdpi), width), (int) Math.min((750 * dm.densityDpi) / refdpi, height));
                 updateTab();
             }
         });
@@ -287,6 +295,7 @@ public class PhoneKeypadInputActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 currenttab = "time";
+                getWindow().setLayout((int) Math.min(((520 * dm.densityDpi) / refdpi), width), (int) Math.min((750 * dm.densityDpi) / refdpi, height));
                 updateTab();
             }
         });
@@ -340,17 +349,15 @@ public class PhoneKeypadInputActivity extends BaseActivity {
         updateTab();
     }
 
-    private boolean isNonzeroValueInTab(String tab)
-    {
-        try
-        {
+    private boolean isNonzeroValueInTab(String tab) {
+        try {
             return (0 != Double.parseDouble(getValue(tab)));
+        } catch (NumberFormatException e) {
+            return false;
         }
-        catch(NumberFormatException e) { return false; }
     }
 
-    private boolean isInvalidTime()
-    {
+    private boolean isInvalidTime() {
         String timeValue = getValue("time");
         if (timeValue.length() == 0) return false;
         if (!timeValue.contains("."))
@@ -370,13 +377,13 @@ public class PhoneKeypadInputActivity extends BaseActivity {
 
         // The green tick is clickable even when it's hidden, so we might get here
         // without valid data.  Ignore the click if input is incomplete
-        if(!nonzeroBloodValue && !nonzeroCarbsValue && !nonzeroInsulin1Value && !nonzeroInsulin2Value && !nonzeroInsulin3Value) {
+        if (!nonzeroBloodValue && !nonzeroCarbsValue && !nonzeroInsulin1Value && !nonzeroInsulin2Value && !nonzeroInsulin3Value) {
             Log.d(TAG, "All zero values in tabs - not processing button click");
             return;
         }
 
         if (isInvalidTime()) {
-            Log.d(TAG,"Time value is invalid - not processing button click");
+            Log.d(TAG, "Time value is invalid - not processing button click");
             return;
         }
 
@@ -384,7 +391,7 @@ public class PhoneKeypadInputActivity extends BaseActivity {
         // Add the dot to the time if it is missing
         String timeValue = getValue("time");
         if (timeValue.length() > 2 && !timeValue.contains(".")) {
-            timeValue = timeValue.substring(0, timeValue.length()-2) + "." + timeValue.substring(timeValue.length()-2);
+            timeValue = timeValue.substring(0, timeValue.length() - 2) + "." + timeValue.substring(timeValue.length() - 2);
         }
 
         String mystring = "";
@@ -393,8 +400,7 @@ public class PhoneKeypadInputActivity extends BaseActivity {
         if (timeValue.length() > 0) mystring += timeValue + " time ";
         if (nonzeroBloodValue) mystring += getValue("bloodtest") + " blood ";
         if (nonzeroCarbsValue) mystring += getValue("carbs") + " g carbs ";
-        if (nonzeroInsulin1Value && (insulinProfile1 != null))
-        {
+        if (nonzeroInsulin1Value && (insulinProfile1 != null)) {
             double d = Double.parseDouble(getValue("insulin-1"));
             if (multipleInsulins) {
                 mystring += df.format(d) + " " + insulinProfile1.getName() + " ";
@@ -437,12 +443,15 @@ public class PhoneKeypadInputActivity extends BaseActivity {
         multiButton1.setBackgroundColor(offColor);
         multiButton2.setBackgroundColor(offColor);
         multiButton3.setBackgroundColor(offColor);
-        multiButton1.setVisibility(View.INVISIBLE);
-        multiButton2.setVisibility(View.INVISIBLE);
-        multiButton3.setVisibility(View.INVISIBLE);
+        multiButton1.setVisibility(View.GONE);
+        multiButton2.setVisibility(View.GONE);
+        multiButton3.setVisibility(View.GONE);
         multiButton1.setEnabled(false);
         multiButton2.setEnabled(false);
         multiButton3.setEnabled(false);
+
+        // Dynamically adjust the spacing of insulin buttons
+        adjustButtonWeights((LinearLayout) findViewById(R.id.insulinTypesSection));
 
         String append = "";
         switch (currenttab.split("-")[0]) {
@@ -455,15 +464,13 @@ public class PhoneKeypadInputActivity extends BaseActivity {
                     multiButton1.setVisibility(View.VISIBLE);
                 } else
                     multiButton1.setText("");
-                if (insulinProfile2 != null)
-                {
+                if (insulinProfile2 != null) {
                     multiButton2.setText(insulinProfile2.getName());
                     multiButton2.setEnabled(true);
                     multiButton2.setVisibility(View.VISIBLE);
                 } else
                     multiButton2.setText("");
-                if (insulinProfile3 != null)
-                {
+                if (insulinProfile3 != null) {
                     multiButton3.setText(insulinProfile3.getName());
                     multiButton3.setEnabled(true);
                     multiButton3.setVisibility(View.VISIBLE);
@@ -479,8 +486,7 @@ public class PhoneKeypadInputActivity extends BaseActivity {
                         break;
                     case "2":
                         multiButton2.setBackgroundColor(onColor);
-                        if (insulinProfile2 == null)
-                        {
+                        if (insulinProfile2 == null) {
                             currenttab = "insulin-1";
                             updateTab();
                         } else
@@ -488,15 +494,14 @@ public class PhoneKeypadInputActivity extends BaseActivity {
                         break;
                     case "3":
                         multiButton3.setBackgroundColor(onColor);
-                        if (insulinProfile3 == null)
-                        {
+                        if (insulinProfile3 == null) {
                             currenttab = "insulin-2";
                             updateTab();
                         } else
                             insulinprofile = insulinProfile3.getName();
                         break;
                 }
-                append = " " +  getString(R.string.units) + (multipleInsulins ? (" " + insulinprofile) : "");
+                append = " " + getString(R.string.units) + (multipleInsulins ? (" " + insulinprofile) : "");
                 break;
             case "carbs":
                 carbstabbutton.setBackgroundColor(onColor);
@@ -520,11 +525,12 @@ public class PhoneKeypadInputActivity extends BaseActivity {
             showSubmitButton = false;
 
         else if (currenttab.equals("time"))
-            showSubmitButton = value.length() > 0 && ( isNonzeroValueInTab("bloodtest") || isNonzeroValueInTab("carbs") || isNonzeroValueInTab("insulin-1") || isNonzeroValueInTab("insulin-2") || isNonzeroValueInTab("insulin-3"));
+            showSubmitButton = value.length() > 0 && (isNonzeroValueInTab("bloodtest") || isNonzeroValueInTab("carbs") || isNonzeroValueInTab("insulin-1") || isNonzeroValueInTab("insulin-2") || isNonzeroValueInTab("insulin-3"));
         else
             showSubmitButton = isNonzeroValueInTab(currenttab);
 
-        mDialTextView.getBackground().setAlpha(showSubmitButton ? 255 : 0);    }
+        mDialTextView.getBackground().setAlpha(showSubmitButton ? 255 : 0);
+    }
 
 
     @Override
@@ -546,4 +552,31 @@ public class PhoneKeypadInputActivity extends BaseActivity {
         PersistentStore.setString(LAST_TAB_STORE, currenttab);
         super.onPause();
     }
+
+    public void adjustButtonWeights(LinearLayout layout) {
+        // Count how many buttons are visible
+        int visibleCount = 0;
+        for (int i = 0; i < layout.getChildCount(); i++) {
+            View child = layout.getChildAt(i);
+            if (child.getVisibility() == View.VISIBLE) {
+                visibleCount++;
+            }
+        }
+
+        // Avoid division by 0
+        if (visibleCount == 0) return;
+
+        // Adjust the weight of visible buttons
+        for (int i = 0; i < layout.getChildCount(); i++) {
+            View child = layout.getChildAt(i);
+            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) child.getLayoutParams();
+            if (child.getVisibility() == View.VISIBLE) {
+                params.weight = 1.0f / visibleCount; // Assign weight equitably
+            } else {
+                params.weight = 0; // Doesn't take up space if it is hidden
+            }
+            child.setLayoutParams(params);
+        }
+    }
+
 }
