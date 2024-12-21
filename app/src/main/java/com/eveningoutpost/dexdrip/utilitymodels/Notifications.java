@@ -593,7 +593,7 @@ public class Notifications extends IntentService {
         //final Notification.Builder b = new Notification.Builder(mContext); // temporary fix until ONGOING CHANNEL is silent by default on android 8+
         final Notification.Builder b;
         if (useOngoingChannel() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            b = new Notification.Builder(mContext, NotificationChannels.ONGOING_CHANNEL);
+            b = new Notification.Builder(mContext, NotificationChannels.LOW_BRIDGE_BATTERY_CHANNEL);
             b.setSound(null);
         } else {
             b = new Notification.Builder(mContext);
@@ -608,10 +608,12 @@ public class Notifications extends IntentService {
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             b.setVisibility(Pref.getBooleanDefaultFalse("public_notifications") ? Notification.VISIBILITY_PUBLIC : Notification.VISIBILITY_PRIVATE);
-            b.setCategory(NotificationCompat.CATEGORY_STATUS);
+            b.setCategory(NotificationCompat.CATEGORY_SYSTEM);
+            b.setCategory(Notification.CATEGORY_SYSTEM);
         }
         if (Pref.getBooleanDefaultFalse("high_priority_notifications")) {
-            b.setPriority(Notification.PRIORITY_HIGH);
+            b.setPriority(Notification.PRIORITY_MAX);
+            b.setPriority(NotificationCompat.PRIORITY_MAX);
         }
         final BestGlucose.DisplayGlucose dg = (use_best_glucose) ? BestGlucose.getDisplayGlucose() : null;
         final boolean use_color_in_notification = false; // could be preference option
@@ -619,7 +621,7 @@ public class Notifications extends IntentService {
                 : (lastReading.displayValue(mContext) + " " + lastReading.slopeArrow()));
         b.setContentTitle(titleString)
                 .setContentText("xDrip Data collection service is running.")
-                .setSmallIcon(R.drawable.ic_action_communication_invert_colors_on)
+                .setSmallIcon(R.drawable.rounded_invert_colors_24)
                 .setUsesChronometer(false);
 
         Bitmap numberIcon = null;
@@ -841,7 +843,7 @@ public class Notifications extends IntentService {
     private NotificationCompat.Builder notificationBuilder(String title, String content, Intent intent, String channelId) {
         return new NotificationCompat.Builder(mContext, channelId)
                 .setVisibility(Pref.getBooleanDefaultFalse("public_notifications") ? Notification.VISIBILITY_PUBLIC : Notification.VISIBILITY_PRIVATE)
-                .setSmallIcon(R.drawable.ic_action_communication_invert_colors_on)
+                .setSmallIcon(R.drawable.rounded_invert_colors_24)
                 .setContentTitle(title)
                 .setContentText(content)
                 .setPriority(Pref.getBooleanDefaultFalse("high_priority_notifications") ? Notification.PRIORITY_MAX : Notification.PRIORITY_HIGH)
@@ -1007,7 +1009,7 @@ public class Notifications extends IntentService {
             NotificationCompat.Builder mBuilder =
                     new NotificationCompat.Builder(context, channelId)
                             .setVisibility(Pref.getBooleanDefaultFalse("public_notifications") ? Notification.VISIBILITY_PUBLIC : Notification.VISIBILITY_PRIVATE)
-                            .setSmallIcon(R.drawable.ic_action_communication_invert_colors_on)
+                            .setSmallIcon(R.drawable.rounded_invert_colors_24)
                             .setContentTitle(title)
                             .setContentText(message)
                             .setLocalOnly(localOnly)
