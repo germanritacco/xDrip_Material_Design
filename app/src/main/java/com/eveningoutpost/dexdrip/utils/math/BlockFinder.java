@@ -79,6 +79,7 @@ public class BlockFinder {
     // TODO this could be a bit smarter
     public int findRandomAvailablePositionWithFailSafe(final int height, final int maxHeight) {
         boolean useTop, useTopCenter, useCenter, useCenterBottom, useBottom;
+        int useNumber = 0;
         final int sectionSize = maxHeight / 5;
 
         try {
@@ -87,6 +88,7 @@ public class BlockFinder {
             useCenter = Pref.getBooleanDefaultFalse("aod_use_center");
             useCenterBottom = Pref.getBooleanDefaultFalse("aod_use_center_bottom");
             useBottom = Pref.getBooleanDefaultFalse("aod_use_bottom");
+            useNumber = Pref.getStringToInt("aod_use_number", 0);
         } catch (NullPointerException e) {
             useTop = useTopCenter = useCenter = useCenterBottom = useBottom = true;
         }
@@ -99,6 +101,11 @@ public class BlockFinder {
         final int bound = maxHeight - height;
 
         if (bound >= 1) {
+
+            if (useNumber > 0) {
+                return useNumber;
+            }
+
             int tries = 200;
             val random = new Random();
 
