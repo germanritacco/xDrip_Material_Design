@@ -1462,6 +1462,8 @@
     <string name="title_aod_use_center_bottom">Use center bottom</string>
     <string name="summary_aod_use_bottom">Use last fifth of screen for AOD Widget</string>
     <string name="title_aod_use_bottom">Use bottom</string>
+    <string name="title_aod_use_number">Use specific position</string>
+    <string name="summary_aod_use_number">Use the specified value for AOD Widget</string>
     <string name="summary_show_home_on_boot">Bring up xDrip screen automatically after device boots</string>
     <string name="title_show_home_on_boot">Show xDrip on Boot</string>
     <string name="eula">EULA</string>
