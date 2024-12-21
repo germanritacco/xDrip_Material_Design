@@ -93,16 +93,18 @@
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:onClick="statisticsDisableFullScreen"
-                android:src="@drawable/ic_fullscreen_exit_grey600_24dp" />
+                android:src="@drawable/rounded_fullscreen_exit_24"
+                android:tint="#b6b6b6" />
 
             <ImageButton
+                android:id="@+id/imageButton4"
                 android:layout_width="35dp"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_share_variant_grey600_24dp"
-                android:id="@+id/imageButton4"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
-                android:onClick="statisticsShare" />
+                android:onClick="statisticsShare"
+                android:src="@drawable/rounded_share_24"
+                android:tint="#b6b6b6" />
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
