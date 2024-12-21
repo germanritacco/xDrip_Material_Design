@@ -4,7 +4,7 @@
     <item
         android:id="@+id/bluejaystandby"
         android:checkable="false"
-        android:icon="@drawable/power_standby"
+        android:icon="@drawable/rounded_power_settings_new_24"
         android:onClick="blueJayPowerStandby"
         android:orderInCategory="1"
         android:title="Standby"

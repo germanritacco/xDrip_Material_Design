@@ -152,7 +152,7 @@
 
     <item android:id="@+id/sharemyconfig"
         android:title="@string/share_config_via_qr_code"
-        android:icon="@drawable/ic_qrcode_grey600_48dp"
+        android:icon="@drawable/rounded_qr_code_36"
         android:checkable="false"
         android:orderInCategory="1"
         android:onClick="shareMyConfig"

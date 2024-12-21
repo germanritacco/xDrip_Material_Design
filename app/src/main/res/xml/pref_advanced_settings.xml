@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        android:icon="@drawable/ic_watch_grey600_48dp"
+        android:icon="@drawable/rounded_watch_36"
         android:key="smart_watch_options"
         android:summary="@string/pebble_and_android_wear_options"
         android:title="@string/smart_watch_features">
@@ -584,7 +584,7 @@
                 android:title="@string/title_lefun_mac"
                 android:summary="@string/summary_miband_mac" />
             <EditTextPreference
-                android:icon="@drawable/ic_vpn_key"
+                android:icon="@drawable/rounded_vpn_key_24"
                 android:key="miband_data_authkey"
                 android:maxLength="32"
                 android:summary="@string/summary_miband_authkey"
@@ -842,7 +842,6 @@
         </PreferenceScreen>
 
         <PreferenceScreen
-            icon="@drawable/ic_heart_pulse_grey600_24dp"
             android:key="smartwatch_sensors_screen"
             android:title="@string/title_Smartwatch_Sensors">
             <SwitchPreference
@@ -871,7 +870,7 @@
         android:key="other_category"
         android:title="@string/other_settings">
         <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-            android:icon="@drawable/ic_speak_reading_grey600_48dp"
+            android:icon="@drawable/rounded_text_to_speech_36"
             android:key="xdrip_speak_readings_settings"
             android:summary="@string/if_the_phone_has_text_to_speech"
             android:title="@string/speak_readings">
@@ -944,7 +943,7 @@
                 android:title="@string/speak_readings_shortcut" />
         </PreferenceScreen>
         <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-            android:icon="@drawable/ic_open_in_app_grey600_48dp"
+            android:icon="@drawable/rounded_p2p_36"
             android:key="xdrip_intrer_app_settings"
             android:summary="@string/for_interacting_compatible_apps"
             android:title="@string/interapp_settings">
@@ -1093,6 +1092,7 @@
         </PreferenceScreen>
         <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
             android:key="xdrip_less_common_settings"
+            android:icon="@drawable/rounded_experiment_36"
             android:summary="@string/debug_and_other_misc_options"
             android:title="@string/less_common_settings">
 
@@ -1318,7 +1318,7 @@
             </PreferenceScreen>
 
             <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-                android:icon="@drawable/ic_bluetooth_settings_grey600_48dp"
+                android:icon="@drawable/rounded_settings_bluetooth_36"
                 android:key="xdrip_bluetooth_adv_settings"
                 android:summary="@string/advanced_bluetooth_settings"
                 android:title="@string/bluetooth_settings">

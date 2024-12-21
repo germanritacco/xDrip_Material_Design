@@ -1,7 +1,7 @@
 <!--                        android:targetPackage="@string/target_package" -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        android:icon="@drawable/ic_add_alert_grey600_48dp"
+        android:icon="@drawable/rounded_notifications_36"
         android:key="whole_alerts_screen"
         android:summary="@string/glucose_calibration_and_other_alerts"
         android:title="@string/alarms_and_alerts">

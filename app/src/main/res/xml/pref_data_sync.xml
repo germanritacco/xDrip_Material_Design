@@ -7,7 +7,7 @@
         android:key="dataSync"
         android:title="@string/data_sync">
         <PreferenceScreen
-            android:icon="@drawable/ic_qrscan"
+            android:icon="@drawable/rounded_qr_code_scanner_36"
             android:key="auto_config_top"
             android:summary="@string/prefs_auto_config_summary"
             android:title="@string/auto_configure_title">
@@ -21,7 +21,7 @@
                 android:title="@string/auto_config_image_title" />
         </PreferenceScreen>
         <PreferenceScreen
-            android:icon="@drawable/ic_cloud_upload_grey600_48dp"
+            android:icon="@drawable/rounded_cloud_upload_36"
             android:key="cloud_data_sync"
             android:summary="@string/options_for_upload"
             android:title="@string/cloud_upload">
@@ -367,7 +367,7 @@
 
         </PreferenceScreen>
         <PreferenceScreen
-            android:icon="@drawable/ic_touch_app_grey600_48dp"
+            android:icon="@drawable/rounded_settings_remote_36"
             android:key="bluetooth_meters"
             android:summary="@string/glucose_meter_options"
             android:title="@string/glucose_meters">

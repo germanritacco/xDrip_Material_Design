@@ -6,7 +6,7 @@
         android:key="xdrip_plus_category"
         android:title="@string/xdrip_plus_extra_settings" />
     <PreferenceScreen
-        android:icon="@drawable/ic_chart_areaspline_grey600_48dp"
+        android:icon="@drawable/rounded_light_mode_36"
         android:key="xdrip_plus_display_settings"
         android:summary="@string/display_customisations"
         android:title="@string/xdrip_plus_display_settings">
@@ -15,7 +15,7 @@
             android:key="xdrip_plus_display_category"
             android:title="@string/xdrip_plus_display_settings">
             <PreferenceScreen
-                android:icon="@drawable/ic_palette_grey600_48dp"
+                android:icon="@drawable/rounded_palette_36"
                 android:key="xdrip_plus_color_settings"
                 android:summary="@string/customize_colours"
                 android:title="@string/xdrip_plus_color_settings">
@@ -348,7 +348,7 @@
                 android:title="@string/show_interface_hints" />
 
             <PreferenceScreen
-                android:icon="@drawable/ic_chart_areaspline_grey600_48dp"
+                android:icon="@drawable/rounded_monitoring_36"
                 android:key="xdrip_plus_graph_display_settings"
                 android:summary="@string/summary_xdrip_plus_graph_display_settings"
                 android:title="@string/title_xdrip_plus_graph_display_settings">
@@ -565,6 +565,12 @@
                     android:key="aod_use_bottom"
                     android:summary="@string/summary_aod_use_bottom"
                     android:title="@string/title_aod_use_bottom" />
+                <EditTextPreference
+                    android:defaultValue="0"
+                    android:inputType="number"
+                    android:key="aod_use_number"
+                    android:summary="@string/summary_aod_use_number"
+                    android:title="@string/title_aod_use_number" />
             </PreferenceScreen>
             <PreferenceScreen
                 android:key="xdrip_plus_number_wall"
@@ -689,7 +695,7 @@
 
     <PreferenceScreen
         android:dependency="I_understand"
-        android:icon="@drawable/ic_auto_fix_grey600_48dp"
+        android:icon="@drawable/rounded_vaccines_36"
         android:key="xdrip_plus_profile_settings"
         android:summary="@string/insulin_carb_ratios_etc_for_models"
         android:title="@string/xdrip_plus_prediction_settings">
@@ -826,7 +832,7 @@
 
     <PreferenceScreen
         android:dependency="I_understand"
-        android:icon="@drawable/ic_google_circles_communities_grey600_48dp"
+        android:icon="@drawable/rounded_sync_36"
         android:key="xdrip_plus_sync_settings"
         android:summary="@string/settings_for_syncing"
         android:title="@string/xdrip_plus_sync_settings">
@@ -937,7 +943,7 @@
                 </PreferenceCategory>
             </PreferenceScreen>
             <PreferenceScreen
-                android:icon="@drawable/desert_sync"
+                android:icon="@drawable/rounded_vpn_lock_36"
                 android:key="xdrip_plus_desert_sync_settings"
                 android:summary="@string/summary_xdrip_plus_desert_sync_settings"
                 android:title="@string/title_xdrip_plus_desert_sync_settings">
@@ -980,7 +986,7 @@
     </PreferenceScreen>
 
     <PreferenceScreen
-        android:icon="@drawable/ic_car_connected_grey600_48dp"
+        android:icon="@drawable/rounded_minor_crash_36"
         android:key="xdrip_plus_motion_settings"
         android:summary="@string/movement_detection_and_vehicle_mode"
         android:title="@string/xdrip_motion_tracking">
@@ -1065,7 +1071,7 @@
     </PreferenceScreen>
 
     <PreferenceScreen
-        android:icon="@drawable/ic_briefcase_download_grey600_48dp"
+        android:icon="@drawable/rounded_cloud_download_36"
         android:key="xdrip_plus_update_settings"
         android:summary="@string/automatic_updates_crash_reports_and_feedback"
         android:title="@string/xdrip_plus_update_settings">
@@ -1111,7 +1117,7 @@
         android:key="xdrip_plus_move_settings"
         android:title="@string/copying_settings">
         <Preference
-            android:icon="@drawable/ic_qrcode_grey600_48dp"
+            android:icon="@drawable/rounded_qr_code_36"
             android:key="show_qr_codes"
             android:title="@string/show_settings_qr_codes">
             <intent
@@ -1120,7 +1126,7 @@
                 android:targetPackage="@string/local_target_package" />
         </Preference>
         <Preference
-            android:icon="@drawable/ic_content_save_grey600_48dp"
+            android:icon="@drawable/rounded_save_36"
             android:key="show_external_save"
             android:title="@string/load_save_settings_to_sdcard">
             <intent
@@ -1133,11 +1139,11 @@
         android:key="xdrip_plus_experimental"
         android:title="@string/title_xdrip_plus_experimental">
         <PreferenceScreen
-            android:icon="@drawable/ic_mode_edit_grey_600_48dp"
+            android:icon="@drawable/rounded_ink_pen_36"
             android:key="pens_screen"
             android:title="@string/insulin_pens">
             <PreferenceScreen
-                android:icon="@drawable/ic_mode_edit_grey_600_48dp"
+                android:icon="@drawable/rounded_ink_pen_36"
                 android:key="opennov_screen"
                 android:summary="NFC dose downloading of models 6 and Echo Plus"
                 android:title="NovoPen Insulin Pen">
@@ -1196,7 +1202,7 @@
             </PreferenceScreen>
 
             <PreferenceScreen
-                android:icon="@drawable/ic_mode_edit_grey_600_48dp"
+                android:icon="@drawable/rounded_ink_pen_36"
                 android:key="inpen_screen"
                 android:summary="@string/summary_inpen_screen"
                 android:title="@string/title_inpen_screen">
@@ -1255,7 +1261,7 @@
             </PreferenceScreen>
 
             <PreferenceScreen
-                android:icon="@drawable/ic_mode_edit_grey_600_48dp"
+                android:icon="@drawable/rounded_ink_pen_36"
                 android:key="pendiq_screen"
                 android:summary="@string/summary_pendiq_screen"
                 android:title="@string/title_pendiq_screen">

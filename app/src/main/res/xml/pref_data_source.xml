@@ -10,6 +10,7 @@
             android:entries="@array/DexCollectionMethods"
             android:entryValues="@array/DexCollectionMethodValues"
             android:key="dex_collection_method"
+            android:icon="@drawable/rounded_devices_other_36"
             android:summary="@string/how_receive_data"
             android:title="@string/hardware_data_source" />
 
@@ -81,7 +82,7 @@
 
 
         <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-            android:icon="@drawable/ic_nfc_grey600_48dp"
+            android:icon="@drawable/rounded_nfc_36"
             android:key="xdrip_plus_nfc_settings"
             android:summary="@string/nfc_options"
             android:title="@string/nfc_scan_features">
@@ -168,6 +169,7 @@
             android:defaultValue="ABCDEF"
             android:inputType="textNoSuggestions|textVisiblePassword|textCapCharacters"
             android:key="dex_txid"
+            android:icon="@drawable/rounded_abc_36"
             android:maxLines="1"
             android:singleLine="true"
             android:summary="@string/transmitter_id"
@@ -184,6 +186,7 @@
             android:key="medtrum_a_hex"
             android:maxLines="1"
             android:singleLine="true"
+            android:icon="@drawable/rounded_bug_report_36"
             android:summary="@string/summary_medtrum_a_hex"
             android:title="@string/title_medtrum_a_hex" />
         <EditTextPreference
@@ -192,6 +195,7 @@
             android:key="nsfollow_url"
             android:maxLines="1"
             android:singleLine="true"
+            android:icon="@drawable/rounded_http_36"
             android:summary="@string/summary_nsfollow_url"
             android:title="@string/title_nsfollow_url" />
         <PreferenceScreen
@@ -320,6 +324,7 @@
         <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
             android:key="xdrip_plus_g5_extra_settings"
             android:summary="@string/advanced_g5_settings"
+            android:icon="@drawable/rounded_bug_report_36"
             android:title="@string/g5_debug_settings">
             <PreferenceCategory
                 android:key="ob1_options"
@@ -429,6 +434,7 @@
             android:defaultValue=""
             android:dialogMessage="@string/wifi_recievers_dialog_message"
             android:dialogTitle="@string/wifi_recievers_dialog_title"
+            android:icon="@drawable/rounded_http_36"
             android:inputType="textUri"
             android:key="wifi_recievers_addresses"
             android:title="@string/list_of_receivers" />

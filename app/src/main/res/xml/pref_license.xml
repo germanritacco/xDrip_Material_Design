@@ -2,7 +2,8 @@
     <Preference
         android:key="I_understand"
         android:summary="@string/not_for_medical_use"
-        android:title="@string/end_user_license_agreement">
+        android:title="@string/end_user_license_agreement"
+        android:icon="@drawable/rounded_assignment_36">
         <intent
             android:action="android.intent.action.MAIN"
             android:targetClass="com.eveningoutpost.dexdrip.LicenseAgreementActivity"

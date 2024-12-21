@@ -3,7 +3,7 @@
     <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         android:key="xdrip_units_settings"
         android:summary="@string/mmol_or_mgdl_high_and_low"
-        android:icon="@drawable/ic_ruler_grey600_48dp"
+        android:icon="@drawable/rounded_straighten_36"
         android:title="@string/glucose_units">
         <PreferenceCategory
             android:title="@string/general_settings"
