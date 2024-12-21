@@ -4,7 +4,7 @@
     android:id="@+id/keypad_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/keypad_background"
+    android:background="#121212"
     android:orientation="vertical"
     android:paddingBottom="1dp"
     android:paddingLeft="6dp"
@@ -196,8 +196,8 @@
                 android:layout_gravity="left"
                 android:background="@android:color/transparent"
                 android:longClickable="false"
-                android:paddingEnd="5dp"
                 android:paddingStart="5dp"
+                android:paddingEnd="5dp"
                 android:scaleType="center"
                 android:src="@android:drawable/ic_btn_speak_now"
                 android:visibility="invisible" />
@@ -218,7 +218,7 @@
                 android:layout_marginLeft="2dp"
                 android:layout_marginRight="2dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_touch_app_white_48dp" />
+                android:src="@drawable/rounded_glucose_36" />
 
             <ImageButton
                 android:id="@+id/carbstabbutton"
@@ -227,7 +227,7 @@
                 android:layout_marginLeft="2dp"
                 android:layout_marginRight="2dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_local_dining_white_48dp" />
+                android:src="@drawable/rounded_fastfood_36" />
 
             <ImageButton
                 android:id="@+id/insulintabbutton"
@@ -236,7 +236,7 @@
                 android:layout_marginLeft="2dp"
                 android:layout_marginRight="2dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_colorize_white_48dp" />
+                android:src="@drawable/rounded_syringe_36" />
 
             <ImageButton
                 android:id="@+id/timetabbutton"
@@ -245,7 +245,7 @@
                 android:layout_marginLeft="2dp"
                 android:layout_marginRight="2dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/round_access_time_24" />
+                android:src="@drawable/round_access_time_32" />
         </LinearLayout>
 
         <LinearLayout

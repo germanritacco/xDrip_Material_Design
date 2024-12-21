@@ -53,5 +53,5 @@
         android:layout_alignParentTop="true"
         android:background="@android:color/transparent"
         android:paddingRight="4dp"
-        android:src="@drawable/ic_undo_variant_grey600_24dp" />
+        android:src="@drawable/rounded_undo_24" />
 </RelativeLayout>

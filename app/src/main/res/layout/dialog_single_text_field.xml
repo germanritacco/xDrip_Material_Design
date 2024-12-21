@@ -28,7 +28,7 @@
         android:layout_margin="5dp"
         android:backgroundTint="#9FA8DA"
         android:contentDescription="@string/scan_share2_barcode"
-        android:src="@drawable/ic_scan" />
+        android:src="@drawable/rounded_barcode_scanner_36" />
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"

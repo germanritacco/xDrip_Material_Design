@@ -146,7 +146,7 @@
             android:layout_marginRight="5dp"
             android:layout_toStartOf="@+id/reminderRepeatDays"
             android:onClick="chooseReminderSound"
-            app:srcCompat="@drawable/ic_music_note_white_24dp" />
+            app:srcCompat="@drawable/rounded_music_note_24" />
 
         <ImageButton
             android:id="@+id/reminderSwapButton"
@@ -159,7 +159,7 @@
             android:paddingLeft="2dp"
             android:paddingTop="2dp"
             android:paddingBottom="2dp"
-            app:srcCompat="@drawable/ic_swap_vert_white_24dp" />
+            app:srcCompat="@drawable/rounded_swap_vert_24" />
 
 
         <CheckBox

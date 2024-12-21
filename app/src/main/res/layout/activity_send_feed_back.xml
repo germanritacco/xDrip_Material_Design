@@ -72,5 +72,5 @@
         android:layout_alignParentBottom="true"
         android:backgroundTint="#1F1F1F"
         android:onClick="closeActivity"
-        android:src="@drawable/rounded_close_24" />
+        android:src="@drawable/rounded_close_32" />
 </RelativeLayout>

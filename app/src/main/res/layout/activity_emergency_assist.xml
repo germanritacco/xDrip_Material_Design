@@ -175,7 +175,7 @@
                     android:layout_weight="1"
                     android:max="360"
                     android:progressTint="#A5D6A7"
-                    android:thumb="@drawable/round_access_time_24"
+                    android:thumb="@drawable/round_access_time_32"
                     android:thumbTint="@color/colorAccent"
                     appx:progressString="@={sprefs[`emergency_assist_low_alert_minutes`]}" />
 
@@ -215,7 +215,7 @@
                     android:layout_weight="1"
                     android:max="360"
                     android:progressTint="#A5D6A7"
-                    android:thumb="@drawable/round_access_time_24"
+                    android:thumb="@drawable/round_access_time_32"
                     android:thumbTint="@color/colorAccent"
                     appx:progressString="@={sprefs[`emergency_assist_lowest_alert_minutes`]}" />
 
@@ -256,7 +256,7 @@
                     android:layout_weight="1"
                     android:max="720"
                     android:progressTint="#A5D6A7"
-                    android:thumb="@drawable/round_access_time_24"
+                    android:thumb="@drawable/round_access_time_32"
                     android:thumbTint="@color/colorAccent"
                     appx:progressString="@={sprefs[`emergency_assist_high_alert_minutes`]}" />
 
@@ -299,7 +299,7 @@
                     android:layout_weight="1"
                     android:max="2880"
                     android:progressTint="#A5D6A7"
-                    android:thumb="@drawable/round_access_time_24"
+                    android:thumb="@drawable/round_access_time_32"
                     android:thumbTint="@color/colorAccent"
                     appx:progressString="@={sprefs[`emergency_assist_inactivity_minutes`]}" />
 

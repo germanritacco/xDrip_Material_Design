@@ -61,7 +61,7 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:onClick="newReminder"
-        android:src="@drawable/ic_add_black_36dp"
+        android:src="@drawable/rounded_add_36"
         app:backgroundTint="#A5D6A7"
         app:borderWidth="0dp" />
 
@@ -124,7 +124,7 @@
                     android:onClick="undoFromFloater"
                     android:paddingTop="5dp"
                     android:tint="#FFFFFF"
-                    app:srcCompat="@drawable/ic_undo_variant_grey600_24dp" />
+                    app:srcCompat="@drawable/rounded_undo_24" />
 
                 <ImageButton
                     android:id="@+id/reminderTrashButton"
@@ -139,7 +139,7 @@
                     android:paddingTop="2dp"
                     android:scaleX="0.8"
                     android:scaleY="0.8"
-                    app:srcCompat="@drawable/rounded_delete_24" />
+                    app:srcCompat="@drawable/rounded_delete_32" />
 
             </LinearLayout>
 

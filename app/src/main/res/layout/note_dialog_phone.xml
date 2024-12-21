@@ -49,6 +49,7 @@
                 android:layout_gravity="right"
                 android:background="#00FFFFFF"
                 android:gravity="right"
+                android:translationX="12dp"
                 android:onClick="promptSpeechNoteInput"
                 android:scaleX="1.2"
                 android:scaleY="1.2"

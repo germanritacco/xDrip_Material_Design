@@ -76,6 +76,6 @@
         android:layout_gravity="end"
         android:backgroundTint="#1f1f1f"
         android:onClick="closeButton"
-        android:src="@drawable/rounded_close_24" />
+        android:src="@drawable/rounded_close_32" />
 
 </RelativeLayout>

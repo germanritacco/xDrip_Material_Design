@@ -79,7 +79,7 @@
                 android:scaleType="fitCenter"
                 android:tint="#FFFFFF"
                 app:showIfTrue="@{safeUnbox(vs.included[`graphic_trend_arrow`])}"
-                app:srcCompat="@drawable/ic_wrench_grey600_48dp" />
+                app:srcCompat="@drawable/rounded_build_24" />
 
             <Switch
                 android:id="@+id/pswitch3"

@@ -135,7 +135,7 @@
             <Button
                 android:backgroundTint="@color/colorButton"
                 android:id="@+id/event_upload_logs_button"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="uploadEventLogs"
@@ -146,7 +146,7 @@
             <Button
                 android:backgroundTint="@color/colorButton"
                 android:id="@+id/event_save_logs_button"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="saveEventLog"
@@ -157,9 +157,9 @@
             <Button
                 android:backgroundTint="@color/colorButton"
                 android:id="@+id/button28"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="0.6"
                 android:onClick="@{(v) -> viewModel.scrollToTop()}"
                 android:text="@string/top"
                 android:textAllCaps="false"
