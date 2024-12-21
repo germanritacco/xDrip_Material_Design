@@ -1599,7 +1599,7 @@ public class BgGraphBuilder {
                         // show basal dose as blue syringe icon
                         if (treatment.isBasalOnly()) {
                             //pv.setBitmapScale((float) (0.5f + (treatment.insulin * 5f))); // 0.1U == 100% 0.2U = 150%
-                            BitmapLoader.loadAndSetKey(pv, R.drawable.ic_eyedropper_variant_grey600_24dp, 0);
+                            BitmapLoader.loadAndSetKey(pv, R.drawable.rounded_syringe_24, 0);
                             pv.setBitmapTint(getCol(X.color_basal_tbr));
                             final Pair<Float, Float> yPositions = GraphTools.bestYPosition(bgReadings, treatment.timestamp, doMgdl, false, highMark, 27d + (18d * consecutiveCloseIcons));
                             pv.set(treatment.timestamp / FUZZER, yPositions.first);

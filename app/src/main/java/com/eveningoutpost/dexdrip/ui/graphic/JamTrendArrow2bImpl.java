@@ -13,7 +13,7 @@ public class JamTrendArrow2bImpl extends JamTrendArrowImpl {
 
     public JamTrendArrow2bImpl(ImageView v) {
         super(v);
-        setImage(R.drawable.ic_arrow_forward_color_24dp);
+        setImage(R.drawable.rounded_arrow_right_alt_color_24);
     }
 
 }

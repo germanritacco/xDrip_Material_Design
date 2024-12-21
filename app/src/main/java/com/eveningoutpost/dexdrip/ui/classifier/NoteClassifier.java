@@ -24,36 +24,36 @@ public class NoteClassifier {
 
         final String haystack = note.toLowerCase();
         if (haystack.contains("battery low")) {
-            return red(R.drawable.alert_icon, note);
+            return red(R.drawable.rounded_warning_24, note);
 
         } else if (haystack.contains("stopped")) {
-            return red(R.drawable.flag_variant, note);
+            return red(R.drawable.round_flag_24, note);
 
         } else if (haystack.contains("paused")) {
-            return amber(R.drawable.flag_variant, note);
+            return amber(R.drawable.round_flag_24, note);
 
         } else if (haystack.contains("started")) {
-            return green(R.drawable.flag_variant, note);
+            return green(R.drawable.round_flag_24, note);
 
         } else if (haystack.contains("cartridge low")) {
-            return red(R.drawable.alert_icon, note);
+            return red(R.drawable.rounded_warning_24, note);
 
         } else if (haystack.equals("connection timed out")) {
-            return red(R.drawable.alert_icon, note);
+            return red(R.drawable.rounded_warning_24, note);
 
         } else if (haystack.startsWith("warning")) {
-            return amber(R.drawable.alert_icon, note);
+            return amber(R.drawable.rounded_warning_24, note);
 
         } else if (haystack.startsWith("maintenance")) {
-            return grey(R.drawable.wrench_icon, note);
+            return grey(R.drawable.rounded_build_24, note);
 
         } else if (haystack.startsWith("reminder")) {
-            return amber(R.drawable.note_text_icon, note);
+            return amber(R.drawable.twotone_sticky_note_2_24, note);
 
         } else if (haystack.startsWith("priming")) {
-            return grey(R.drawable.dropper, note);
+            return grey(R.drawable.rounded_syringe_24, note);
         }
-        return grey(R.drawable.note_text_icon, note);
+        return grey(R.drawable.twotone_sticky_note_2_24, note);
     }
 
 

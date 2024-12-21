@@ -174,13 +174,13 @@ public class CompatibleApps extends BroadcastReceiver {
     public static void showNotification(String title, String content, PendingIntent yesIntent, PendingIntent noIntent, PendingIntent contentIntent, int notificationId) {
 
         final NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(xdrip.getAppContext(), (String)null)
-                .setSmallIcon(R.drawable.ic_action_communication_invert_colors_on)
+                .setSmallIcon(R.drawable.rounded_invert_colors_24)
                 .setContentTitle(title)
                 .setContentText(content)
                 .setContentIntent(contentIntent)
                 .setPriority(NotificationCompat.PRIORITY_MAX)
-                .addAction(R.drawable.tick_icon_small, gs(R.string.yes), yesIntent)
-                .addAction(android.R.drawable.ic_delete, gs(R.string.no), noIntent);
+                .addAction(R.drawable.rounded_check_24, gs(R.string.yes), yesIntent)
+                .addAction(R.drawable.rounded_close_24, gs(R.string.no), noIntent);
 
         final NotificationManager mNotifyMgr = (NotificationManager) xdrip.getAppContext().getSystemService(Context.NOTIFICATION_SERVICE);
 

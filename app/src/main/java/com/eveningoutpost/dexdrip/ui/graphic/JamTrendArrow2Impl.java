@@ -14,7 +14,7 @@ class JamTrendArrow2Impl extends JamTrendArrowImpl {
 
     JamTrendArrow2Impl(ImageView v) {
         super(v);
-        setImage(R.drawable.ic_arrow_forward_white_24dp);
+        setImage(R.drawable.rounded_arrow_right_alt_white_24);
     }
 
     @Override

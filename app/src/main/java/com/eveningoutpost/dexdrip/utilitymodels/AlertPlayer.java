@@ -532,10 +532,10 @@ public class AlertPlayer {
         boolean localOnly = (Home.get_forced_wear() && PersistentStore.getBoolean("bg_notifications_watch"));
         Log.d(TAG, "NotificationCompat.Builder localOnly=" + localOnly);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, NotificationChannels.BG_ALERT_CHANNEL)//KS Notification
-                .setSmallIcon(R.drawable.ic_action_communication_invert_colors_on)
+                .setSmallIcon(R.drawable.rounded_invert_colors_24)
                 .setContentTitle(title)
                 .setContentText(content)
-                //.addAction(R.drawable.ic_action_communication_invert_colors_on, "SNOOZE", notificationIntent(context, intent))
+                //.addAction(R.drawable.rounded_invert_colors_24, "SNOOZE", notificationIntent(context, intent))
                 .setContentIntent(notificationIntent(context, intent))
                 .setLocalOnly(localOnly)
 
@@ -544,7 +544,7 @@ public class AlertPlayer {
                 .setDeleteIntent(snoozeIntent(context, minsFromStartPlaying));
         if (Pref.getBoolean("show_buttons_in_alerts", true)) {
              builder.addAction(
-                    R.drawable.alert_icon,
+                    R.drawable.rounded_warning_24,
                     context.getString(R.string.snooze_alert),
                     snoozeIntent(context, minsFromStartPlaying)
             );

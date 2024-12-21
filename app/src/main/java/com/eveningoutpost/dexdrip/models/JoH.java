@@ -693,7 +693,7 @@ public class JoH {
     public static void fixActionBar(AppCompatActivity context) {
         try {
             context.getSupportActionBar().setDisplayShowHomeEnabled(true);
-            context.getSupportActionBar().setIcon(R.drawable.ic_launcher);
+            context.getSupportActionBar().setIcon(R.drawable.rounded_invert_colors_48);
         } catch (Exception e) {
             Log.e(TAG, "Got exception with supportactionbar: " + e.toString());
 
@@ -1540,7 +1540,7 @@ public class JoH {
 
     private static NotificationCompat.Builder notificationBuilder(String title, String content, PendingIntent intent, String channelId) {
         return new NotificationCompat.Builder(xdrip.getAppContext(), channelId)
-                .setSmallIcon(R.drawable.ic_action_communication_invert_colors_on)
+                .setSmallIcon(R.drawable.rounded_invert_colors_24)
                 .setContentTitle(title)
                 .setContentText(content)
                 .setContentIntent(intent);

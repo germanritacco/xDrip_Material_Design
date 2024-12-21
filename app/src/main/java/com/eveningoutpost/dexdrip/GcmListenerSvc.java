@@ -630,7 +630,7 @@ public class GcmListenerSvc extends JamListenerSvc {
 
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         Notification.Builder notificationBuilder = (Notification.Builder) new Notification.Builder(this)
-                .setSmallIcon(R.drawable.ic_launcher)
+                .setSmallIcon(R.drawable.rounded_invert_colors_48)
                 .setContentTitle(title)
                 .setContentText(body)
                 .setAutoCancel(true)

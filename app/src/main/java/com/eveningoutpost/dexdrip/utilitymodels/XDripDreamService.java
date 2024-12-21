@@ -145,7 +145,7 @@ public class XDripDreamService extends DreamService implements SensorEventListen
 
         for (int i = 0; i < 1; i++) {
             image = new ImageView(this);
-            image.setImageResource(R.drawable.ic_launcher);
+            image.setImageResource(R.drawable.rounded_invert_colors_48);
             image.setAlpha(0.3f);
             //  image.setBackgroundColor(0xFF004000);
             mBouncer.addView(image, lp);

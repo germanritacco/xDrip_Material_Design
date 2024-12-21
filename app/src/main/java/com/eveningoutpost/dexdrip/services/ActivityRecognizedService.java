@@ -240,7 +240,7 @@ public class ActivityRecognizedService extends IntentService implements GoogleAp
                 PendingIntent.FLAG_ONE_SHOT);
         builder.setContentText("Shut down motion detection! See Error Logs - Please report to developer" + JoH.dateTimeText(JoH.tsl()));
         builder.setContentIntent(pendingIntent);
-        builder.setSmallIcon(R.drawable.ic_launcher);
+        builder.setSmallIcon(R.drawable.rounded_invert_colors_48);
         builder.setContentTitle("Problem with motion detection!");
         NotificationManagerCompat.from(context).notify(VEHICLE_NOTIFICATION_ERROR_ID, builder.build());
     }
@@ -629,7 +629,7 @@ public class ActivityRecognizedService extends IntentService implements GoogleAp
     private void raise_vehicle_notification(String msg) {
         final NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
         builder.setContentText(msg);
-        builder.setSmallIcon(R.drawable.ic_launcher);
+        builder.setSmallIcon(R.drawable.rounded_invert_colors_48);
         if (VehicleMode.shouldPlaySound()) {
             setInternalPrefsLong(VEHICLE_MODE_LAST_ALERT, JoH.tsl());
             builder.setSound(Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getPackageName() + "/" + R.raw.labbed_musical_chime));
