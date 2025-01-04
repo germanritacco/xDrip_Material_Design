@@ -61,9 +61,9 @@ public class AlertList extends ActivityWithMenu {
 
     HashMap<String, String> createAlertMap(AlertType alert) {
         HashMap<String, String> map = new HashMap<String, String>();
-        String overrideSilentMode = "Override Silent Mode";
+        String overrideSilentMode = gs(R.string.override_silent_mode);
         if (alert.override_silent_mode == false) {
-            overrideSilentMode = "No Alert in Silent Mode";
+            overrideSilentMode = gs(R.string.not_override_silent_mode);
         }
         // We use a - sign to tell that this text should be stiked through
         String extra = "-";

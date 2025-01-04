@@ -468,11 +468,13 @@
                     </LinearLayout>
 
                     <Button
-                        android:backgroundTint="@color/colorButton"
                         android:id="@+id/edit_alert_pre_snooze"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
+                        android:layout_marginStart="15sp"
+                        android:layout_marginEnd="15sp"
+                        android:backgroundTint="@color/colorButton"
                         android:text="@string/snooze_alert_before_it_fires" />
 
                 </LinearLayout>

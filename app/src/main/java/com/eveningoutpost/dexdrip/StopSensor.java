@@ -64,7 +64,7 @@ public class StopSensor extends ActivityWithMenu {
         LibreAlarmReceiver.clearSensorStats();
         PluggableCalibration.invalidateAllCaches();
 
-        Treatments.sensorStop(null, "Stopped by xDrip");
+        Treatments.sensorStop(null, gs(R.string.stopped_xdrip));
 
         Ob1G5StateMachine.stopSensor();
         if (JoH.pratelimit("dex-stop-start", 15)) {

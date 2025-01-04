@@ -6,7 +6,7 @@
         android:icon="@drawable/rounded_straighten_36"
         android:title="@string/glucose_units">
         <PreferenceCategory
-            android:title="@string/general_settings"
+            android:title="@string/glucose_units"
             android:key="bgRange">
             <ListPreference
                 android:key="units"

@@ -271,6 +271,16 @@
                     android:key="share_test_key"
                     android:shouldDisableView="true"
                     android:title="@string/dexcom_test_mode_serial" />
+                <Preference
+                    android:dependency="share_upload"
+                    android:summary="@string/manage_existing_followers"
+                    android:key="manage_dexcom_share_followers"
+                    android:title="@string/manage_followers">
+                    <intent
+                        android:action="android.intent.action.MAIN"
+                        android:targetClass="com.eveningoutpost.dexdrip.FollowerManagementActivity"
+                        android:targetPackage="@string/local_target_package" />
+                </Preference>
             </PreferenceScreen>
             <PreferenceScreen
                 android:key="tidepool_upload_screen"
@@ -310,23 +320,23 @@
                 <CheckBoxPreference
                     android:defaultValue="false"
                     android:key="tidepool_only_while_charging"
-                    android:summary="Upload data only when charging"
-                    android:title="Only when charging" />
+                    android:summary="@string/tidepool_charging_summary"
+                    android:title="@string/tidepool_charging_title" />
                 <CheckBoxPreference
                     android:defaultValue="false"
                     android:key="tidepool_only_while_unmetered"
-                    android:summary="Upload data only when connected to an unmetered network like Wifi"
-                    android:title="Only on Wifi" />
+                    android:summary="@string/tidepool_wifi_summary"
+                    android:title="@string/tidepool_wifi_title" />
                 <CheckBoxPreference
                     android:defaultValue="false"
                     android:key="tidepool_no_treatments"
-                    android:summary="Upload only CGM data to avoid duplicates with manual pump upload"
-                    android:title="Don't upload treatments" />
+                    android:summary="@string/tidepool_treatments_summary"
+                    android:title="@string/tidepool_treatments_title" />
                 <CheckBoxPreference
                     android:defaultValue="false"
                     android:key="tidepool_new_auth"
-                    android:summary="2023 openid authentication method."
-                    android:title="Use new Auth" />
+                    android:summary="@string/tidepool_auth_summary"
+                    android:title="@string/tidepool_auth_title" />
 
             </PreferenceScreen>
 

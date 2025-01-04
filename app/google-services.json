@@ -1,51 +1,44 @@
 {
   "project_info": {
-    "project_number": "10591810485",
-    "firebase_url": "https://xdrip-plus.firebaseio.com",
-    "project_id": "xdrip-plus",
-    "storage_bucket": "xdrip-plus.appspot.com"
+    "project_number": "1044882817117",
+    "project_id": "dexdrip-0de814c8",
+    "storage_bucket": "dexdrip-0de814c8.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:10591810485:android:b70845957aa2e415",
+        "mobilesdk_app_id": "1:1044882817117:android:2d16f74d071e79e1c38db4",
         "android_client_info": {
           "package_name": "com.eveningoutpost.dexdrip"
         }
       },
       "oauth_client": [
         {
-          "client_id": "10591810485-upgrnlqjblrcuad3bu80ouvr7osfoh4i.apps.googleusercontent.com",
+          "client_id": "1044882817117-8k17tpomqtsvftnam2mnl4mj8moorvl3.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.eveningoutpost.dexdrip"
+            "package_name": "com.eveningoutpost.dexdrip",
+            "certificate_hash": "b04fa2d1dca966da5d2a197c665d373afc1ee70c"
           }
         },
         {
-          "client_id": "10591810485-0quj31nt2aac7jkt7odbmg2nme2dqar3.apps.googleusercontent.com",
+          "client_id": "1044882817117-qf2vi64i151a1nrvsj8kit5grn5jq807.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCgbeeITUidfer8MkMffMZRN_ueXfhAxzc"
+          "current_key": "AIzaSyB2BhF5yexMefc1Y71lzD4798KBXdEW8jA"
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 1,
           "other_platform_oauth_client": [
             {
-              "client_id": "10591810485-0quj31nt2aac7jkt7odbmg2nme2dqar3.apps.googleusercontent.com",
+              "client_id": "1044882817117-qf2vi64i151a1nrvsj8kit5grn5jq807.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 1
         }
       }
     }

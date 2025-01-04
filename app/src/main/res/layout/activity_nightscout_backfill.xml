@@ -31,7 +31,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_weight="1"
-                    android:text="Choose the date for the oldest record to send to Nightscout. Use with care!"
+                    android:text="@string/nightscout_backfill_summary"
                     android:textAlignment="center"
                     android:textSize="18sp" />
 
@@ -70,7 +70,7 @@
                     android:layout_marginEnd="20dp"
                     android:layout_weight="1"
                     android:onClick="backfillRun"
-                    android:text="Do it!" />
+                    android:text="@string/ok" />
 
                 <Button
                     android:backgroundTint="@color/colorButton"
@@ -80,7 +80,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_weight="1"
                     android:onClick="backfillCancel"
-                    android:text="Cancel" />
+                    android:text="@string/cancel" />
 
             </LinearLayout>
 

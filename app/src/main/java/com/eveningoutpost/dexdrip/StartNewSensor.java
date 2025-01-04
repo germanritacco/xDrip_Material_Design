@@ -250,7 +250,7 @@ public class StartNewSensor extends ActivityWithMenu {
         // JoH.scheduleNotification(xdrip.getAppContext(), "Sensor should be ready", xdrip.getAppContext().getString(R.string.please_enter_two_calibrations_to_get_started), 60 * 130, Home.SENSOR_READY_ID);
 
         // Add treatment entry in db
-        Treatments.sensorStart(startTime, "Started by xDrip");
+        Treatments.sensorStart(startTime, gs(R.string.started_xdrip));
 
         CollectionServiceStarter.restartCollectionServiceBackground();
 

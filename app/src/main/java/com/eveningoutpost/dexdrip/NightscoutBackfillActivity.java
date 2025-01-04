@@ -54,14 +54,14 @@ public class NightscoutBackfillActivity extends AppCompatActivity implements Nav
     }
 
     private void updateDateButton() {
-        SimpleDateFormat format = new SimpleDateFormat("MMMM d, yyyy h:mm a");
+        SimpleDateFormat format = new SimpleDateFormat("d MMMM yyyy, HH:mm");
         dateButton.setText(format.format(calendar.getTime()));
     }
 
     @Override
     protected void onResume() {
         xdrip.checkForcedEnglish(this);
-        setTitle("Nightscout Backfill");
+        setTitle(gs(R.string.nightscout_backfill));
         super.onResume();
         mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), "Nightscout Backfill", this);

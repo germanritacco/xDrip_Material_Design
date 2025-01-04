@@ -63,7 +63,7 @@
                     android:id="@+id/warningButton4"
                     android:onClick="viewWarning"
                     android:layout_gravity="right"
-                    android:backgroundTint="#1f1f1f" />
+                    android:backgroundTint="@color/colorButton"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -79,7 +79,7 @@
 
                 <Button style="?android:attr/buttonStyleSmall"
                     android:background="@android:color/transparent"
-                    android:backgroundTint="@color/colorButton"
+                    android:backgroundTint="#1f1f1f"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/view_google_licenses"

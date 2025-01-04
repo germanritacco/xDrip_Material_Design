@@ -94,6 +94,7 @@ import static com.eveningoutpost.dexdrip.utilitymodels.Constants.MINUTE_IN_MS;
 import static com.eveningoutpost.dexdrip.utilitymodels.Constants.SECOND_IN_MS;
 import static com.eveningoutpost.dexdrip.utils.DexCollectionType.getBestCollectorHardwareName;
 import static com.eveningoutpost.dexdrip.utils.bt.Helper.getStatusName;
+import static com.eveningoutpost.dexdrip.xdrip.gs;
 
 
 /**
@@ -109,7 +110,7 @@ public class Ob1G5StateMachine {
     private static final String PREF_SAVED_QUEUE = "Ob1-saved-queue";
 
     public static final String PREF_QUEUE_DRAINED = "OB1-QUEUE-DRAINED";
-    public static final String CLOSED_OK_TEXT = "Closed OK";
+    public static final String CLOSED_OK_TEXT = gs(R.string.closed_ok);
 
     private static int LOW_BATTERY_WARNING_LEVEL = Pref.getStringToInt("g5-battery-warning-level", 300); // voltage a < this value raises warnings;
     private static final long BATTERY_READ_PERIOD_MS = HOUR_IN_MS * 12; // how often to poll battery data (12 hours)
@@ -155,7 +156,7 @@ public class Ob1G5StateMachine {
     public static boolean doCheckAuth(final Ob1G5CollectionService parent, final RxBleConnection connection) {
 
         if (connection == null) return false;
-        parent.msg("Authorizing");
+        parent.msg(gs(R.string.authorizing));
 
         if (parent.android_wear) {
             speakSlowly = true;
@@ -252,7 +253,7 @@ public class Ob1G5StateMachine {
     @SuppressLint("CheckResult")
     public static boolean doCheckAuth2(final Ob1G5CollectionService parent, final RxBleConnection connection) {
         if (connection == null) return false;
-        parent.msg("Authorizing 2");
+        parent.msg(gs(R.string.authorizing));
 
         if (!usingG6()) {
             setG6Defaults();
@@ -992,7 +993,7 @@ public class Ob1G5StateMachine {
         try {
             checkVersionAndBattery(parent, connection);
         } finally {
-            parent.msg("Got needed");
+            parent.msg(gs(R.string.phone_service_got_needed));
             parent.updateLast(tsl());       // TODO verify if this is ok to do here
             parent.clearErrors();           // TODO verify if this is ok to do here
         }
@@ -1554,7 +1555,7 @@ public class Ob1G5StateMachine {
     private static void checkAndActivateSensor() {
         // automagically start an xDrip sensor session if transmitter already has active sensor
         if (!Sensor.isActive() && Ob1G5CollectionService.isG5SensorStarted() && (!Sensor.stoppedRecently() || shortTxId())) {
-            JoH.static_toast_long(xdrip.gs(R.string.auto_starting_sensor));
+            JoH.static_toast_long(gs(R.string.auto_starting_sensor));
             if (shortTxId()) relAutoSessionStartTime = HOUR_IN_MS * 24; // If we are using a G7
             final List<BgReading> last = BgReading.latest(1); // Last reading
             if ((last != null) && (last.size() > 0)) { // Have we had a reading?

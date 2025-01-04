@@ -14,6 +14,7 @@ import com.activeandroid.annotation.Table;
 import com.activeandroid.query.Select;
 import com.eveningoutpost.dexdrip.GcmActivity;
 import com.eveningoutpost.dexdrip.Home;
+import com.eveningoutpost.dexdrip.R;
 import com.eveningoutpost.dexdrip.importedlibraries.dexcom.records.CalRecord;
 import com.eveningoutpost.dexdrip.importedlibraries.dexcom.records.CalSubrecord;
 import com.eveningoutpost.dexdrip.models.UserError.Log;
@@ -41,6 +42,7 @@ import java.util.UUID;
 
 import static com.eveningoutpost.dexdrip.models.BgReading.isDataSuitableForDoubleCalibration;
 import static com.eveningoutpost.dexdrip.calibrations.PluggableCalibration.newFingerStickData;
+import static com.eveningoutpost.dexdrip.xdrip.gs;
 
 
 class DexParameters extends SlopeParameters {
@@ -294,7 +296,7 @@ public class Calibration extends Model {
             if ((bgReadings == null) || (bgReadings.size() != 3) || !isDataSuitableForDoubleCalibration() ){
 
             if (Ob1G5CollectionService.usingNativeMode()) {
-                JoH.static_toast_long("Sending Blood Tests to Transmitter"); // TODO extract string
+                JoH.static_toast_long(gs(R.string.send_test_transmitter));
                 BloodTest.create(JoH.tsl() - (Constants.SECOND_IN_MS * 30), bg1, "Initial Calibration");
                 BloodTest.create(JoH.tsl(), bg2, "Initial Calibration");
 

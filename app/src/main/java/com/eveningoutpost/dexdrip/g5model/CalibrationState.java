@@ -4,20 +4,22 @@ package com.eveningoutpost.dexdrip.g5model;
 
 import android.util.SparseArray;
 
+import com.eveningoutpost.dexdrip.R;
 import com.eveningoutpost.dexdrip.models.UserError;
 import com.google.common.collect.ImmutableSet;
 
 import lombok.Getter;
 
 import static com.eveningoutpost.dexdrip.services.G5CollectionService.TAG;
+import static com.eveningoutpost.dexdrip.xdrip.gs;
 
 public enum CalibrationState {
 
     // TODO i18n
 
     Unknown(0x00, "Unknown"),
-    Stopped(0x01, "Stopped"),
-    WarmingUp(0x02, "Warming Up"),
+    Stopped(0x01, gs(R.string.stopped)),
+    WarmingUp(0x02, gs(R.string.warming_up)),
     ExcessNoise(0x03, "Excess Noise"),
     NeedsFirstCalibration(0x04, "Needs Initial Calibration"),
     NeedsSecondCalibration(0x05, "Needs Second Calibration"),
@@ -33,7 +35,7 @@ public enum CalibrationState {
     Ended(0x0f, "Ended"),
     SensorFailed3(0x10, "Sensor Failed 3"),
     TransmitterProblem(0x11, "Transmitter Problem"),
-    Errors(0x12, "Sensor Errors"),
+    Errors(0x12, gs(R.string.sensor_errors)),
     SensorFailed4(0x13, "Sensor Failed 4"),
     SensorFailed5(0x14, "Sensor Failed 5"),
     SensorFailed6(0x15, "Sensor Failed 6"),
@@ -47,8 +49,8 @@ public enum CalibrationState {
     SensorFailed10(0x1D, "Sensor Failed 10"),
     SensorFailed11(0x1E, "Sensor Failed 11"),
     SensorStarted(0xC1, "Sensor Started"),
-    SensorStopped(0xC2, "Sensor Stopped"),
-    CalibrationSent(0xC3, "Calibration Sent");
+    SensorStopped(0xC2, gs(R.string.sensor_stopped)),
+    CalibrationSent(0xC3, gs(R.string.calibration_sent));
 
     @Getter
     byte value;
@@ -121,7 +123,9 @@ public enum CalibrationState {
         return this == WarmingUp;
     }
 
-    public boolean transitional() { return transitional.contains(this); }
+    public boolean transitional() {
+        return transitional.contains(this);
+    }
 
     public boolean ok() {
         return this == Ok;
@@ -143,7 +147,7 @@ public enum CalibrationState {
             case WarmingUp:
                 if (DexSessionKeeper.isStarted()) {
                     if (DexSessionKeeper.warmUpTimeValid()) {
-                        return getText() + "\n" + DexSessionKeeper.prettyTime() + " left";
+                        return getText() + "\n" + DexSessionKeeper.prettyTime() + " " + gs(R.string.left);
                     } else {
                         return getText();
                     }

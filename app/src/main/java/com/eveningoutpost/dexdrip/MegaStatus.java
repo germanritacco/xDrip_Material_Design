@@ -13,6 +13,7 @@ import static com.eveningoutpost.dexdrip.utils.DexCollectionType.NSFollow;
 import static com.eveningoutpost.dexdrip.utils.DexCollectionType.SHFollow;
 import static com.eveningoutpost.dexdrip.utils.DexCollectionType.WebFollow;
 import static com.eveningoutpost.dexdrip.utils.DexCollectionType.CLFollow;
+import static com.eveningoutpost.dexdrip.xdrip.gs;
 
 import android.app.Activity;
 
@@ -21,6 +22,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -160,7 +162,7 @@ public class MegaStatus extends FloatingLocaleActivityWithScreenshot {
 
         if (sectionList.isEmpty()) {
 
-            addAsection("Classic Status Page", "Legacy System Status");
+            addAsection(gs(R.string.classic_status_page), "Legacy System Status");
 
             final DexCollectionType dexCollectionType = DexCollectionType.getDexCollectionType();
 
@@ -170,7 +172,7 @@ public class MegaStatus extends FloatingLocaleActivityWithScreenshot {
             }
             if (dexCollectionType.equals(DexcomG5)) {
                 if (Pref.getBooleanDefaultFalse(Ob1G5CollectionService.OB1G5_PREFS)) {
-                    addAsection(G5_STATUS, "G6/G7/One/One+ Collector/Transmitter Status");
+                    addAsection(gs(R.string.dexcom_status), gs(R.string.g6_status));
                 } else {
                     addAsection(G5_STATUS, "G5 Collector and Transmitter Status");
                 }
@@ -196,7 +198,7 @@ public class MegaStatus extends FloatingLocaleActivityWithScreenshot {
                     || Pref.getBooleanDefaultFalse("cloud_storage_api_enable")
                     || Pref.getBooleanDefaultFalse("share_upload")
                     || (Pref.getBooleanDefaultFalse("wear_sync") && Home.get_engineering_mode())) {
-                addAsection(UPLOADERS, "Cloud Uploader Queues");
+                addAsection(gs(R.string.uploaders), gs(R.string.cloud_queues));
             }
             if (LeFunEntry.isEnabled()) {
                 addAsection(LEFUN_STATUS, "Lefun Watch Status");
@@ -236,6 +238,7 @@ public class MegaStatus extends FloatingLocaleActivityWithScreenshot {
             case G4_STATUS:
                 la.addRows(DexCollectionService.megaStatus());
                 break;
+            case "Estado de Dexcom":
             case G5_STATUS:
                 if (Pref.getBooleanDefaultFalse(Ob1G5CollectionService.OB1G5_PREFS)) {
                     la.addRows(Ob1G5CollectionService.megaStatus());
@@ -255,6 +258,7 @@ public class MegaStatus extends FloatingLocaleActivityWithScreenshot {
                 la.addRows(DesertSync.megaStatus());
                 la.addRows(RollCall.megaStatus());
                 break;
+            case "Subidas":
             case UPLOADERS:
                 la.addRows(UploaderQueue.megaStatus());
                 break;

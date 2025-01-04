@@ -392,8 +392,8 @@
                     android:dependency="ob1_minimize_scanning"
                     android:enabled="true"
                     android:key="ob1_avoid_scanning"
-                    android:summary="Avoid scanning as much as possible (reduces battery usage further)"
-                    android:title="Avoid Scanning" />
+                    android:summary="@string/avoid_scanning_summary"
+                    android:title="@string/avoid_scanning" />
                 <CheckBoxPreference
                     android:defaultValue="false"
                     android:key="using_g6"
@@ -407,7 +407,7 @@
                 <CheckBoxPreference
                     android:defaultValue="false"
                     android:key="ob1_special_pairing_workaround"
-                    android:summary="Some Samsung devices can have an error where they lose the pairing information. This attempts to work around the issue."
+                    android:summary="@string/special_pairing_workaround_summary"
                     android:title="@string/special_pairing_workaround" />
                 <EditTextPreference
                     android:defaultValue=""

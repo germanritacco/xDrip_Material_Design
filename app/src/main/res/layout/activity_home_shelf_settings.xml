@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable name="vs" type="com.eveningoutpost.dexdrip.ui.BaseShelf"/>
-        <variable name="home" type="com.eveningoutpost.dexdrip.Home" />
-    </data>
 
+        <variable
+            name="vs"
+            type="com.eveningoutpost.dexdrip.ui.BaseShelf" />
+
+        <variable
+            name="home"
+            type="com.eveningoutpost.dexdrip.Home" />
+    </data>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -15,7 +20,6 @@
         android:background="#121212"
         android:orientation="vertical"
         android:padding="10dp">
-
 
         <Switch
             android:id="@+id/pswitch0"
@@ -89,9 +93,7 @@
                 android:checked="@{safeUnbox(vs.included[`graphic_trend_arrow`])}"
                 android:onCheckedChanged="@{(v, result) -> home.showArrowConfigurator(v, false, true)}"
                 android:onClick="@{() -> vs.ptoggle(`graphic_trend_arrow`)}"
-                android:text="Show Graphical Trend Arrow" />
-
-
+                android:text="@string/show_trend_arrow" />
         </LinearLayout>
 
         <Spinner
@@ -104,8 +106,5 @@
             android:onItemSelected="@{(a,b,c,d) -> home.arrowSelectionChanged(a,b,c,d)}"
             android:selection="@{home.arrowSelectionCurrent}"
             app:showIfTrue="@{safeUnbox(vs.included[`arrow_configurator`])}" />
-
-
     </LinearLayout>
-
 </layout>

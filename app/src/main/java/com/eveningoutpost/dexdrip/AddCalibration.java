@@ -27,6 +27,7 @@ import com.eveningoutpost.dexdrip.utils.DexCollectionType;
 import java.util.UUID;
 
 import static com.eveningoutpost.dexdrip.services.Ob1G5CollectionService.getTransmitterID;
+import static com.eveningoutpost.dexdrip.xdrip.gs;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -214,7 +215,7 @@ public class AddCalibration extends AppCompatActivity implements NavigationDrawe
                                     JoH.clearCache();
                                     final Calibration Calibration = new Calibration();
                                     final Sensor sensor = Sensor.currentSensor();
-                                    JoH.static_toast_long("Sending Blood Test to Transmitter");
+                                    JoH.static_toast_long(gs(R.string.send_test_transmitter));
                                     BloodTest.create(JoH.tsl() - (Constants.SECOND_IN_MS * 30), bg, "Add Calibration");
                                     if (!Pref.getBooleanDefaultFalse("bluetooth_meter_for_calibrations_auto")) {
                                         NativeCalibrationPipe.addCalibration((int) bg, JoH.tsl() - (Constants.SECOND_IN_MS * 30));

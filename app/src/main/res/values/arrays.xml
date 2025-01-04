@@ -4,23 +4,23 @@
         <item>Bluetooth Wixel</item>
         <item>xBridge Wixel</item>
         <item>Wifi Wixel / Parakeet</item>
-        <item>Wifi Wixel + BT Wixel</item>
+        <item>Wifi Wixel + Bluetooth Wixel</item>
         <item>Wifi Wixel + xBridge Wixel</item>
-        <item>G6/G7/One/One+ Transmitter</item>
+        <item>@string/dexcom_transmitter</item>
         <item>Libre Bluetooth</item>
-        <item>Libre Bluetooth + wifi</item>
-        <item>Libre wifi</item>
-        <item>xDrip+ Sync Follower</item>
+        <item>Libre Bluetooth + Wifi</item>
+        <item>Libre Wifi</item>
+        <item>@string/sync_follower</item>
         <item>LibreAlarm</item>
-        <item>Libre (patched App)</item>
+        <item>@string/libre_parched_app</item>
         <item>640G / EverSense</item>
         <item>Medtrum A6</item>
-        <item>Nightscout Follower</item>
-        <item>Dex Share Follower</item>
-        <item>Web Follower</item>
-        <item>Companion App</item>
+        <item>@string/nightscout_follower</item>
+        <item>@string/dex_share_follower</item>
+        <item>@string/web_follower</item>
+        <item>@string/companion_app</item>
         <item>GlucoRx/Aidex App</item>
-        <item>CareLink Follower</item>
+        <item>@string/careLink_follower</item>
         <item>@string/disable_collection</item>
     </string-array>
 
@@ -48,7 +48,7 @@
         <item>Disabled</item>
     </string-array>
 
-     <string-array name="EnableStreamingMethods">
+    <string-array name="EnableStreamingMethods">
         <item>@string/enable_streaming_always_allow</item>
         <item>@string/enable_streaming_ask_each_time</item>
         <item>@string/enable_streaming_never</item>
@@ -73,9 +73,9 @@
     </string-array>
 
     <string-array name="CalibrateExternalLibre2">
-        <item>No calibration</item>
-        <item>Calibrate based on raw</item>
-        <item>Calibrate based on glucose (experimental)</item>
+        <item>@string/libre2_no_calibration</item>
+        <item>@string/libre2_calibration_raw</item>
+        <item>@string/libre2_calibration_glucose</item>
     </string-array>
 
     <string-array name="CalibrateExternalLibre2Values">
@@ -83,22 +83,20 @@
         <item>calibrate_raw</item>
         <item>calibrate_glucose</item>
     </string-array>
-    
-    <string-array name="SendToPebbleChoice">
 
+    <string-array name="SendToPebbleChoice">
         <item>Standard Watchface (old)</item>
         <item>Color Trend Watchface</item>
         <item>Pebble Classic Trend Watchface</item>
         <item>Pebble Trend Clay Version (test)</item>
     </string-array>
-    <string-array name="SendToPebbleChoiceValues">
 
+    <string-array name="SendToPebbleChoiceValues">
         <item>2</item>
         <item>3</item>
         <item>4</item>
         <item>5</item>
     </string-array>
-
 
     <string-array name="PebbleTrendPeriods">
         <item>1hr</item>
@@ -120,9 +118,9 @@
     </string-array>
 
     <string-array name="UpdateChannelDetail">
-        <item>Stable - tried and tested versions</item>
-        <item>Beta - new features but not fully tested </item>
-        <item>Alpha - versions for early testing</item>
+        <item>@string/channel_stable</item>
+        <item>@string/channel_beta</item>
+        <item>@string/channel_alpha</item>
     </string-array>
 
     <string-array name="UpdateChannelE">
@@ -133,10 +131,10 @@
     </string-array>
 
     <string-array name="UpdateChannelDetailE">
-        <item>Stable - tried and tested versions</item>
-        <item>Beta - new features but not fully tested </item>
-        <item>Alpha - versions for early testing</item>
-        <item>Nightly - untested raw code - experts only!</item>
+        <item>@string/channel_stable</item>
+        <item>@string/channel_beta</item>
+        <item>@string/channel_alpha</item>
+        <item>@string/channel_nightly</item>
     </string-array>
 
     <string-array name="TreatmentCalibrationChoice">
@@ -147,10 +145,10 @@
     </string-array>
 
     <string-array name="TreatmentCalibrationChoiceDetail">
-        <item>Automatic mode (best)</item>
-        <item>Ask me every time</item>
-        <item>Never use them</item>
-        <item>Always use them</item>
+        <item>@string/treatment_calibration_auto</item>
+        <item>@string/treatment_calibration_ask</item>
+        <item>@string/treatment_calibration_never</item>
+        <item>@string/treatment_calibration_always</item>
     </string-array>
 
 
@@ -166,11 +164,11 @@
 
     <!--     make sure to keep this values in sync with AlertPlayer.getAlertProfile -->
     <string-array name="BgAlertProfileEntries">
-        <item>High</item>
-        <item>Medium</item>
-        <item>Ascending volume</item>
-        <item>Vibrate only</item>
-        <item>Silent</item>
+        <item>@string/alert_profile_high</item>
+        <item>@string/alert_profile_medium</item>
+        <item>@string/alert_profile_ascending</item>
+        <item>@string/alert_profile_vibrate</item>
+        <item>@string/alert_profile_silent</item>
     </string-array>
 
     <string-array name="BgAlertProfileValues">
@@ -194,24 +192,25 @@
     </string-array>
 
     <string-array name="alertType">
-        <item>System Sound/Alarm</item>
-        <item>Custom Sound/Alarm</item>
-        <item>Default xDrip sound</item>
+        <item>@string/alert_type_system</item>
+        <item>@string/alert_type_custom</item>
+        <item>@string/alert_type_default</item>
     </string-array>
 
     <string-array name="reminderAlertType">
-        <item>Android Ringtone/Alarm</item>
-        <item>Custom Audio file</item>
-        <item>Default xDrip+ reminder sound</item>
+        <item>@string/alert_type_system</item>
+        <item>@string/alert_type_custom</item>
+        <item>@string/alert_type_default</item>
     </string-array>
 
-<!--    TODO abstract noise values to single source -->
+    <!--    TODO abstract noise values to single source -->
     <string-array name="NoiseLevelBlock">
-        <item>Send even Extremely noisy signals</item>
-        <item>Only block noise level Extreme</item>
-        <item>Block Very High noise and worse</item>
-        <item>Block High noise and worse</item>
+        <item>@string/block_extremely</item>
+        <item>@string/block_extreme</item>
+        <item>@string/block_very_high</item>
+        <item>@string/block_high</item>
     </string-array>
+
     <string-array name="NoiseLevelBlockValues">
         <item>100000</item>
         <item>200</item>
@@ -221,10 +220,11 @@
 
 
     <string-array name="TrendArrows">
-        <item>Jam Expressive Arrow 1</item>
-        <item>Jam Simple White Arrow 1</item>
-        <item>Jam Simple Color Arrow 1</item>
-        <item>Candy Cane</item>
+        <item>@string/arrow_expressive</item>
+        <item>@string/arrow_simple_white</item>
+        <item>@string/arrow_simple_color</item>
+        <item>@string/Arrow_candy_cane</item>
+
     </string-array>
     <string-array name="TrendArrowValues">
         <item>JamTrendArrowImpl</item>
