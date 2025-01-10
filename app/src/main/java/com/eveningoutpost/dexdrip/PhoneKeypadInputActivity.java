@@ -60,19 +60,7 @@ public class PhoneKeypadInputActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.keypad_activity_phone);
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
-
-        int width = dm.widthPixels;
-        int height = dm.heightPixels;
-        final int refdpi = 320;
-        Log.d(TAG, "Width height: " + width + " " + height + " DPI:" + dm.densityDpi);
-        if (currenttab.split("-")[0].equals("insulin")) {
-            getWindow().setLayout((int) Math.min(((520 * dm.densityDpi) / refdpi), width), (int) Math.min((850 * dm.densityDpi) / refdpi, height));
-        } else {
-            getWindow().setLayout((int) Math.min(((520 * dm.densityDpi) / refdpi), width), (int) Math.min((750 * dm.densityDpi) / refdpi, height));
-        }
-
+        dimensions();
         getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         WindowManager.LayoutParams lp = getWindow().getAttributes();
         lp.dimAmount = 0.5f;
@@ -271,7 +259,6 @@ public class PhoneKeypadInputActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 currenttab = "bloodtest";
-                getWindow().setLayout((int) Math.min(((520 * dm.densityDpi) / refdpi), width), (int) Math.min((750 * dm.densityDpi) / refdpi, height));
                 updateTab();
             }
         });
@@ -279,7 +266,6 @@ public class PhoneKeypadInputActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 currenttab = "insulin-1";
-                getWindow().setLayout((int) Math.min(((520 * dm.densityDpi) / refdpi), width), (int) Math.min(((850 * dm.densityDpi) / refdpi), height));
                 updateTab();
             }
         });
@@ -287,7 +273,6 @@ public class PhoneKeypadInputActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 currenttab = "carbs";
-                getWindow().setLayout((int) Math.min(((520 * dm.densityDpi) / refdpi), width), (int) Math.min((750 * dm.densityDpi) / refdpi, height));
                 updateTab();
             }
         });
@@ -295,7 +280,6 @@ public class PhoneKeypadInputActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 currenttab = "time";
-                getWindow().setLayout((int) Math.min(((520 * dm.densityDpi) / refdpi), width), (int) Math.min((750 * dm.densityDpi) / refdpi, height));
                 updateTab();
             }
         });
@@ -449,7 +433,7 @@ public class PhoneKeypadInputActivity extends BaseActivity {
         multiButton1.setEnabled(false);
         multiButton2.setEnabled(false);
         multiButton3.setEnabled(false);
-
+        dimensions();
         // Dynamically adjust the spacing of insulin buttons
         adjustButtonWeights((LinearLayout) findViewById(R.id.insulinTypesSection));
 
@@ -549,7 +533,8 @@ public class PhoneKeypadInputActivity extends BaseActivity {
 
     @Override
     protected void onPause() {
-        PersistentStore.setString(LAST_TAB_STORE, currenttab);
+        // PersistentStore.setString(LAST_TAB_STORE, currenttab);
+        PersistentStore.setString(LAST_TAB_STORE, "insulin-1"); // reset to insulin-1 on pause
         super.onPause();
     }
 
@@ -576,6 +561,20 @@ public class PhoneKeypadInputActivity extends BaseActivity {
                 params.weight = 0; // Doesn't take up space if it is hidden
             }
             child.setLayoutParams(params);
+        }
+    }
+
+    void dimensions() {
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+        int width = dm.widthPixels;
+        int height = dm.heightPixels;
+        final int refdpi = 320;
+        Log.d(TAG, "Width height: " + width + " " + height + " DPI:" + dm.densityDpi);
+        if ((currenttab.split("-")[0].equals("insulin")) && multipleInsulins) {
+            getWindow().setLayout((int) Math.min(((520 * dm.densityDpi) / refdpi), width), (int) Math.min((850 * dm.densityDpi) / refdpi, height));
+        } else {
+            getWindow().setLayout((int) Math.min(((520 * dm.densityDpi) / refdpi), width), (int) Math.min((750 * dm.densityDpi) / refdpi, height));
         }
     }
 
