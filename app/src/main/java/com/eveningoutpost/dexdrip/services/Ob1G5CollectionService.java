@@ -1920,7 +1920,7 @@ public class Ob1G5CollectionService extends G5BaseService {
                 }
             }
             final PendingIntent pi = PendingIntent.getActivity(xdrip.getAppContext(), G5_SENSOR_STARTED, JoH.getStartActivityIntent(Home.class), PendingIntent.FLAG_UPDATE_CURRENT);
-            JoH.showNotification(state.getText(), "Sensor Stopped", pi, G5_SENSOR_STARTED, true, true, false);
+            JoH.showNotification(state.getText(), gs(R.string.sensor_stopped), pi, G5_SENSOR_STARTED, true, true, false);
             UserError.Log.ueh(TAG, "Native Sensor is now Stopped: " + state.getExtendedText());
             Treatments.sensorStop(null, gs(R.string.stopped_transmitter) + ": " + state.getExtendedText());
         } else if (is_started && !was_started) {

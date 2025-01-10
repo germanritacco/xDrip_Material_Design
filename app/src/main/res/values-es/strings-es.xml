@@ -1148,6 +1148,7 @@
     <string name="low_alerts_currently_disabled">ALERTAS DE BAJA ACTUALMENTE DESACTIVADAS</string>
     <string name="high_alerts_currently_disabled">ALERTAS DE ALTA ACTUALMENTE DESACTIVADAS</string>
     <string name="bg_reading_missed">Lecturas de glucemia no realizadas</string>
+    <string name="bg_reading_missed_title">Transmisor fuera de rango</string>
     <string name="not_connected">No Conectado</string>
     <string name="no_data">No hay datos</string>
     <string name="no_bluetooth">No hay Bluetooth</string>

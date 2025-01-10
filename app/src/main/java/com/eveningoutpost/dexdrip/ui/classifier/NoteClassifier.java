@@ -3,6 +3,7 @@ package com.eveningoutpost.dexdrip.ui.classifier;
 // jamorham
 
 import android.graphics.Color;
+
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 
@@ -26,13 +27,13 @@ public class NoteClassifier {
         if (haystack.contains("battery low")) {
             return red(R.drawable.rounded_warning_24, note);
 
-        } else if (haystack.contains("stopped")) {
+        } else if ((haystack.contains("stopped")) || (haystack.contains("detenido"))) {
             return red(R.drawable.round_flag_24, note);
 
         } else if (haystack.contains("paused")) {
             return amber(R.drawable.round_flag_24, note);
 
-        } else if (haystack.contains("started")) {
+        } else if ((haystack.contains("started")) || (haystack.contains("iniciado"))) {
             return green(R.drawable.round_flag_24, note);
 
         } else if (haystack.contains("cartridge low")) {
@@ -74,7 +75,7 @@ public class NoteClassifier {
     }
 
     private static HPointValue icon(@DrawableRes int id, @ColorInt int color, String note) {
-        final PointValueExtended pv = new PointValueExtended(0,0);
+        final PointValueExtended pv = new PointValueExtended(0, 0);
         BitmapLoader.loadAndSetKey(pv, id, 0);
         pv.setBitmapTint(color);
         pv.setBitmapScale(1f);
