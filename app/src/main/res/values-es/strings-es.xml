@@ -897,13 +897,13 @@
     <string name="play_sound_when_ready_for_calibration">Emitir sonido cuando este listo para calibrar</string>
     <string name="receiving_data_from_collector">Recibiendo datos del colector %s</string>
     <!-- trend arrow for speak -->
-    <string name="DoubleDown">caída rápida </string>
-    <string name="SingleDown">cayendo</string>
-    <string name="FortyFiveDown">ligeramente decreciente</string>
-    <string name="Flat">consistente</string>
-    <string name="FortyFiveUp">aumentando levemente</string>
-    <string name="SingleUp">ascendente</string>
-    <string name="DoubleUp">aumentando rápidamente</string>
+    <string name="DoubleDown">bajando rápidamente</string>
+    <string name="SingleDown">bajando</string>
+    <string name="FortyFiveDown">bajando lentamente</string>
+    <string name="Flat">estable</string>
+    <string name="FortyFiveUp">subiendo lentamente</string>
+    <string name="SingleUp">subiendo</string>
+    <string name="DoubleUp">subiendo rápidamente</string>
     <string name="Speak_trend_arrow_name">Leer flecha de tendencia</string>
     <string name="Speak_everything_twice">Leer todo doblemente</string>
     <string name="Speech_speed">Velocidad lectura</string>
