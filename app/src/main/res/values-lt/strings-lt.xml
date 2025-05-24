@@ -1264,6 +1264,7 @@
     <string name="summary_lefun_send_alarms">Siųsti glikemijos aliarmus apyrankei</string>
     <string name="title_lefun_send_alarms">Siųsti aliarmus</string>
     <string name="title_lefun_option_shake_snoozes">Pakratyti nutildymui</string>
+    <string name="title_lefun_send_calls">Siųsti skambučius</string>
     <string name="title_lefun_screens_features">Lefun ekranai / funkcijos</string>
     <string name="title_features">Funkcijos</string>
     <string name="title_lefun_feature_lift_to_wak">Pakelti pažadinimui</string>
@@ -1470,7 +1471,7 @@
     <string name="top">Į viršų</string>
     <string name="connect_device_usb_otg">Prijunkite prietaisą per USB OTG kabelį.</string>
     <string name="connection_status">Susiejimo statusas:</string>
-    <string name="range_in_high_low">Ribos: (tikslas/hiper/hipo)</string>
+    <string name="range_in_high_low">Ribos:\n(tikslas/hiper/hipo)</string>
     <string name="absolute_s">Matavimų sk.:</string>
     <string name="median_bg">Mediana:</string>
     <string name="mean_bg">Vidurkis:</string>

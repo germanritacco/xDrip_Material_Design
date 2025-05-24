@@ -5,13 +5,17 @@ import static android.app.PendingIntent.getActivity;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.eveningoutpost.dexdrip.models.UserError.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,8 +40,7 @@ public class FirstPageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Log.d("DrawStats", "FirstPageFragment onCreateView");
 
-        myView = inflater.inflate(
-                R.layout.stats_general, container, false);
+        myView = inflater.inflate(R.layout.stats_general, container, false);
 
         myView.setTag(0);
 
@@ -111,12 +114,17 @@ public class FirstPageFragment extends Fragment {
                 double median = bgList.get(bgList.size() / 2).calculated_value;
                 TextView medianView = (TextView) localView.findViewById(R.id.textView_median);
 
+                double median_mgdl = Math.round(median * 10) / 10d;
+                // choose correct color for median value
+                if (median_mgdl <= 130) {
+                    medianView.setTextColor(ContextCompat.getColor(context, R.color.colorGreen));
+                } else {
+                    medianView.setTextColor(ContextCompat.getColor(context, R.color.colorRed));
+                }
                 if (mgdl) {
-                    updateText(localView, medianView, Math.round(median * 10) / 10d + " mg/dl");
-
+                    updateText(localView, medianView, median_mgdl + " mg/dl");
                 } else {
                     updateText(localView, medianView, Math.round(median * Dex_Constants.MG_DL_TO_MMOL_L * 100) / 100d + " mmol/l");
-
                 }
 
                 double mean = 0;
@@ -127,34 +135,66 @@ public class FirstPageFragment extends Fragment {
                 }
 
                 TextView meanView = (TextView) localView.findViewById(R.id.textView_mean);
+                double mean_mgdl = Math.round(mean * 10) / 10d;
+                // choose correct color for mean value
+                if (mean_mgdl <= 140) {
+                    meanView.setTextColor(ContextCompat.getColor(context, R.color.colorGreen));
+                } else if (mean_mgdl > 140 && mean_mgdl < 180) {
+                    meanView.setTextColor(ContextCompat.getColor(context, R.color.colorYellow));
+                } else {
+                    meanView.setTextColor(ContextCompat.getColor(context, R.color.colorRed));
+                }
                 //update mean
                 if (mgdl) {
-                    updateText(localView, meanView, (Math.round(mean * 10) / 10d) + " mg/dl");
+                    updateText(localView, meanView, mean_mgdl + " mg/dl");
                 } else {
                     updateText(localView, meanView, (Math.round(mean * Dex_Constants.MG_DL_TO_MMOL_L * 100) / 100d) + " mmol/l");
-
                 }
                 //update A1c
                 TextView a1cView = (TextView) localView.findViewById(R.id.textView_a1c);
                 int a1c_ifcc = (int) Math.round(((mean + 46.7) / 28.7 - 2.15) * 10.929);
                 double a1c_dcct = Math.round(10 * (mean + 46.7) / 28.7) / 10d;
+                // choose correct color for HbA1c value
+                if (a1c_dcct < 7) {
+                    a1cView.setTextColor(ContextCompat.getColor(context, R.color.colorGreen));
+                } else if (a1c_dcct >= 7 && a1c_dcct < 9) {
+                    a1cView.setTextColor(ContextCompat.getColor(context, R.color.colorYellow));
+                } else {
+                    a1cView.setTextColor(ContextCompat.getColor(context, R.color.colorRed));
+                }
                 updateText(localView, a1cView, a1c_ifcc + " mmol/mol\n" + a1c_dcct + "%");
-
 
                 for (BgReadingStats bgr : bgList) {
                     stdev += (bgr.calculated_value - mean) * (bgr.calculated_value - mean) / len;
                 }
                 stdev = Math.sqrt(stdev);
+                double stdev_mgdl = Math.round(stdev * 10) / 10d;
                 TextView stdevView = (TextView) localView.findViewById(R.id.textView_stdev);
+                // choose correct color for stdev value
+                if (stdev_mgdl < 33) {
+                    stdevView.setTextColor(ContextCompat.getColor(context, R.color.colorGreen));
+                } else if (stdev_mgdl >= 33 && stdev_mgdl <= 50) {
+                    stdevView.setTextColor(ContextCompat.getColor(context, R.color.colorYellow));
+                } else {
+                    stdevView.setTextColor(ContextCompat.getColor(context, R.color.colorRed));
+                }
                 if (mgdl) {
-                    updateText(localView, stdevView, (Math.round(stdev * 10) / 10d) + " mg/dl");
+                    updateText(localView, stdevView, stdev_mgdl + " mg/dl");
                 } else {
                     updateText(localView, stdevView, (Math.round(stdev * Dex_Constants.MG_DL_TO_MMOL_L * 100) / 100d) + " mmol/l");
                 }
 
                 TextView coefficientOfVariation = (TextView) localView.findViewById(R.id.textView_coefficient_of_variation);
-                updateText(localView, coefficientOfVariation, Math.round(1000d*stdev/mean)/10d + "%");
-
+                double cv = Math.round(1000d * stdev / mean) / 10d;
+                // choose correct color for CV value
+                if (cv < 36) {
+                    coefficientOfVariation.setTextColor(ContextCompat.getColor(context, R.color.colorGreen));
+                } else if (cv >= 36 && cv <= 50) {
+                    coefficientOfVariation.setTextColor(ContextCompat.getColor(context, R.color.colorYellow));
+                } else {
+                    coefficientOfVariation.setTextColor(ContextCompat.getColor(context, R.color.colorRed));
+                }
+                updateText(localView, coefficientOfVariation, cv + "%");
 
                 //calculate BGI / PGS
                 // https://github.com/nightscout/cgm-remote-monitor/blob/master/lib/report_plugins/glucosedistribution.js#L150
@@ -163,7 +203,7 @@ public class FirstPageFragment extends Fragment {
                 bgListByTime = pass1DataCleaning(bgListByTime);
                 bgListByTime = pass2DataCleaning(bgListByTime);
 
-                double normalReadingspct= inRange*100/total; //TODO calculate from cleaned data?
+                double normalReadingspct = inRange * 100 / total; //TODO calculate from cleaned data?
 
                 // list size can be 0 after cleaning so cancel if so
                 if (bgListByTime.size() == 0) {
@@ -172,29 +212,50 @@ public class FirstPageFragment extends Fragment {
 
                 double glucoseFirst = bgListByTime.get(0).calculated_value;
                 double glucoseLast = glucoseFirst;
-                double glucoseTotal =  glucoseLast;
+                double glucoseTotal = glucoseLast;
                 double gviTotal = 0;
                 int usedRecords = 1;
-                for (int i=1; i<bgListByTime.size();i++) {
+                for (int i = 1; i < bgListByTime.size(); i++) {
                     BgReadingStats bgr = bgListByTime.get(i);
                     double delta = bgr.calculated_value - glucoseLast;
                     gviTotal += Math.sqrt(25 + Math.pow(delta, 2));
                     usedRecords += 1;
                     glucoseLast = bgr.calculated_value;
-                    glucoseTotal +=  glucoseLast;
+                    glucoseTotal += glucoseLast;
                 }
                 double gviDelta = Math.abs(glucoseLast - glucoseFirst);//Math.floor(glucose_data[0].bgValue,glucose_data[glucose_data.length-1].bgValue);
-                double gviIdeal = Math.sqrt(Math.pow(usedRecords*5,2) + Math.pow(gviDelta,2));
+                double gviIdeal = Math.sqrt(Math.pow(usedRecords * 5, 2) + Math.pow(gviDelta, 2));
                 double gvi = (gviTotal / gviIdeal * 100) / 100;
                 Log.d("DrawStats", "GVI=" + gvi + " GVIIdeal=" + gviIdeal + " GVITotal=" + gviTotal + " GVIDelta=" + gviDelta + " usedRecords=" + usedRecords);
                 double glucoseMean = Math.floor(glucoseTotal / usedRecords);
                 double tirMultiplier = normalReadingspct / 100.0;
-                double PGS = (gvi * glucoseMean * (1-tirMultiplier) * 100) / 100;
+                double PGS = (gvi * glucoseMean * (1 - tirMultiplier) * 100) / 100;
                 Log.d("DrawStats", "NormalReadingspct=" + normalReadingspct + " glucoseMean=" + glucoseMean + " tirMultiplier=" + tirMultiplier + " PGS=" + PGS);
-                TextView gviView = (TextView) localView.findViewById(R.id.textView_gvi);
                 DecimalFormat df = new DecimalFormat("#.00");
-                updateText(localView, gviView,  df.format(gvi) + "  PGS:  " + df.format(PGS));
 
+                // choose correct color for GVI value
+                TextView gviView = (TextView) localView.findViewById(R.id.textView_gvi);
+                if (gvi >= 1.0 && gvi <= 1.2) {
+                    gviView.setTextColor(ContextCompat.getColor(context, R.color.colorBlue));
+                } else if (gvi > 1.2 && gvi <= 1.5) {
+                    gviView.setTextColor(ContextCompat.getColor(context, R.color.colorGreen));
+                } else {
+                    gviView.setTextColor(ContextCompat.getColor(context, R.color.colorRed));
+                }
+                updateText(localView, gviView, df.format(gvi));
+
+                // choose correct color for PGS value
+                TextView pgsView = (TextView) localView.findViewById(R.id.textView_pgs);
+                if (PGS >= 0 && PGS < 35) {
+                    pgsView.setTextColor(ContextCompat.getColor(context, R.color.colorBlue));
+                } else if (PGS >= 35 && PGS < 100) {
+                    pgsView.setTextColor(ContextCompat.getColor(context, R.color.colorGreen));
+                } else if (PGS >= 100 && PGS <= 150) {
+                    pgsView.setTextColor(ContextCompat.getColor(context, R.color.colorYellow));
+                } else {
+                    pgsView.setTextColor(ContextCompat.getColor(context, R.color.colorRed));
+                }
+                updateText(localView, pgsView, df.format(PGS));
             }
         }
 
@@ -243,18 +304,18 @@ public class FirstPageFragment extends Fragment {
     private List<BgReadingStats> pass1DataCleaning(List<BgReadingStats> bgListByTime) {
         // data cleaning pass 1 - add interpolated missing points
         List<BgReadingStats> glucose_data = new ArrayList<>(bgListByTime.size());
-        for (int i=0; i<bgListByTime.size()-2; i++) {
+        for (int i = 0; i < bgListByTime.size() - 2; i++) {
 
             BgReadingStats entry = bgListByTime.get(i);
             BgReadingStats nextEntry = bgListByTime.get(i + 1);
 
             long timeDelta = nextEntry.timestamp - entry.timestamp;
 
-            if (timeDelta < 9 * 60 * 1000 ||  timeDelta > 25 * 60 * 1000) {
+            if (timeDelta < 9 * 60 * 1000 || timeDelta > 25 * 60 * 1000) {
                 glucose_data.add(entry);
                 continue;
             }
-            int missingRecords = (int) (Math.floor(timeDelta / (5 * 60 * 990)) -1);
+            int missingRecords = (int) (Math.floor(timeDelta / (5 * 60 * 990)) - 1);
             long timePatch = (long) Math.floor(timeDelta / (missingRecords + 1));
             double bgDelta = (nextEntry.calculated_value - entry.calculated_value) / (missingRecords + 1);
             glucose_data.add(entry);
@@ -274,18 +335,18 @@ public class FirstPageFragment extends Fragment {
         // data cleaning pass 2 - replace single jumpy measures with interpolated values
         List<BgReadingStats> glucose_data2 = new ArrayList<>(glucose_data.size());
         BgReadingStats prevEntry = null;
-        if(glucose_data.size() > 0) {
+        if (glucose_data.size() > 0) {
             glucose_data2.add(glucose_data.get(0));
             prevEntry = glucose_data.get(0);
         }
 
-        for (int i = 1; i < glucose_data.size()-2; i++) {
+        for (int i = 1; i < glucose_data.size() - 2; i++) {
             BgReadingStats entry = glucose_data.get(i);
-            BgReadingStats nextEntry = glucose_data.get(i+1);
+            BgReadingStats nextEntry = glucose_data.get(i + 1);
             long timeDelta = nextEntry.timestamp - entry.timestamp;
             long timeDelta2 = entry.timestamp - prevEntry.timestamp;
             long maxGap = (5 * 60 * 1000) + 20000;
-            if (timeDelta > maxGap || timeDelta2 > maxGap ) {
+            if (timeDelta > maxGap || timeDelta2 > maxGap) {
                 glucose_data2.add(entry);
                 prevEntry = entry;
                 continue;
@@ -298,7 +359,7 @@ public class FirstPageFragment extends Fragment {
                 continue;
             }
 
-            if ((delta1 > 0 && delta2 <0) || (delta1 < 0 && delta2 > 0)) {
+            if ((delta1 > 0 && delta2 < 0) || (delta1 < 0 && delta2 > 0)) {
                 double d = (nextEntry.calculated_value - prevEntry.calculated_value) / 2;
                 BgReadingStats newEntry = new BgReadingStats();
                 newEntry.calculated_value = prevEntry.calculated_value + d;

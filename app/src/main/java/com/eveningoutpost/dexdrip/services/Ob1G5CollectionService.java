@@ -378,7 +378,7 @@ public class Ob1G5CollectionService extends G5BaseService {
                         break;
                     case DISCOVER:
                         if ((wear_broadcast && usingAlt()) || specialPairingWorkaround()) {
-                            msg("Pausing");
+                            msg(gs(R.string.pausing));
                             UserError.Log.d(TAG, "Pausing for alt: ");
                             JoH.threadSleep(1000);
                         }
@@ -995,12 +995,15 @@ public class Ob1G5CollectionService extends G5BaseService {
     }
 
     public static void clearPersistStore() {
-        PersistentStore.removeItem(KEKS_ONE + transmitterMAC);
+        PersistentStore.cleanupOld(KEKS_ONE);
+        PersistentStore.cleanupOld(OB1G5_MACSTORE);
     }
 
     public static void clearPersist() {
         clearPersistStore();
         expireFailures(true);
+        transmitterID = null;
+        transmitterMAC = null;
     }
 
     private void scheduleWakeUp(long future, final String info) {
@@ -1112,7 +1115,7 @@ public class Ob1G5CollectionService extends G5BaseService {
         final PowerManager.WakeLock wl = JoH.getWakeLock("g5-start-service", 310000);
         try {
             UserError.Log.d(TAG, "WAKE UP WAKE UP WAKE UP WAKE UP @ " + JoH.dateTimeText(tsl()));
-            msg("Wake up");
+            msg(gs(R.string.wake_up));
             if (wakeup_time > 0) {
                 wakeup_jitter = msSince(wakeup_time);
                 if (wakeup_jitter < 0) {
@@ -2189,7 +2192,7 @@ public class Ob1G5CollectionService extends G5BaseService {
 
         final int queueSize = Ob1G5StateMachine.queueSize();
         if (queueSize > 0) {
-            l.add(new StatusItem("Queue Items", "(" + queueSize + ") " + Ob1G5StateMachine.getFirstQueueItemName()));
+            l.add(new StatusItem(gs(R.string.queue_items), "(" + queueSize + ") " + Ob1G5StateMachine.getFirstQueueItemName()));
         }
 
         if (max_wakeup_jitter > 5000) {

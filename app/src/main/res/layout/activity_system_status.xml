@@ -232,17 +232,23 @@
                         android:id="@+id/restart_collection_service"
                         style="?android:attr/buttonStyleSmall"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/colorButton"
                         android:text="@string/restart_collector" />
 
                     <Button
                         android:backgroundTint="@color/colorButton"
                         android:id="@+id/forget_device"
-                        app:showIfTrue="@{ms.bluetooth()}"
                         style="?android:attr/buttonStyleSmall"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/forget_device" />
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/colorButton"
+                        android:text="@string/forget_device"
+                        app:showIfTrue="@{ms.bluetooth()}" />
                 </LinearLayout>
 
                 <LinearLayout

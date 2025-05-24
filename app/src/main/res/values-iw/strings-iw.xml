@@ -1252,7 +1252,7 @@
     <string name="transmitter_battery_status">סוללת משדר:  </string>
     <string name="connect_device_usb_otg">בבקשה חברו את ההתקן שלכם דרך כבל USB OTG.</string>
     <string name="connection_status">מצב החיבור:</string>
-    <string name="range_in_high_low">תחום: (בתוך, גבוה, נמוך)</string>
+    <string name="range_in_high_low">תחום:\n(בתוך, גבוה, נמוך)</string>
     <string name="median_bg">רמת סוכר חציונית:</string>
     <string name="mean_bg">רמת סוכר ממוצעת:</string>
     <string name="hba1c_est">הערכת HbA1c:</string>

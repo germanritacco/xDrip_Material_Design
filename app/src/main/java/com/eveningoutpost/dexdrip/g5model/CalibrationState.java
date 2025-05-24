@@ -32,7 +32,7 @@ public enum CalibrationState {
     SensorFailed2(0x0c, "Sensor Failed 2"),
     UnusualCalibration(0x0d, "Unusual Calibration"),
     InsufficientCalibration(0x0e, "Insufficient Calibration"),
-    Ended(0x0f, "Ended"),
+    Ended(0x0f, gs(R.string.ended)),
     SensorFailed3(0x10, "Sensor Failed 3"),
     TransmitterProblem(0x11, "Transmitter Problem"),
     Errors(0x12, gs(R.string.sensor_errors)),
@@ -41,14 +41,14 @@ public enum CalibrationState {
     SensorFailed6(0x15, "Sensor Failed 6"),
     SensorFailedStart(0x16, "Sensor Failed Start"),
     SensorFailedStart2(0x17, "Sensor Failed Start 2"),
-    SensorExpired(0x18, "Sensor Expired"),
+    SensorExpired(0x18, gs(R.string.sensor_expired_2)),
     SensorFailed7(0x19, "Sensor Failed 7"), // apparently not a failure state
     SensorStopped2(0x1A, "Sensor Stopped 2"),
     SensorFailed8(0x1B, "Sensor Failed 8"),
     SensorFailed9(0x1C, "Sensor Failed 9"),
     SensorFailed10(0x1D, "Sensor Failed 10"),
     SensorFailed11(0x1E, "Sensor Failed 11"),
-    SensorStarted(0xC1, "Sensor Started"),
+    SensorStarted(0xC1, gs(R.string.sensor_started)),
     SensorStopped(0xC2, gs(R.string.sensor_stopped)),
     CalibrationSent(0xC3, gs(R.string.calibration_sent));
 

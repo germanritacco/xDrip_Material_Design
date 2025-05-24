@@ -85,6 +85,7 @@ import lombok.val;
 import static com.eveningoutpost.dexdrip.models.JoH.tolerantParseDouble;
 import static com.eveningoutpost.dexdrip.utilitymodels.ColorCache.X;
 import static com.eveningoutpost.dexdrip.utilitymodels.ColorCache.getCol;
+import static com.eveningoutpost.dexdrip.xdrip.gs;
 
 public class BgGraphBuilder {
     public static final int FUZZER = (int) (30 * Constants.SECOND_IN_MS);
@@ -129,6 +130,7 @@ public class BgGraphBuilder {
     private SharedPreferences prefs;
     public double highMark;
     public double lowMark;
+    public double forecastLowMark; // Marker used for forecast low analysis
     public double defaultMinY;
     public double defaultMaxY;
     public boolean doMgdl;
@@ -243,6 +245,10 @@ public class BgGraphBuilder {
         this.context = context;
         this.highMark = tolerantParseDouble(prefs.getString("highValue", "170"), 170);
         this.lowMark = tolerantParseDouble(prefs.getString("lowValue", "70"), 70);
+        this.forecastLowMark = this.lowMark; // Set the forecast low marker to match the low value marker
+        if (!Pref.getBoolean("low_value_is_forecast_low_threshold", true)) { // If the user has chosen not to use the Low Value as the Forecast Low threshold
+            this.forecastLowMark = tolerantParseDouble(prefs.getString("forecast_low_threshold", "70"), 70); // Set the forecast low marker to match the forecast low threshold specified by the user
+        }
         this.doMgdl = (prefs.getString("units", "mgdl").equals("mgdl"));
         defaultMinY = unitized(40);
         defaultMaxY = unitized(250);
@@ -1461,15 +1467,15 @@ public class BgGraphBuilder {
                         double polyPredicty = poly.predict(plow_timestamp);
                         Log.d(TAG, "Low predictor at max lookahead is: " + JoH.qs(polyPredicty));
                         low_occurs_at_processed_till_timestamp = highest_bgreading_timestamp; // store that we have processed up to this timestamp
-                        if (polyPredicty <= (lowMark + offset)) {
+                        if (polyPredicty <= (forecastLowMark + offset)) {
                             low_occurs_at = plow_timestamp;
-                            final double lowMarkIndicator = (lowMark - (lowMark / 4));
+                            final double lowMarkIndicator = (forecastLowMark - (forecastLowMark / 4));
                             //if (d) Log.d(TAG, "Poly predict: "+JoH.qs(polyPredict)+" @ "+JoH.qsz(iob.timestamp));
                             while (plow_timestamp > plow_now) {
 //                                plow_timestamp = plow_timestamp - FUZZER;
                                 plow_timestamp = plow_timestamp - (1000 * 30 * 5); // TODO check this! 2.5 minute accuracy on dots and low mark intercept for low_occurs at
                                 polyPredicty = poly.predict(plow_timestamp);
-                                if (polyPredicty > (lowMark + offset)) {
+                                if (polyPredicty > (forecastLowMark + offset)) {
                                     PointValue zv = new HPointValue((double) (plow_timestamp / FUZZER), (float) polyPredicty);
                                     polyBgValues.add(zv);
                                 } else {
@@ -1836,7 +1842,7 @@ public class BgGraphBuilder {
                                     //iv.setLabel("+Insulin: " + JoH.qs(evaluation[1], 1));
                                     keyStore.putS("bwp_last_insulin", JoH.qs(evaluation[1], 1) + ((low_occurs_at > 0) ? ("!") : ""));
                                     keyStore.putL("bwp_last_insulin_timestamp", JoH.tsl());
-                                    bwp_update = "\u224F" + " Insulin: " + JoH.qs(evaluation[1], 1) + ((low_occurs_at > 0) ? (" " + "\u26A0") : ""); // warning symbol // TODO I18n
+                                    bwp_update = "\u224F" + " " + gs(R.string.insulin) + ": " + JoH.qs(evaluation[1], 1) + ((low_occurs_at > 0) ? (" " + "\u26A0") : ""); // warning symbol // TODO I18n
                                     //annotationValues.add(iv); // needs to be different value list so we can make annotation nicer
                                 }
                             }

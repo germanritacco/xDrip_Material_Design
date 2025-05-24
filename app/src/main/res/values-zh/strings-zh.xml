@@ -1425,7 +1425,7 @@
     <string name="top">顶部</string>
     <string name="connect_device_usb_otg">请通过USB OTG数据线连接您的设备</string>
     <string name="connection_status">连接状态</string>
-    <string name="range_in_high_low">范围：(内/高/低)</string>
+    <string name="range_in_high_low">范围：\n(内/高/低)</string>
     <string name="absolute_s">绝对 #s：</string>
     <string name="median_bg">中位血糖值</string>
     <string name="mean_bg">平均血糖值</string>

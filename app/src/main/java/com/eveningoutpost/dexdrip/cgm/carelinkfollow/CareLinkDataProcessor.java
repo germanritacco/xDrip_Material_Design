@@ -166,8 +166,8 @@ public class CareLinkDataProcessor {
                         //check required values
                         if (marker.value != null && !marker.value.equals(0)) {
                             //new blood test
-                            if (BloodTest.getForPreciseTimestamp(marker.dateTime.getTime(), 10000) == null) {
-                                BloodTest.create(marker.dateTime.getTime(), marker.value, SOURCE_CARELINK_FOLLOW);
+                            if (BloodTest.getForPreciseTimestamp(marker.getDate().getTime(), 10000) == null) {
+                                BloodTest.create(marker.getDate().getTime(), marker.getBloodGlucose(), SOURCE_CARELINK_FOLLOW);
                             }
                         }
 
@@ -186,15 +186,15 @@ public class CareLinkDataProcessor {
                             //Insulin
                             if (marker.type.equals(Marker.MARKER_TYPE_INSULIN)) {
                                 carbs = 0;
-                                if (marker.deliveredExtendedAmount != null && marker.deliveredFastAmount != null) {
-                                    insulin = marker.deliveredExtendedAmount + marker.deliveredFastAmount;
+                                if (marker.getInsulinAmount() != null) {
+                                    insulin = marker.getInsulinAmount();
                                 }
                                 //SKIP if insulin = 0
                                 if (insulin == 0) continue;
                                 //Carbs
                             } else if (marker.type.equals(Marker.MARKER_TYPE_MEAL)) {
-                                if (marker.amount != null) {
-                                    carbs = marker.amount;
+                                if (marker.getCarbAmount() != null) {
+                                    carbs = marker.getCarbAmount();
                                 }
                                 insulin = 0;
                                 //SKIP if carbs = 0
@@ -202,8 +202,8 @@ public class CareLinkDataProcessor {
                             }
 
                             //new Treatment
-                            if (newTreatment(carbs, insulin, marker.dateTime.getTime())) {
-                                t = Treatments.create(carbs, insulin, marker.dateTime.getTime());
+                            if (newTreatment(carbs, insulin, marker.getDate().getTime())) {
+                                t = Treatments.create(carbs, insulin, marker.getDate().getTime());
                                 if (t != null) {
                                     t.enteredBy = SOURCE_CARELINK_FOLLOW;
                                     t.save();
@@ -222,7 +222,7 @@ public class CareLinkDataProcessor {
         //PUMP INFO (Pump Status)
         if (recentData.isNGP()) {
             PumpStatus.setReservoir(recentData.reservoirRemainingUnits);
-            PumpStatus.setBattery(recentData.medicalDeviceBatteryLevelPercent);
+            PumpStatus.setBattery(recentData.getDeviceBatteryLevel());
             if (recentData.activeInsulin != null)
                 PumpStatus.setBolusIoB(recentData.activeInsulin.amount);
             PumpStatus.syncUpdate();
@@ -246,13 +246,13 @@ public class CareLinkDataProcessor {
                 //Active Notifications
                 if (recentData.notificationHistory.activeNotifications != null) {
                     for (ActiveNotification activeNotification : recentData.notificationHistory.activeNotifications) {
-                        addNotification(activeNotification.dateTime, recentData.getDeviceFamily(), activeNotification.messageId, activeNotification.faultId);
+                        addNotification(activeNotification.dateTime, recentData.getDeviceFamily(), activeNotification.getMessageId(), activeNotification.faultId);
                     }
                 }
                 //Cleared Notifications
                 if (recentData.notificationHistory.clearedNotifications != null) {
                     for (ClearedNotification clearedNotification : recentData.notificationHistory.clearedNotifications) {
-                        addNotification(clearedNotification.triggeredDateTime, recentData.getDeviceFamily(), clearedNotification.messageId, clearedNotification.faultId);
+                        addNotification(clearedNotification.triggeredDateTime, recentData.getDeviceFamily(), clearedNotification.getMessageId(), clearedNotification.faultId);
                     }
                 }
             }

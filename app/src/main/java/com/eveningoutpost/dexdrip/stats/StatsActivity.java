@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
@@ -79,9 +80,7 @@ public class StatsActivity extends ActivityWithMenu {
         initPagerAndIndicator();
         setButtonColors();
         registerButtonListeners();
-
-        if (JoH.ratelimit("statistics-startup",5)) showStartupInfo();
-
+        if (JoH.ratelimit("statistics-startup", 5)) showStartupInfo();
     }
 
     private void showStartupInfo() {
@@ -93,7 +92,6 @@ public class StatsActivity extends ActivityWithMenu {
         final int option = Home.SHOWCASE_STATISTICS;
         if ((oneshot) && (ShotStateStore.hasShot(option))) return;
 
-
         // This could do with being in a utility static method also used in Home
         final int size1 = 50;
         final int size2 = 20;
@@ -102,24 +100,15 @@ public class StatsActivity extends ActivityWithMenu {
         final ViewTarget target = new ViewTarget(R.id.button_stats_7d, this);
         final Activity activity = this;
 
-
         JoH.runOnUiThreadDelayed(new Runnable() {
-                                     @Override
-                                     public void run() {
-                                         final ShowcaseView myShowcase = new ShowcaseView.Builder(activity)
-
-                                                 .setTarget(target)
-                                                 .setStyle(R.style.CustomShowcaseTheme2)
-                                                 .setContentTitle(title)
-                                                 .setContentText("\n" + message)
-                                                 .setShowcaseDrawer(new JamorhamShowcaseDrawer(getResources(), getTheme(), size1, size2))
-                                                 .singleShot(oneshot ? option : -1)
-                                                 .build();
-                                         myShowcase.setBackgroundColor(Color.TRANSPARENT);
-                                         myShowcase.show();
-                                     }
-                                 }
-                , 3000);
+            @Override
+            public void run() {
+                final ShowcaseView myShowcase = new ShowcaseView.Builder(activity)
+                        .setTarget(target).setStyle(R.style.CustomShowcaseTheme2).setContentTitle(title).setContentText("\n" + message).setShowcaseDrawer(new JamorhamShowcaseDrawer(getResources(), getTheme(), size1, size2)).singleShot(oneshot ? option : -1).build();
+                myShowcase.setBackgroundColor(Color.TRANSPARENT);
+                myShowcase.show();
+            }
+        }, 3000);
 
         // TextView tv = new TextView(this);
         //  tv.setText("Swipe left/right to switch between reports!");
@@ -144,9 +133,7 @@ public class StatsActivity extends ActivityWithMenu {
     }
 
     private void initPagerAndIndicator() {
-        mStatisticsPageAdapter =
-                new StatisticsPageAdapter(
-                        getSupportFragmentManager());
+        mStatisticsPageAdapter = new StatisticsPageAdapter(getSupportFragmentManager());
         // set dots for indication
         indicationDots = new TextView[mStatisticsPageAdapter.getCount()];
         LinearLayout indicator = (LinearLayout) findViewById(R.id.indicator_layout);
@@ -156,40 +143,35 @@ public class StatsActivity extends ActivityWithMenu {
             indicationDots[i].setTextSize(12);
             indicator.addView(indicationDots[i], new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         }
-        indicationDots[0].setText("\u26AB");
+        indicationDots[0].setText("\u2B24");
         mViewPager = (ViewPager) findViewById(pager);
         mViewPager.setAdapter(mStatisticsPageAdapter);
         mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
             }
 
             @Override
             public void onPageSelected(int position) {
-
                 //if (position != 0) {
                 //    swipeInfoNotNeeded = true;
                 //}
-
                 for (int i = 0; i < indicationDots.length; i++) {
                     indicationDots[i].setText("\u25EF"); //U+2B24
                 }
-                indicationDots[position].setText("\u26AB");
+                indicationDots[position].setText("\u2B24");
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
             }
         });
         mViewPager.setCurrentItem(2);
     }
 
     void setButtonColors() {
-
-        switch (state)
-        {
+        switch (state) {
             case TODAY:
                 stateString = "Today";
                 break;
@@ -233,7 +215,6 @@ public class StatsActivity extends ActivityWithMenu {
                     break;
             }
         } else {
-
             buttonTD.setAlpha(0.5f);
             buttonYTD.setAlpha(0.5f);
             button7d.setAlpha(0.5f);
@@ -262,21 +243,16 @@ public class StatsActivity extends ActivityWithMenu {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_statistics, menu);
-
         menuItem = menu.findItem(R.id.action_toggle_fullscreen);
         menuItem2 = menu.findItem(R.id.action_toggle_printing);
-
         updateMenuChecked();
-
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-
         if (hasFocus) fullScreenHandler(false);
-
     }
 
     private void updateMenuChecked() {
@@ -293,66 +269,56 @@ public class StatsActivity extends ActivityWithMenu {
         if (recreate) recreate();
     }
 
-    private void fullScreenHandler(boolean recreate)
-    {
+    private void fullScreenHandler(boolean recreate) {
         goFullScreen(Pref.getBooleanDefaultFalse(SHOW_STATISTICS_FULL_SCREEN), decorView);
         if ((recreate) && (!Pref.getBooleanDefaultFalse(SHOW_STATISTICS_FULL_SCREEN))) recreate();
     }
 
-    public void toggleStatisticsFullScreenMode(MenuItem m)
-    {
+    public void toggleStatisticsFullScreenMode(MenuItem m) {
         Pref.toggleBoolean(SHOW_STATISTICS_FULL_SCREEN);
         updateMenuChecked();
         fullScreenHandler(true);
     }
-    public void toggleStatisticsPrintingMode(MenuItem m)
-    {
+
+    public void toggleStatisticsPrintingMode(MenuItem m) {
         Pref.toggleBoolean(SHOW_STATISTICS_PRINT_COLOR);
         evaluateColors(true);
         updateMenuChecked();
     }
-    public void statisticsDisableFullScreen(View v)
-    {
+
+    public void statisticsDisableFullScreen(View v) {
         toggleStatisticsFullScreenMode(null);
     }
-    public void  statisticsShare(View v)
-    {
-      statisticsShare((MenuItem)null);
+
+    public void statisticsShare(View v) {
+        statisticsShare((MenuItem) null);
     }
 
-    public void statisticsShare(MenuItem m)
-    {
+    public void statisticsShare(MenuItem m) {
         try {
-        if (checkPermissions()) {
-            final Activity context = this;
-            JoH.runOnUiThreadDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    View rootView = getWindow().getDecorView().findViewWithTag(mViewPager.getCurrentItem()); // search by tag :(
-                    String file_name = "xDrip-Screenshot-" + JoH.dateTimeText(JoH.tsl()).replace(" ", "-").replace(":", "-").replace(".", "-") + ".png";
-                    final String dirPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath() + "/Screenshots";
-                    JoH.bitmapToFile(JoH.screenShot(rootView,"xDrip+ Statistics for "+stateString+"   @ "+JoH.dateText(JoH.tsl())), dirPath, file_name);
-                    JoH.shareImage(context, new File(dirPath + "/" + file_name));
-                }
-            }, 250);
-
-        }
-        } catch (Exception e)
-        {
-            Log.e(TAG,"Got exception sharing statistics: "+e);
-            JoH.static_toast_long("Got an error: "+e);
+            if (checkPermissions()) {
+                final Activity context = this;
+                JoH.runOnUiThreadDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        View rootView = getWindow().getDecorView().findViewWithTag(mViewPager.getCurrentItem()); // search by tag :(
+                        String file_name = "xDrip-Screenshot-" + JoH.dateTimeText(JoH.tsl()).replace(" ", "-").replace(":", "-").replace(".", "-") + ".png";
+                        final String dirPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath() + "/Screenshots";
+                        JoH.bitmapToFile(JoH.screenShot(rootView, "xDrip+ Statistics for " + stateString + "   @ " + JoH.dateText(JoH.tsl())), dirPath, file_name);
+                        JoH.shareImage(context, new File(dirPath + "/" + file_name));
+                    }
+                }, 250);
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Got exception sharing statistics: " + e);
+            JoH.static_toast_long("Got an error: " + e);
         }
     }
 
     private boolean checkPermissions() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(getApplicationContext(),
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    != PackageManager.PERMISSION_GRANTED) {
-
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                        MY_PERMISSIONS_REQUEST_STORAGE_SCREENSHOT);
+            if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_PERMISSIONS_REQUEST_STORAGE_SCREENSHOT);
                 return false;
             }
         }
@@ -361,25 +327,20 @@ public class StatsActivity extends ActivityWithMenu {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == MY_PERMISSIONS_REQUEST_STORAGE_SCREENSHOT) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                statisticsShare((MenuItem)null);
+                statisticsShare((MenuItem) null);
             } else {
                 JoH.static_toast_long(this, "Cannot save screenshot without permission");
             }
         }
     }
 
-
-
     private void registerButtonListeners() {
-
         View.OnClickListener myListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if (v == buttonTD) {
                     state = TODAY;
                 } else if (v == buttonYTD) {
@@ -391,12 +352,10 @@ public class StatsActivity extends ActivityWithMenu {
                 } else if (v == button90d) {
                     state = D90;
                 }
-
                 Log.d("DrawStats", "button pressed, invalidating");
                 mStatisticsPageAdapter.notifyDataSetChanged();
                 mViewPager.invalidate();
                 setButtonColors();
-
             }
         };
         buttonTD.setOnClickListener(myListener);
@@ -404,15 +363,12 @@ public class StatsActivity extends ActivityWithMenu {
         button7d.setOnClickListener(myListener);
         button30d.setOnClickListener(myListener);
         button90d.setOnClickListener(myListener);
-
-
     }
 
     @Override
     public String getMenuName() {
         return getString(R.string.statistics);
     }
-
 
     public class StatisticsPageAdapter extends FragmentStatePagerAdapter {
         public StatisticsPageAdapter(FragmentManager fm) {
@@ -421,7 +377,6 @@ public class StatsActivity extends ActivityWithMenu {
 
         @Override
         public Fragment getItem(int i) {
-
             switch (i) {
                 case 0:
                     return new FirstPageFragment();
@@ -454,7 +409,5 @@ public class StatsActivity extends ActivityWithMenu {
             // return POSITION_NONE to update/repaint the views if notifyDataSetChanged()+invalidate() is called
             return POSITION_NONE;
         }
-
     }
-
 }

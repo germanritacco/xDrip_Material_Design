@@ -1270,6 +1270,7 @@
     <string name="summary_lefun_send_alarms">KŞ alarmını bilekliğe bildirim olarak gönder</string>
     <string name="title_lefun_send_alarms">Alarmları Gönder</string>
     <string name="title_lefun_option_shake_snoozes">Ertelemek için bilekliği salla</string>
+    <string name="title_lefun_send_calls">Çağrıları Gönder</string>
     <string name="title_lefun_screens_features">Lefun Ekranı / Özellikler</string>
     <string name="title_features">Özellikler</string>
     <string name="title_lefun_feature_lift_to_wak">Uyandırmak için kolunu kaldır</string>
@@ -1490,7 +1491,7 @@
     <string name="top">Üst</string>
     <string name="connect_device_usb_otg">Lütfen cihazınızı USB OTG kablosu ile bağlayın.</string>
     <string name="connection_status">Bağlantı durumu:</string>
-    <string name="range_in_high_low">Aralık: (İçinde/Yüksek/Düşük)</string>
+    <string name="range_in_high_low">Aralık:\n(İçinde/Yüksek/Düşük)</string>
     <string name="absolute_s">Mutlak #s:</string>
     <string name="median_bg">Ortanca KŞ:</string>
     <string name="mean_bg">KŞ Ortalaması:</string>

@@ -1,8 +1,8 @@
 {
   "profiles": [
     {
-      "name": "FIASP",
-      "displayName": "FIASP (ultra fast acting)",
+      "name": "Fiasp",
+      "displayName": "Fiasp (ultra fast acting)",
       "concentration": "U100",
       "PPN": [
         "FIASP-U100"

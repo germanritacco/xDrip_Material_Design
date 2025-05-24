@@ -167,8 +167,7 @@ public class Ob1G5StateMachine {
                     // .timeout(10, TimeUnit.SECONDS)
                     .timeout(15, TimeUnit.SECONDS) // WARN
                     // .observeOn(Schedulers.newThread()) // needed?
-                    .doOnNext(notificationObservable -> handleAuthenticationWrite(parent, connection))
-                    .flatMap(notificationObservable -> notificationObservable)
+                    .doOnNext(notificationObservable -> handleAuthenticationWrite(parent, connection)).flatMap(notificationObservable -> notificationObservable)
                     //.timeout(5, TimeUnit.SECONDS)
                     //.observeOn(Schedulers.newThread())
                     .subscribe(bytes -> {
@@ -182,8 +181,7 @@ public class Ob1G5StateMachine {
                     // .timeout(10, TimeUnit.SECONDS)
                     .timeout(15, TimeUnit.SECONDS) // WARN
                     // .observeOn(Schedulers.newThread()) // needed?
-                    .doOnNext(notificationObservable -> handleAuthenticationWrite(parent, connection))
-                    .flatMap(notificationObservable -> notificationObservable)
+                    .doOnNext(notificationObservable -> handleAuthenticationWrite(parent, connection)).flatMap(notificationObservable -> notificationObservable)
                     //.timeout(5, TimeUnit.SECONDS)
                     //.observeOn(Schedulers.newThread())
                     .subscribe(bytes -> {
@@ -213,8 +211,7 @@ public class Ob1G5StateMachine {
             if (p.length == 2) {
                 val data = p[1];
                 if (data != null) {
-                    connection.getCharacteristic(ExtraData)
-                            .blockingGet().setWriteType(BluetoothGattCharacteristic.WRITE_TYPE_NO_RESPONSE);
+                    connection.getCharacteristic(ExtraData).blockingGet().setWriteType(BluetoothGattCharacteristic.WRITE_TYPE_NO_RESPONSE);
                     val len = data.length;
                     for (int i = 0; i < len; i = i + 20) {
                         val size = Math.min(20, len - i);
@@ -229,8 +226,7 @@ public class Ob1G5StateMachine {
                 }
                 if (cmd != null) {
                     UserError.Log.d(TAG, "Sending auth command: " + HexDump.dumpHexString(cmd));
-                    connection.getCharacteristic(Authentication)
-                            .blockingGet().setWriteType(BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT);
+                    connection.getCharacteristic(Authentication).blockingGet().setWriteType(BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT);
                     connection.writeCharacteristic(Authentication, nn(cmd)).subscribe();
                 }
             } else if (p.length == 1) {
@@ -276,15 +272,11 @@ public class Ob1G5StateMachine {
             UserError.Log.e(TAG, "Got exception in plugin: " + e);
             e.printStackTrace();
         }
-        connection.setupNotification(ExtraData)
-                .timeout(15, TimeUnit.SECONDS) // WARN
+        connection.setupNotification(ExtraData).timeout(15, TimeUnit.SECONDS) // WARN
                 .doOnNext(notificationObservable -> {
                     UserError.Log.d(TAG, "Extra data notifications enabled");
-                    connection.setupIndication(Authentication)
-                            .timeout(15, TimeUnit.SECONDS) // WARN
-                            .doOnNext(notificationObservable2 -> doNext(parent, connection))
-                            .flatMap(notificationObservable2 -> notificationObservable2)
-                            .subscribe(bytes -> {
+                    connection.setupIndication(Authentication).timeout(15, TimeUnit.SECONDS) // WARN
+                            .doOnNext(notificationObservable2 -> doNext(parent, connection)).flatMap(notificationObservable2 -> notificationObservable2).subscribe(bytes -> {
                                 lastAuthenticationStream = tsl();
                                 UserError.Log.d(TAG, "Received Authentication 2 indication bytes: " + bytesToHex(bytes));
                                 try {
@@ -309,9 +301,7 @@ public class Ob1G5StateMachine {
                                     }
                                 }
                             }, throwable -> handleAuthenticationThrowable(throwable, parent));
-                })
-                .flatMap(notificationObservable -> notificationObservable)
-                .subscribe(bytes -> {
+                }).flatMap(notificationObservable -> notificationObservable).subscribe(bytes -> {
                     lastAuthenticationStream = tsl();
                     UserError.Log.d(TAG, "Received extra data indication bytes: " + bytesToHex(bytes));
                     try {
@@ -329,41 +319,34 @@ public class Ob1G5StateMachine {
     @SuppressLint("CheckResult")
     private static void handleAuthenticationWrite(final Ob1G5CollectionService parent, final RxBleConnection connection) {
         final int specifiedSlot = Pref.getBooleanDefaultFalse("engineering_mode") ? Pref.getStringToInt("dex_specified_slot", -1) : -1;
-        final AuthRequestTxMessage authRequest = (specifiedSlot == -1) ? new AuthRequestTxMessage(getTokenSize(), usingAlt())
-                : new AuthRequestTxMessage(getTokenSize(), specifiedSlot);
+        final AuthRequestTxMessage authRequest = (specifiedSlot == -1) ? new AuthRequestTxMessage(getTokenSize(), usingAlt()) : new AuthRequestTxMessage(getTokenSize(), specifiedSlot);
         lastAuthPacket = authRequest;
         UserError.Log.i(TAG, "AuthRequestTX: " + bytesToHex(authRequest.byteSequence));
 
-        connection.writeCharacteristic(Authentication, nn(authRequest.byteSequence))
-                .subscribe(
-                        characteristicValue -> {
-                            // Characteristic value confirmed.
-                            if (d)
-                                UserError.Log.d(TAG, "Wrote authrequest, got: " + bytesToHex(characteristicValue));
-                            speakSlowly();
-                            if ((msSince(lastAuthenticationStream) > 500) && !isTransmitterG6Rev2(getTransmitterID())) {
-                                connection.readCharacteristic(Authentication).subscribe(
-                                        readValue -> {
-                                            authenticationProcessor(parent, connection, readValue);
-                                        }, throwable -> {
-                                            UserError.Log.d(TAG, "Could not read after AuthRequestTX: " + throwable);
-                                        });
-                                //parent.background_automata();
-                            }
-                        },
-                        throwable -> {
-                            UserError.Log.e(TAG, "Could not write AuthRequestTX: " + throwable);
-                            parent.incrementErrors();
-                        }
+        connection.writeCharacteristic(Authentication, nn(authRequest.byteSequence)).subscribe(characteristicValue -> {
+                    // Characteristic value confirmed.
+                    if (d)
+                        UserError.Log.d(TAG, "Wrote authrequest, got: " + bytesToHex(characteristicValue));
+                    speakSlowly();
+                    if ((msSince(lastAuthenticationStream) > 500) && !isTransmitterG6Rev2(getTransmitterID())) {
+                        connection.readCharacteristic(Authentication).subscribe(readValue -> {
+                            authenticationProcessor(parent, connection, readValue);
+                        }, throwable -> {
+                            UserError.Log.d(TAG, "Could not read after AuthRequestTX: " + throwable);
+                        });
+                        //parent.background_automata();
+                    }
+                }, throwable -> {
+                    UserError.Log.e(TAG, "Could not write AuthRequestTX: " + throwable);
+                    parent.incrementErrors();
+                }
 
-                );
+        );
     }
 
     private static void handleAuthenticationThrowable(final Throwable throwable, final Ob1G5CollectionService parent) {
         if (!(throwable instanceof OperationSuccess)) {
-            if (((parent.getState() == Ob1G5CollectionService.STATE.CLOSED)
-                    || (parent.getState() == Ob1G5CollectionService.STATE.CLOSE))
-                    && (throwable instanceof BleDisconnectedException)) {
+            if (((parent.getState() == Ob1G5CollectionService.STATE.CLOSED) || (parent.getState() == Ob1G5CollectionService.STATE.CLOSE)) && (throwable instanceof BleDisconnectedException)) {
                 UserError.Log.d(TAG, "normal authentication notification throwable: (" + parent.getState() + ") " + throwable + " " + JoH.dateTimeText(tsl()));
                 parent.connectionStateChange(CLOSED_OK_TEXT);
             } else if ((parent.getState() == Ob1G5CollectionService.STATE.BOND) && (throwable instanceof TimeoutException)) {
@@ -374,15 +357,14 @@ public class Ob1G5StateMachine {
             } else {
                 UserError.Log.d(TAG, "authentication notification  throwable: (" + parent.getState() + ") " + throwable + " " + JoH.dateTimeText(tsl()));
                 parent.incrementErrors();
-                if (throwable instanceof BleCannotSetCharacteristicNotificationException
-                        || throwable instanceof BleGattCharacteristicException) {
+                if (throwable instanceof BleCannotSetCharacteristicNotificationException || throwable instanceof BleGattCharacteristicException) {
                     parent.tryGattRefresh();
                     parent.changeState(SCAN);
                 }
             }
             if ((throwable instanceof BleDisconnectedException) || (throwable instanceof TimeoutException)) {
                 if ((parent.getState() == Ob1G5CollectionService.STATE.BOND) || (parent.getState() == Ob1G5CollectionService.STATE.CHECK_AUTH)) {
-
+                    parent.savePersist();
                     if (parent.getState() == Ob1G5CollectionService.STATE.BOND) {
                         UserError.Log.d(TAG, "SLEEPING BEFORE RECONNECT");
                         threadSleep(15000);
@@ -404,38 +386,33 @@ public class Ob1G5StateMachine {
                 // Respond to the challenge request
                 verifyChallengeHash(((AuthChallengeRxMessage) pkt.msg).tokenHash);
                 byte[] challengeHash = calculateChallengeHash(((AuthChallengeRxMessage) pkt.msg).challenge);
-                if (d)
-                    UserError.Log.d(TAG, "challenge hash" + Arrays.toString(challengeHash));
+                if (d) UserError.Log.d(TAG, "challenge hash" + Arrays.toString(challengeHash));
                 if (challengeHash != null) {
-                    if (d)
-                        UserError.Log.d(TAG, "Transmitter trying auth challenge");
+                    if (d) UserError.Log.d(TAG, "Transmitter trying auth challenge");
 
-                    connection.writeCharacteristic(Authentication, nn(new BaseAuthChallengeTxMessage(challengeHash).byteSequence))
-                            .subscribe(
-                                    challenge_value -> {
+                    connection.writeCharacteristic(Authentication, nn(new BaseAuthChallengeTxMessage(challengeHash).byteSequence)).subscribe(challenge_value -> {
 
-                                        speakSlowly();
-                                        if (msSince(lastAuthenticationStream) > 500) {
-                                            connection.readCharacteristic(Authentication)
-                                                    //.observeOn(Schedulers.io())
-                                                    .subscribe(
-                                                            status_value -> {
-                                                                // interpret authentication response
-                                                                authenticationProcessor(parent, connection, status_value);
-                                                            }, throwable -> {
-                                                                if (throwable instanceof OperationSuccess) {
-                                                                    UserError.Log.d(TAG, "Stopping auth challenge listener due to success");
-                                                                } else {
-                                                                    UserError.Log.d(TAG, "Could not read reply to auth challenge: " + throwable);
-                                                                    parent.incrementErrors();
-                                                                    speakSlowly = true;
-                                                                }
-                                                            });
-                                        }
+                        speakSlowly();
+                        if (msSince(lastAuthenticationStream) > 500) {
+                            connection.readCharacteristic(Authentication)
+                                    //.observeOn(Schedulers.io())
+                                    .subscribe(status_value -> {
+                                        // interpret authentication response
+                                        authenticationProcessor(parent, connection, status_value);
                                     }, throwable -> {
-                                        UserError.Log.e(TAG, "Could not write auth challenge reply: " + throwable);
-                                        parent.incrementErrors();
+                                        if (throwable instanceof OperationSuccess) {
+                                            UserError.Log.d(TAG, "Stopping auth challenge listener due to success");
+                                        } else {
+                                            UserError.Log.d(TAG, "Could not read reply to auth challenge: " + throwable);
+                                            parent.incrementErrors();
+                                            speakSlowly = true;
+                                        }
                                     });
+                        }
+                    }, throwable -> {
+                        UserError.Log.e(TAG, "Could not write auth challenge reply: " + throwable);
+                        parent.incrementErrors();
+                    });
 
                 } else {
                     UserError.Log.e(TAG, "Could not generate challenge hash! - resetting");
@@ -457,9 +434,7 @@ public class Ob1G5StateMachine {
                         parent.changeState(Ob1G5CollectionService.STATE.UNBOND);
 
                     } else {
-                        if (!status.isBonded()
-                                && (parent.isDeviceLocallyBonded() || parent.isDeviceLocallyBonded())
-                                && parent.incrementRetry() <= 3) {
+                        if (!status.isBonded() && (parent.isDeviceLocallyBonded() || parent.isDeviceLocallyBonded()) && parent.incrementRetry() <= 3) {
                             UserError.Log.wtf(TAG, "Doing Android 12+ workaround");
                             JoH.threadSleep(1500);
                             handleAuthenticationWrite(parent, connection);
@@ -534,20 +509,17 @@ public class Ob1G5StateMachine {
     @SuppressLint("CheckResult")
     public synchronized static void doKeepAlive(Ob1G5CollectionService parent, RxBleConnection connection, Runnable runnable) {
         if (connection == null) return;
-        connection.writeCharacteristic(Authentication, nn(new KeepAliveTxMessage(60).byteSequence))
-                .timeout(2, TimeUnit.SECONDS)
-                .subscribe(
-                        characteristicValue -> {
-                            UserError.Log.d(TAG, "Sent keep-alive " + ((runnable != null) ? "Running runnable chain" : ""));
-                            if (runnable != null) {
-                                runnable.run();
-                            }
-                            throw new OperationSuccess("keep-alive runnable complete");
-                        }, throwable -> {
-                            if (!(throwable instanceof OperationSuccess)) {
-                                UserError.Log.e(TAG, "Got error sending keepalive: " + throwable);
-                            }
-                        });
+        connection.writeCharacteristic(Authentication, nn(new KeepAliveTxMessage(60).byteSequence)).timeout(2, TimeUnit.SECONDS).subscribe(characteristicValue -> {
+            UserError.Log.d(TAG, "Sent keep-alive " + ((runnable != null) ? "Running runnable chain" : ""));
+            if (runnable != null) {
+                runnable.run();
+            }
+            throw new OperationSuccess("keep-alive runnable complete");
+        }, throwable -> {
+            if (!(throwable instanceof OperationSuccess)) {
+                UserError.Log.e(TAG, "Got error sending keepalive: " + throwable);
+            }
+        });
     }
 
     // Handle bonding
@@ -561,43 +533,35 @@ public class Ob1G5StateMachine {
             connection.requestConnectionPriority(BluetoothGatt.CONNECTION_PRIORITY_HIGH, 500, TimeUnit.MILLISECONDS);
         }
         UserError.Log.e(TAG, "Sending keepalive..");
-        connection.writeCharacteristic(Authentication, nn(new KeepAliveTxMessage(60).byteSequence))
-                .subscribe(
-                        characteristicValue -> {
-                            UserError.Log.d(TAG, "Wrote keep-alive request successfully");
-                            speakSlowly(); // is this really needed here?
-                            parent.unBond();
-                            parent.instantCreateBondIfAllowed();
-                            speakSlowly();
-                            connection.writeCharacteristic(Authentication, nn(new BondRequestTxMessage().byteSequence))
-                                    .subscribe(
-                                            bondRequestValue -> {
-                                                UserError.Log.d(TAG, "Wrote bond request value: " + bytesToHex(bondRequestValue));
-                                                speakSlowly();
-                                                connection.readCharacteristic(Authentication)
-                                                        .observeOn(Schedulers.io())
-                                                        .timeout(10, TimeUnit.SECONDS)
-                                                        .subscribe(
-                                                                status_value -> {
-                                                                    UserError.Log.d(TAG, "Got status read after keepalive " + bytesToHex(status_value));
-                                                                    authenticationProcessor(parent, connection, status_value);
-                                                                    throw new OperationSuccess("Bond requested");
-                                                                }, throwable -> {
-                                                                    UserError.Log.e(TAG, "Throwable when reading characteristic after keepalive: " + throwable);
-                                                                });
+        connection.writeCharacteristic(Authentication, nn(new KeepAliveTxMessage(60).byteSequence)).subscribe(characteristicValue -> {
+            UserError.Log.d(TAG, "Wrote keep-alive request successfully");
+            speakSlowly(); // is this really needed here?
+            parent.unBond();
+            parent.instantCreateBondIfAllowed();
+            speakSlowly();
+            connection.writeCharacteristic(Authentication, nn(new BondRequestTxMessage().byteSequence)).subscribe(bondRequestValue -> {
+                UserError.Log.d(TAG, "Wrote bond request value: " + bytesToHex(bondRequestValue));
+                speakSlowly();
+                connection.readCharacteristic(Authentication).observeOn(Schedulers.io()).timeout(10, TimeUnit.SECONDS).subscribe(status_value -> {
+                    UserError.Log.d(TAG, "Got status read after keepalive " + bytesToHex(status_value));
+                    authenticationProcessor(parent, connection, status_value);
+                    throw new OperationSuccess("Bond requested");
+                }, throwable -> {
+                    UserError.Log.e(TAG, "Throwable when reading characteristic after keepalive: " + throwable);
+                });
 
-                                                // Wrote bond request successfully was here moved above - is this right?
-                                            }, throwable -> {
-                                                // failed to write bond request retry?
-                                                if (!(throwable instanceof OperationSuccess)) {
-                                                    UserError.Log.e(TAG, "Failed to write bond request! " + throwable);
-                                                }
-                                            });
+                // Wrote bond request successfully was here moved above - is this right?
+            }, throwable -> {
+                // failed to write bond request retry?
+                if (!(throwable instanceof OperationSuccess)) {
+                    UserError.Log.e(TAG, "Failed to write bond request! " + throwable);
+                }
+            });
 
-                        }, throwable -> {
-                            // Could not write keep alive ? retry?
-                            UserError.Log.e(TAG, "Failed writing keep-alive request! " + throwable);
-                        });
+        }, throwable -> {
+            // Could not write keep alive ? retry?
+            UserError.Log.e(TAG, "Failed writing keep-alive request! " + throwable);
+        });
         UserError.Log.d(TAG, "Exiting doKeepAliveBondRequest");
         final PowerManager.WakeLock linger = JoH.getWakeLock("jam-g5-bond-linger", 30000);
         return true;
@@ -631,19 +595,17 @@ public class Ob1G5StateMachine {
     public static boolean doReset(Ob1G5CollectionService parent, RxBleConnection connection) {
         if (connection == null) return false;
         parent.msg("Hard Resetting Transmitter");
-        connection.writeCharacteristic(Control, nn(new ResetTxMessage().byteSequence))
-                .subscribe(characteristicValue -> {
-                    if (d)
-                        UserError.Log.d(TAG, "Wrote ResetTxMessage request!!");
-                    parent.msg("Hard Reset Sent");
-                }, throwable -> {
-                    parent.msg("Hard Reset maybe Failed");
-                    UserError.Log.e(TAG, "Failed to write ResetTxMessage: " + throwable);
-                    if (throwable instanceof BleGattCharacteristicException) {
-                        final int status = ((BleGattCharacteristicException) throwable).getStatus();
-                        UserError.Log.e(TAG, "Got status message: " + getStatusName(status));
-                    }
-                });
+        connection.writeCharacteristic(Control, nn(new ResetTxMessage().byteSequence)).subscribe(characteristicValue -> {
+            if (d) UserError.Log.d(TAG, "Wrote ResetTxMessage request!!");
+            parent.msg("Hard Reset Sent");
+        }, throwable -> {
+            parent.msg("Hard Reset maybe Failed");
+            UserError.Log.e(TAG, "Failed to write ResetTxMessage: " + throwable);
+            if (throwable instanceof BleGattCharacteristicException) {
+                final int status = ((BleGattCharacteristicException) throwable).getStatus();
+                UserError.Log.e(TAG, "Got status message: " + getStatusName(status));
+            }
+        });
         return true;
     }
 
@@ -655,12 +617,11 @@ public class Ob1G5StateMachine {
     public static void checkVersionAndBattery(final Ob1G5CollectionService parent, final RxBleConnection connection) {
         final int nextVersionRequest = requiredNextFirmwareDetailsType();
         if ((getVersionDetails) && (nextVersionRequest != -1)) {
-            connection.writeCharacteristic(Control, nn(new VersionRequestTxMessage(nextVersionRequest).byteSequence))
-                    .subscribe(versionValue -> {
-                        UserError.Log.e(TAG, "Wrote version request: " + nextVersionRequest);
-                    }, throwable -> {
-                        UserError.Log.e(TAG, "Failed to write VersionRequestTxMessage: " + throwable);
-                    });
+            connection.writeCharacteristic(Control, nn(new VersionRequestTxMessage(nextVersionRequest).byteSequence)).subscribe(versionValue -> {
+                UserError.Log.e(TAG, "Wrote version request: " + nextVersionRequest);
+            }, throwable -> {
+                UserError.Log.e(TAG, "Failed to write VersionRequestTxMessage: " + throwable);
+            });
         } else if ((getBatteryDetails) && (parent.getBatteryStatusNow || !haveCurrentBatteryStatus())) {
 
             enqueueUniqueCommand(new BatteryInfoTxMessage(), "Query battery");
@@ -681,8 +642,7 @@ public class Ob1G5StateMachine {
             parent.lastSensorStatus = null; // not applicable
             parent.lastUsableGlucosePacketTime = 0;
         }
-        connection.getCharacteristic(Control)
-                .blockingGet().setWriteType(BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT);
+        connection.getCharacteristic(Control).blockingGet().setWriteType(BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT);
 
         connection.setupIndication(Control)
 
@@ -691,27 +651,21 @@ public class Ob1G5StateMachine {
                     if (d) UserError.Log.d(TAG, "Notifications enabled");
                     speakSlowly();
 
-                    connection.writeCharacteristic(Control, nn(use_g5_internal_alg ? (getEGlucose(parent) ? new EGlucoseTxMessage(shortTxId()).byteSequence : new GlucoseTxMessage().byteSequence) : new SensorTxMessage().byteSequence))
-                            .subscribe(
-                                    characteristicValue -> {
-                                        if (d)
-                                            UserError.Log.d(TAG, "Wrote SensorTxMessage request");
-                                    }, throwable -> {
-                                        UserError.Log.e(TAG, "Failed to write SensorTxMessage: " + throwable);
-                                        if (throwable instanceof BleGattCharacteristicException) {
-                                            final int status = ((BleGattCharacteristicException) throwable).getStatus();
-                                            UserError.Log.e(TAG, "Got status message: " + getStatusName(status));
-                                            if (status == 8) {
-                                                UserError.Log.e(TAG, "Request rejected due to Insufficient Authorization failure!");
-                                                parent.authResult(false);
-                                            }
-                                        }
-                                    });
+                    connection.writeCharacteristic(Control, nn(use_g5_internal_alg ? (getEGlucose(parent) ? new EGlucoseTxMessage(shortTxId()).byteSequence : new GlucoseTxMessage().byteSequence) : new SensorTxMessage().byteSequence)).subscribe(characteristicValue -> {
+                        if (d) UserError.Log.d(TAG, "Wrote SensorTxMessage request");
+                    }, throwable -> {
+                        UserError.Log.e(TAG, "Failed to write SensorTxMessage: " + throwable);
+                        if (throwable instanceof BleGattCharacteristicException) {
+                            final int status = ((BleGattCharacteristicException) throwable).getStatus();
+                            UserError.Log.e(TAG, "Got status message: " + getStatusName(status));
+                            if (status == 8) {
+                                UserError.Log.e(TAG, "Request rejected due to Insufficient Authorization failure!");
+                                parent.authResult(false);
+                            }
+                        }
+                    });
 
-                })
-                .flatMap(notificationObservable -> notificationObservable)
-                .timeout(6, TimeUnit.SECONDS)
-                .subscribe(bytes -> {
+                }).flatMap(notificationObservable -> notificationObservable).timeout(6, TimeUnit.SECONDS).subscribe(bytes -> {
                     // incoming data notifications
                     UserError.Log.d(TAG, "Received indication bytes: " + bytesToHex(bytes));
                     final PacketShop data_packet = classifyPacket(bytes);
@@ -930,19 +884,15 @@ public class Ob1G5StateMachine {
                             final TransmitterTimeRxMessage txtime = (TransmitterTimeRxMessage) data_packet.msg;
                             DexTimeKeeper.updateAge(getTransmitterID(), txtime.getCurrentTime(), true);
                             if (txtime.sessionInProgress()) {
-                                UserError.Log.e(TAG, "Session start time reports: "
-                                        + JoH.dateTimeText(txtime.getRealSessionStartTime()) + " Duration: "
-                                        + JoH.niceTimeScalar(txtime.getSessionDuration()));
+                                UserError.Log.e(TAG, "Session start time reports: " + JoH.dateTimeText(txtime.getRealSessionStartTime()) + " Duration: " + JoH.niceTimeScalar(txtime.getSessionDuration()));
                                 DexSessionKeeper.setStart(txtime.getRealSessionStartTime());
                             } else {
                                 UserError.Log.e(TAG, "Session start time reports: No session in progress");
                                 DexSessionKeeper.clearStart();
                             }
-                            if (Pref.getBooleanDefaultFalse("ob1_g5_preemptive_restart")
-                                    && FirmwareCapability.isTransmitterPreemptiveRestartCapable(getTransmitterID())) {
+                            if (Pref.getBooleanDefaultFalse("ob1_g5_preemptive_restart") && FirmwareCapability.isTransmitterPreemptiveRestartCapable(getTransmitterID())) {
                                 int restartDaysThreshold = usingG6() ? 9 : 6;
-                                if (txtime.getSessionDuration() > Constants.DAY_IN_MS * restartDaysThreshold
-                                        && txtime.getSessionDuration() < Constants.MONTH_IN_MS) {
+                                if (txtime.getSessionDuration() > Constants.DAY_IN_MS * restartDaysThreshold && txtime.getSessionDuration() < Constants.MONTH_IN_MS) {
                                     UserError.Log.uel(TAG, "Requesting preemptive session restart");
                                     restartSensorWithTimeTravel();
                                 }
@@ -1008,9 +958,7 @@ public class Ob1G5StateMachine {
             }
         }
 
-        if (JoH.pratelimit("g5-tx-time-since", 7200)
-                || glucose.calibrationState().warmingUp()
-                || !DexSessionKeeper.isStarted()) {
+        if (JoH.pratelimit("g5-tx-time-since", 7200) || glucose.calibrationState().warmingUp() || !DexSessionKeeper.isStarted()) {
             if (JoH.ratelimit("g5-tx-time-governer", 30)) {
                 if (getTransmitterID().length() > 4) {
                     enqueueUniqueCommand(new TimeTxMessage(), "Periodic Query Time");
@@ -1040,8 +988,7 @@ public class Ob1G5StateMachine {
         // tell device to disconnect now
         UserError.Log.d(TAG, "Disconnect NOW: " + JoH.dateTimeText(tsl()));
         speakSlowly();
-        connection.writeCharacteristic(Control, nn(new DisconnectTxMessage().byteSequence))
-                .timeout(2, TimeUnit.SECONDS)
+        connection.writeCharacteristic(Control, nn(new DisconnectTxMessage().byteSequence)).timeout(2, TimeUnit.SECONDS)
                 //  .observeOn(Schedulers.newThread())
                 //  .subscribeOn(Schedulers.newThread())
                 .subscribe(disconnectValue -> {
@@ -1116,13 +1063,9 @@ public class Ob1G5StateMachine {
             UserError.Log.d(TAG, "Requesting backfill between: " + JoH.dateTimeText(startTime) + " " + JoH.dateTimeText(endTime));
 
             if (!shortTxId()) {
-                enqueueUniqueCommand(
-                        BackFillTxMessage.get(getTransmitterID(), startTime, endTime),
-                        "Get backfill since: " + JoH.hourMinuteString(startTime));
+                enqueueUniqueCommand(BackFillTxMessage.get(getTransmitterID(), startTime, endTime), "Get backfill since: " + JoH.hourMinuteString(startTime));
             } else {
-                enqueueUniqueCommand(
-                        BackFillTxMessage2.get(getTransmitterID(), startTime, endTime),
-                        "Get backfill2 since: " + JoH.hourMinuteString(startTime));
+                enqueueUniqueCommand(BackFillTxMessage2.get(getTransmitterID(), startTime, endTime), "Get backfill2 since: " + JoH.hourMinuteString(startTime));
             }
         } else {
             nextBackFillCheckSize = BACKFILL_CHECK_SMALL;
@@ -1333,16 +1276,12 @@ public class Ob1G5StateMachine {
                     UserError.Log.wtf(TAG, "Cannot start G6 sensor as calibration code not set!");
                 } else {
                     UserError.Log.ueh(TAG, "Starting G6 sensor using calibration code: " + code);
-                    enqueueUniqueCommand(new SessionStartTxMessage(when,
-                                    DexTimeKeeper.getDexTime(getTransmitterID(), when), code),
-                            "Start G6 Sensor");
+                    enqueueUniqueCommand(new SessionStartTxMessage(when, DexTimeKeeper.getDexTime(getTransmitterID(), when), code), "Start G6 Sensor");
                 }
 
             } else {
                 UserError.Log.ueh(TAG, "Starting G5 sensor");
-                enqueueUniqueCommand(new SessionStartTxMessage(when,
-                                DexTimeKeeper.getDexTime(getTransmitterID(), when)),
-                        "Start G5 Sensor");
+                enqueueUniqueCommand(new SessionStartTxMessage(when, DexTimeKeeper.getDexTime(getTransmitterID(), when)), "Start G5 Sensor");
             }
         }
     }
@@ -1389,10 +1328,7 @@ public class Ob1G5StateMachine {
 
     public static void stopSensor() {
         if (acceptCommands()) {
-            enqueueCommand(
-                    new SessionStopTxMessage(
-                            DexTimeKeeper.getDexTime(getTransmitterID(), tsl())),
-                    "Stop Sensor");
+            enqueueCommand(new SessionStopTxMessage(DexTimeKeeper.getDexTime(getTransmitterID(), tsl())), "Stop Sensor");
         }
     }
 
@@ -1407,41 +1343,29 @@ public class Ob1G5StateMachine {
 
     public static void enableExtensionParameter() {
         if (acceptCommands()) {
-            enqueueUniqueCommand(new ExtensionTxMessage(ExtensionTxMessage.PARAM_ENABLE), "Enable extension")
-                    .setDontRetry()
-                    .setPreWrite(Ob1G5StateMachine::postExtension);
+            enqueueUniqueCommand(new ExtensionTxMessage(ExtensionTxMessage.PARAM_ENABLE), "Enable extension").setDontRetry().setPreWrite(Ob1G5StateMachine::postExtension);
         }
     }
 
     public static void disableExtensionParameter() {
         if (acceptCommands()) {
-            enqueueUniqueCommand(new ExtensionTxMessage(ExtensionTxMessage.PARAM_DISABLE), "Disable extension")
-                    .setDontRetry()
-                    .setPreWrite(Ob1G5StateMachine::postExtension);
+            enqueueUniqueCommand(new ExtensionTxMessage(ExtensionTxMessage.PARAM_DISABLE), "Disable extension").setDontRetry().setPreWrite(Ob1G5StateMachine::postExtension);
         }
     }
 
     public static void restartSensorWithTimeTravel() {
-        restartSensorWithTimeTravel(tsl() -
-                (useExtendedTimeTravel() ? DAY_IN_MS * 3 + HOUR_IN_MS * 2 : HOUR_IN_MS * 2 - MINUTE_IN_MS * 10));
+        restartSensorWithTimeTravel(tsl() - (useExtendedTimeTravel() ? DAY_IN_MS * 3 + HOUR_IN_MS * 2 : HOUR_IN_MS * 2 - MINUTE_IN_MS * 10));
     }
 
     public static boolean useExtendedTimeTravel() {
-        return Pref.getBooleanDefaultFalse("ob1_g5_preemptive_restart_extended_time_travel")
-                && (FirmwareCapability.isTransmitterTimeTravelCapable(getTransmitterID())
-                || (Pref.getBooleanDefaultFalse("ob1_g5_defer_preemptive_restart_all_firmwares") && Home.get_engineering_mode()));
+        return Pref.getBooleanDefaultFalse("ob1_g5_preemptive_restart_extended_time_travel") && (FirmwareCapability.isTransmitterTimeTravelCapable(getTransmitterID()) || (Pref.getBooleanDefaultFalse("ob1_g5_defer_preemptive_restart_all_firmwares") && Home.get_engineering_mode()));
     }
 
     public static void restartSensorWithTimeTravel(long when) {
         if (acceptCommands()) {
-            enqueueUniqueCommand(
-                    new SessionStopTxMessage(
-                            DexTimeKeeper.getDexTime(getTransmitterID(), when)),
-                    "Auto Stop Sensor");
+            enqueueUniqueCommand(new SessionStopTxMessage(DexTimeKeeper.getDexTime(getTransmitterID(), when)), "Auto Stop Sensor");
             final long when_started = when + SECOND_IN_MS;
-            enqueueUniqueCommand(new SessionStartTxMessage(when,
-                            DexTimeKeeper.getDexTime(getTransmitterID(), when_started)),
-                    "Auto Start Sensor");
+            enqueueUniqueCommand(new SessionStartTxMessage(when, DexTimeKeeper.getDexTime(getTransmitterID(), when_started)), "Auto Start Sensor");
             if (Pref.getBoolean("ob1_g5_preemptive_restart_alert", true)) {
                 Notifications.ob1SessionRestartRequested();
             }
@@ -1470,12 +1394,11 @@ public class Ob1G5StateMachine {
                 UserError.Log.wtf(TAG, msg);
                 return;
             }
+            final String msg = gs(R.string.queuing_calibration) + ": " + BgGraphBuilder.unitized_string_with_units_static(glucose);
+            JoH.static_toast_long(msg);
+            UserError.Log.uel(TAG, msg + " " + JoH.dateTimeText(timestamp));
 
-            UserError.Log.uel(TAG, "Queuing Calibration for transmitter: " + BgGraphBuilder.unitized_string_with_units_static(glucose) + " " + JoH.dateTimeText(timestamp));
-
-            enqueueCommand(new CalibrateTxMessage(
-                            glucose, DexTimeKeeper.getDexTime(getTransmitterID(), timestamp)),
-                    "Calibrate " + BgGraphBuilder.unitized_string_with_units_static_short(glucose));
+            enqueueCommand(new CalibrateTxMessage(glucose, DexTimeKeeper.getDexTime(getTransmitterID(), timestamp)), gs(R.string.calibrate) + " " + BgGraphBuilder.unitized_string_with_units_static_short(glucose));
         }
     }
 
@@ -1498,42 +1421,40 @@ public class Ob1G5StateMachine {
                     reprocessTxMessage(unit.msg);
                     if (unit.retry < 5 && JoH.msSince(unit.timestamp) < HOUR_IN_MS * 8) {
                         unit.preWrite();
-                        connection.writeCharacteristic(Control, nn(unit.msg.byteSequence))
-                                .timeout(2, TimeUnit.SECONDS)
-                                .subscribe(value -> {
-                                    UserError.Log.d(TAG, "Wrote Queue Message: " + unit.text);
-                                    final long guardTime = unit.msg.guardTime();
-                                    inevitableDisconnect(parent, connection, guardTime);
-                                    if (guardTime > 0) {
-                                        UserError.Log.d(TAG, "Sleeping post execute: " + unit.text + " " + guardTime + "ms");
-                                        JoH.threadSleep(guardTime);
-                                    }
-                                    unit.postWrite();
-                                    throw new OperationSuccess("Completed: " + unit.text);
+                        connection.writeCharacteristic(Control, nn(unit.msg.byteSequence)).timeout(2, TimeUnit.SECONDS).subscribe(value -> {
+                            UserError.Log.d(TAG, "Wrote Queue Message: " + unit.text);
+                            final long guardTime = unit.msg.guardTime();
+                            inevitableDisconnect(parent, connection, guardTime);
+                            if (guardTime > 0) {
+                                UserError.Log.d(TAG, "Sleeping post execute: " + unit.text + " " + guardTime + "ms");
+                                JoH.threadSleep(guardTime);
+                            }
+                            unit.postWrite();
+                            throw new OperationSuccess("Completed: " + unit.text);
 
-                                }, throwable -> {
-                                    if (!(throwable instanceof OperationSuccess)) {
-                                        if (!unit.dontRetry) {
-                                            unit.retry++;
-                                            UserError.Log.d(TAG, "Re-adding: " + unit.text);
-                                            synchronized (commandQueue) {
-                                                commandQueue.push(unit);
-                                            }
-                                        } else {
-                                            UserError.Log.d(TAG, "Not re-adding " + unit.text);
-                                        }
-                                        UserError.Log.d(TAG, "Failure: " + unit.text + " " + JoH.dateTimeText(tsl()));
-                                        if (throwable instanceof BleDisconnectedException) {
-                                            UserError.Log.d(TAG, "Disconnected: " + unit.text + " " + throwable);
-                                            parent.changeState(Ob1G5CollectionService.STATE.CLOSE);
-                                        } else {
-                                            UserError.Log.e(TAG, "Failed to write: " + unit.text + " " + throwable);
-                                        }
-                                        parent.changeState(Ob1G5CollectionService.STATE.CLOSE);
-                                    } else {
-                                        queued(parent, connection); // turtles all the way down
+                        }, throwable -> {
+                            if (!(throwable instanceof OperationSuccess)) {
+                                if (!unit.dontRetry) {
+                                    unit.retry++;
+                                    UserError.Log.d(TAG, "Re-adding: " + unit.text);
+                                    synchronized (commandQueue) {
+                                        commandQueue.push(unit);
                                     }
-                                });
+                                } else {
+                                    UserError.Log.d(TAG, "Not re-adding " + unit.text);
+                                }
+                                UserError.Log.d(TAG, "Failure: " + unit.text + " " + JoH.dateTimeText(tsl()));
+                                if (throwable instanceof BleDisconnectedException) {
+                                    UserError.Log.d(TAG, "Disconnected: " + unit.text + " " + throwable);
+                                    parent.changeState(Ob1G5CollectionService.STATE.CLOSE);
+                                } else {
+                                    UserError.Log.e(TAG, "Failed to write: " + unit.text + " " + throwable);
+                                }
+                                parent.changeState(Ob1G5CollectionService.STATE.CLOSE);
+                            } else {
+                                queued(parent, connection); // turtles all the way down
+                            }
+                        });
                     } else {
                         UserError.Log.e(TAG, "Ejected command from queue due to being too old: " + unit.text + " " + JoH.dateTimeText(unit.timestamp));
                         queued(parent, connection); // move on to next command if we just ejected something
@@ -1657,9 +1578,7 @@ public class Ob1G5StateMachine {
             //   final boolean g6 = usingG6();
             //    final boolean g6r2 = g6 && FirmwareCapability.isTransmitterG6Rev2(getTransmitterID());
             //    processNewTransmitterData(g6 ? (int)(sensorRx.unfiltered * (g6r2 ? G6_REV2_SCALING : G6_SCALING)) : sensorRx.unfiltered, g6 ? (int)(sensorRx.filtered * (g6r2 ? G6_REV2_SCALING : G6_SCALING)) : sensorRx.filtered, sensor_battery_level, new Date().getTime());
-            processNewTransmitterData((int) RawScaling.scale(sensorRx.unfiltered, getTransmitterID(), false),
-                    (int) RawScaling.scale(sensorRx.filtered, getTransmitterID(), true),
-                    sensor_battery_level, new Date().getTime());
+            processNewTransmitterData((int) RawScaling.scale(sensorRx.unfiltered, getTransmitterID(), false), (int) RawScaling.scale(sensorRx.filtered, getTransmitterID(), true), sensor_battery_level, new Date().getTime());
         }
 
         if (WholeHouse.isLive()) {
@@ -1823,8 +1742,7 @@ public class Ob1G5StateMachine {
             if (batteryInfoRxMessage.voltagea < LOW_BATTERY_WARNING_LEVEL) {
                 if (JoH.pratelimit("g5-low-battery-warning", 40000)) {
                     final boolean loud = !PowerStateReceiver.is_power_connected();
-                    JoH.showNotification("Battery Low", "Transmitter battery has dropped to: " + batteryInfoRxMessage.voltagea + " it may fail soon",
-                            null, 770, NotificationChannels.LOW_TRANSMITTER_BATTERY_CHANNEL, loud, loud, null, null, null);
+                    JoH.showNotification("Battery Low", "Transmitter battery has dropped to: " + batteryInfoRxMessage.voltagea + " it may fail soon", null, 770, NotificationChannels.LOW_TRANSMITTER_BATTERY_CHANNEL, loud, loud, null, null, null);
                 }
             }
             PersistentStore.cleanupOld(G5_BATTERY_LEVEL_MARKER);
@@ -1942,19 +1860,15 @@ public class Ob1G5StateMachine {
 
         final BackFillStream backfill = new BackFillStream();
 
-        connection.setupNotification(ProbablyBackfill)
-                .timeout(15, TimeUnit.SECONDS) // WARN
-                .observeOn(Schedulers.newThread())
-                .flatMap(notificationObservable -> notificationObservable)
-                .subscribe(bytes -> {
-                            UserError.Log.d(TAG, "Received backfill notification bytes: " + bytesToHex(bytes));
-                            backfill.pushNew(bytes);
-                            inevitableDisconnect(parent, connection);
-                            Inevitable.task("Process G5 backfill", 3000, () -> processBacksies(backfill.decode()));
-                        }, throwable -> {
-                            UserError.Log.d(TAG, "backfill throwable: " + throwable);
-                        }
-                );
+        connection.setupNotification(ProbablyBackfill).timeout(15, TimeUnit.SECONDS) // WARN
+                .observeOn(Schedulers.newThread()).flatMap(notificationObservable -> notificationObservable).subscribe(bytes -> {
+                    UserError.Log.d(TAG, "Received backfill notification bytes: " + bytesToHex(bytes));
+                    backfill.pushNew(bytes);
+                    inevitableDisconnect(parent, connection);
+                    Inevitable.task("Process G5 backfill", 3000, () -> processBacksies(backfill.decode()));
+                }, throwable -> {
+                    UserError.Log.d(TAG, "backfill throwable: " + throwable);
+                });
         if (d) UserError.Log.d(TAG, "monitor backfill exit");
     }
 
@@ -2026,27 +1940,7 @@ public class Ob1G5StateMachine {
 
     // types of packet we receive
     private enum PACKET {
-        NULL,
-        UNKNOWN,
-        AuthChallengeRxMessage,
-        AuthStatusRxMessage,
-        SensorRxMessage,
-        VersionRequestRxMessage,
-        VersionRequest1RxMessage,
-        VersionRequest2RxMessage,
-        BatteryInfoRxMessage,
-        SessionStartRxMessage,
-        SessionStopRxMessage,
-        GlucoseRxMessage,
-        EGlucoseRxMessage,
-        EGlucoseRxMessage2,
-        CalibrateRxMessage,
-        BackFillRxMessage,
-        BackFillControlRxMessage,
-        TransmitterTimeRxMessage,
-        BondRequestRxMessage,
-        F2DUnknownRxMessage,
-        InvalidRxMessage,
+        NULL, UNKNOWN, AuthChallengeRxMessage, AuthStatusRxMessage, SensorRxMessage, VersionRequestRxMessage, VersionRequest1RxMessage, VersionRequest2RxMessage, BatteryInfoRxMessage, SessionStartRxMessage, SessionStopRxMessage, GlucoseRxMessage, EGlucoseRxMessage, EGlucoseRxMessage2, CalibrateRxMessage, BackFillRxMessage, BackFillControlRxMessage, TransmitterTimeRxMessage, BondRequestRxMessage, F2DUnknownRxMessage, InvalidRxMessage,
 
     }
 
@@ -2128,8 +2022,7 @@ public class Ob1G5StateMachine {
     }
 
     public static boolean usingAlt() {
-        return (android_wear && !Pref.getBooleanDefaultFalse("only_ever_use_wear_collector"))
-                || (immediateBonding() && !ignoreBonding()) || WholeHouse.isLive();
+        return (android_wear && !Pref.getBooleanDefaultFalse("only_ever_use_wear_collector")) || (immediateBonding() && !ignoreBonding()) || WholeHouse.isLive();
     }
 
     private static class OperationSuccess extends RuntimeException {

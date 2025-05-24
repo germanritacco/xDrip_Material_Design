@@ -13,4 +13,11 @@
     <color name="colorButton">#9FA8DA</color>
     <color name="colorMaterialGrey">#1f1f1f</color>
     <color name="colorHint">#a8a8a8</color>
+    <color name="colorBlue">#90CAF9</color>
+    <color name="colorRed">#EF9A9A</color>
+    <color name="colorYellow">#FFF59D</color>
+    <color name="colorGreen">#A5D6A7</color>
+    <color name="colorRedv2">#E53935</color>
+    <color name="colorYellowv2">#FDD835</color>
+    <color name="colorGreenv2">#43A047</color>
 </resources>

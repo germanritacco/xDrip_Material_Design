@@ -1260,6 +1260,7 @@
     <string name="summary_lefun_send_alarms">Stuur meldingen naar de band voor glucosealarmen</string>
     <string name="title_lefun_send_alarms">Stuur alarmen</string>
     <string name="title_lefun_option_shake_snoozes">Schud om te sluimeren</string>
+    <string name="title_lefun_send_calls">Stuur oproepen</string>
     <string name="title_lefun_screens_features">Lefun Schermen / Functies</string>
     <string name="title_features">Functies</string>
     <string name="title_lefun_feature_lift_to_wak">Optillen om te ontwaken</string>
@@ -1450,7 +1451,7 @@
     <string name="top">Boven</string>
     <string name="connect_device_usb_otg">Sluit uw apparaat aan via een USB OTG-kabel.</string>
     <string name="connection_status">Verbindingsstatus:</string>
-    <string name="range_in_high_low">Bereik: (in/hoog/laag)</string>
+    <string name="range_in_high_low">Bereik:\n(in/hoog/laag)</string>
     <string name="absolute_s">Absoluut aantal:</string>
     <string name="median_bg">Mediane BG:</string>
     <string name="mean_bg">Gemiddelde BG:</string>

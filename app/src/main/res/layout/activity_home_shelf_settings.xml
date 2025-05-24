@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-
-        <variable
-            name="vs"
-            type="com.eveningoutpost.dexdrip.ui.BaseShelf" />
-
-        <variable
-            name="home"
-            type="com.eveningoutpost.dexdrip.Home" />
+        <variable name="vs" type="com.eveningoutpost.dexdrip.ui.BaseShelf"/>
+        <variable name="home" type="com.eveningoutpost.dexdrip.Home" />
     </data>
 
     <LinearLayout
@@ -93,7 +87,10 @@
                 android:checked="@{safeUnbox(vs.included[`graphic_trend_arrow`])}"
                 android:onCheckedChanged="@{(v, result) -> home.showArrowConfigurator(v, false, true)}"
                 android:onClick="@{() -> vs.ptoggle(`graphic_trend_arrow`)}"
-                android:text="@string/show_trend_arrow" />
+                android:text="@string/show_graphical_trend_arrow" />
+
+
+
         </LinearLayout>
 
         <Spinner

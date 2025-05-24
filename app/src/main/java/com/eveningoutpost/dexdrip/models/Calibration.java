@@ -11,6 +11,7 @@ import com.activeandroid.ActiveAndroid;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
+import com.activeandroid.query.Delete;
 import com.activeandroid.query.Select;
 import com.eveningoutpost.dexdrip.GcmActivity;
 import com.eveningoutpost.dexdrip.Home;
@@ -641,11 +642,11 @@ public class Calibration extends Model {
                     } else {
                         Log.d(TAG, "Follower mode or note so not processing calibration deeply");
                     }
-                } else {
+                } /*else {
                     final String msg = "Sensor data fails sanity test - Cannot Calibrate! raw:" + bgReading.raw_data;
                     UserError.Log.e(TAG, msg);
                     JoH.static_toast_long(msg);
-                }
+                }*/
             } else {
                 // we couldn't get a reading close enough to the calibration timestamp
                 if (!is_follower) {
@@ -1361,6 +1362,12 @@ public class Calibration extends Model {
         String msg = "Deleted all calibrations for sensor";
         Log.ueh(TAG, msg);
         JoH.static_toast_long(msg);
+    }
+
+    public static void deleteAll() {
+        new Delete()
+                .from(Calibration.class)
+                .execute();
     }
 
 }

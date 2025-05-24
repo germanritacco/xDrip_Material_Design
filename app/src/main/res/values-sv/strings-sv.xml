@@ -1413,7 +1413,7 @@
     <string name="transmitter_battery_status">Sändarbatteri:  </string>
     <string name="connect_device_usb_otg">Vänligen anslut enheten via en USB OTG-kabel.</string>
     <string name="connection_status">Anslutningsstatus:</string>
-    <string name="range_in_high_low">Mål: (inom/hög/låg)</string>
+    <string name="range_in_high_low">Mål:\n(inom/hög/låg)</string>
     <string name="median_bg">Median-BG:</string>
     <string name="mean_bg">Medel-BG:</string>
     <string name="hba1c_est">Upps. hbA1c:</string>

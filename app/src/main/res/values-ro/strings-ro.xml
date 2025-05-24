@@ -1249,6 +1249,7 @@
     <string name="summary_lefun_send_alarms">Trimite notificări către brățară pentru alarmele de glicemie</string>
     <string name="title_lefun_send_alarms">Trimite Alarme</string>
     <string name="title_lefun_option_shake_snoozes">Scutură pentru Amânare</string>
+    <string name="title_lefun_send_calls">Trimite apeluri</string>
     <string name="title_lefun_screens_features">Lefun ecrane/caracteristici</string>
     <string name="title_features">Caracteristici</string>
     <string name="title_lefun_feature_lift_to_wak">Ridicați pentru Reactivare</string>
@@ -1437,7 +1438,7 @@
     <string name="top">Sus</string>
     <string name="connect_device_usb_otg">Vă rugăm să conectaţi dispozitivul prin cablu USB OTG.</string>
     <string name="connection_status">Stare conexiune:</string>
-    <string name="range_in_high_low">Interval: (în/hiper/hipo)</string>
+    <string name="range_in_high_low">Interval:\n(în/hiper/hipo)</string>
     <string name="absolute_s">Absolut #s:</string>
     <string name="median_bg">Valoarea mediană a glicemiei:</string>
     <string name="mean_bg">Valoarea medie a glicemiei:</string>

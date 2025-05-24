@@ -1254,6 +1254,7 @@
     <string name="summary_lefun_send_alarms">Enviar notificações de alarmes de glicose para a pulseira</string>
     <string name="title_lefun_send_alarms">Enviar Alarmes</string>
     <string name="title_lefun_option_shake_snoozes">Agitar para Silenciar</string>
+    <string name="title_lefun_send_calls">Enviar Chamadas</string>
     <string name="title_features">Funcionalidades</string>
     <string name="title_lefun_feature_lift_to_wak">Levantar para ativar</string>
     <string name="title_lefun_feature_anti_lost">Alerta de Desconexão</string>
@@ -1431,7 +1432,7 @@
     <string name="transmitter_battery_status">Bateria do Transmissor:  </string>
     <string name="connect_device_usb_otg">Conecte seu dispositivo via cabo USB OTG.</string>
     <string name="connection_status">Estado da conexão:</string>
-    <string name="range_in_high_low">Interv.:(dentro/hiper/hipo)</string>
+    <string name="range_in_high_low">Interv.:\n(dentro/hiper/hipo)</string>
     <string name="absolute_s">Nº absoluto:</string>
     <string name="median_bg">Glicose Mediana:</string>
     <string name="mean_bg">Glicose Média:</string>

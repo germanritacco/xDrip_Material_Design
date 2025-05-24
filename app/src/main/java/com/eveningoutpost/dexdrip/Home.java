@@ -1204,6 +1204,9 @@ public class Home extends ActivityWithMenu implements ActivityCompat.OnRequestPe
 
         if (chart != null) {
             chart.setAlpha((float) 1);
+
+
+
         }
     }
     // jamorham voiceinput methods
@@ -1482,7 +1485,7 @@ public class Home extends ActivityWithMenu implements ActivityCompat.OnRequestPe
                     final String thisNumberStr = Double.toString(thisnumber);
                     if (thisnumber > 0) {
                         thisInsulinSumNumber = thisnumber;
-                        textInsulinSumDose.setText(thisNumberStr + " units");
+                        textInsulinSumDose.setText(thisNumberStr + gs(R.string.space_units));
                         Log.d(TAG, "Rapid dose: " + thisNumberStr);
                         textInsulinSumDose.setVisibility(View.VISIBLE);
                         if (!MultipleInsulins.isEnabled()) {
@@ -2465,7 +2468,7 @@ public class Home extends ActivityWithMenu implements ActivityCompat.OnRequestPe
             updateCurrentBgInfoCommon(collector, notificationText);
         }
         if (collector.equals(DexCollectionType.Disabled)) {
-            notificationText.append("\n DATA SOURCE DISABLED");
+            notificationText.append(getString(R.string.__data_source_disabled));
             if (!Experience.gotData()) {
                 // TODO should this move to Experience::processSteps ?
                 final Activity activity = this;

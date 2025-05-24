@@ -6,7 +6,7 @@
         <item>Wifi Wixel / Parakeet</item>
         <item>Wifi Wixel + Bluetooth Wixel</item>
         <item>Wifi Wixel + xBridge Wixel</item>
-        <item>@string/dexcom_transmitter</item>
+        <item>Dexcom</item>
         <item>Libre Bluetooth</item>
         <item>Libre Bluetooth + Wifi</item>
         <item>Libre Wifi</item>
@@ -198,9 +198,9 @@
     </string-array>
 
     <string-array name="reminderAlertType">
-        <item>@string/alert_type_system</item>
-        <item>@string/alert_type_custom</item>
-        <item>@string/alert_type_default</item>
+        <item>@string/android_ringtone_alarm</item>
+        <item>@string/custom_audio_file</item>
+        <item>@string/default_xdrip_reminder_sound</item>
     </string-array>
 
     <!--    TODO abstract noise values to single source -->

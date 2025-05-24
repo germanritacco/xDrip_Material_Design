@@ -1269,6 +1269,7 @@
     <string name="summary_lefun_send_alarms">Отправлять уведомления о глюкозе на браслет</string>
     <string name="title_lefun_send_alarms">Отправлять уведомления</string>
     <string name="title_lefun_option_shake_snoozes">Потрясти, чтобы отложить</string>
+    <string name="title_lefun_send_calls">Оповещения о звонках</string>
     <string name="title_lefun_screens_features">Экраны / Функции Lefun</string>
     <string name="title_features">Функции</string>
     <string name="title_lefun_feature_lift_to_wak">Пробуждать поворотом</string>
@@ -1489,7 +1490,7 @@
     <string name="top">Верх</string>
     <string name="connect_device_usb_otg">Пожалуйста, подключите Ваше устройство кабелем USB OTG</string>
     <string name="connection_status">Состояние подключения:</string>
-    <string name="range_in_high_low">Диапазон: (в/высокий/низкий)</string>
+    <string name="range_in_high_low">Диапазон:\n(в/высокий/низкий)</string>
     <string name="absolute_s">Абсолютный #s:</string>
     <string name="median_bg">Медиана гликемии:</string>
     <string name="mean_bg">Средняя гликемии:</string>

@@ -23,11 +23,11 @@ import com.eveningoutpost.dexdrip.utils.ActivityWithMenu;
 public class MissedReadingActivity extends ActivityWithMenu {
     public static String menu_name = "Missed reading";
     private Context mContext;
-    
+
     private CheckBox checkboxEnableAlert;
     private CheckBox checkboxAllDay;
     private CheckBox checkboxEnableReraise;
-    
+
     private LinearLayout layoutTimeBetween;
     private LinearLayout timeInstructions;
     private TextView viewTimeStart;
@@ -37,32 +37,32 @@ public class MissedReadingActivity extends ActivityWithMenu {
     private EditText bgMissedMinutes;
     private EditText bgMissedSnoozeMin;
     private EditText bgMissedReraiseSec;
-    
+
     private TextView viewAlertTime;
     private TextView viewSelectTime;
     private TextView viewSnoozeTime;
     private TextView viewReraiseTime;
-    
-    
+
+
     private int startHour = 0;
     private int startMinute = 0;
     private int endHour = 23;
     private int endMinute = 59;
     private int missedMinutes = 59;
-    
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_missed_readings);
         mContext = this;
-        
+
         viewTimeStart = (TextView) findViewById(R.id.missed_reading_time_start);
         viewTimeEnd = (TextView) findViewById(R.id.missed_reading_time_end);
         checkboxAllDay = (CheckBox) findViewById(R.id.missed_reading_all_day);
         checkboxEnableAlert = (CheckBox) findViewById(R.id.missed_reading_enable_alert);
         checkboxEnableReraise = (CheckBox) findViewById(R.id.missed_reading_enable_alerts_reraise);
-        
+
         layoutTimeBetween = (LinearLayout) findViewById(R.id.missed_reading_time_between);
         timeInstructions = (LinearLayout) findViewById(R.id.missed_reading_instructions);
         timeInstructionsStart = (TextView) findViewById(R.id.missed_reading_instructions_start);
@@ -75,19 +75,19 @@ public class MissedReadingActivity extends ActivityWithMenu {
         viewSnoozeTime = (TextView) findViewById(R.id.missed_reading_bg_snooze_text);
         viewReraiseTime = (TextView) findViewById(R.id.missed_reading_reraise_sec_text);
 
-        
+
         // Set the different controls
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         int startMinutes = prefs.getInt("missed_readings_start", 0);
         int endMinutes = prefs.getInt("missed_readings_end", 0);
-        boolean enableAlert = prefs.getBoolean("bg_missed_alerts",false);
-        boolean allDay = prefs.getBoolean("missed_readings_all_day",true);
-        boolean enableReraise = prefs.getBoolean("bg_missed_alerts_enable_alerts_reraise",false);
-        
+        boolean enableAlert = prefs.getBoolean("bg_missed_alerts", false);
+        boolean allDay = prefs.getBoolean("missed_readings_all_day", true);
+        boolean enableReraise = prefs.getBoolean("bg_missed_alerts_enable_alerts_reraise", false);
+
         checkboxAllDay.setChecked(allDay);
         checkboxEnableAlert.setChecked(enableAlert);
         checkboxEnableReraise.setChecked(enableReraise);
-        
+
         startHour = AlertType.time2Hours(startMinutes);
         startMinute = AlertType.time2Minutes(startMinutes);
         endHour = AlertType.time2Hours(endMinutes);
@@ -95,11 +95,11 @@ public class MissedReadingActivity extends ActivityWithMenu {
         bgMissedMinutes.setText(prefs.getString("bg_missed_minutes", "30"));
         bgMissedSnoozeMin.setText("" + MissedReadingService.getOtherAlertSnoozeMinutes(prefs, "bg_missed_alerts"));
         bgMissedReraiseSec.setText(prefs.getString("bg_missed_alerts_reraise_sec", "60"));
-        
+
         addListenerOnButtons();
         enableAllControls();
     }
-    
+
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -116,14 +116,14 @@ public class MissedReadingActivity extends ActivityWithMenu {
         prefs.edit().putBoolean("bg_missed_alerts_enable_alerts_reraise", checkboxEnableReraise.isChecked()).apply();
 
         MissedReadingService.delayedLaunch();
-      //  context.startService(new Intent(context, MissedReadingService.class));
+        //  context.startService(new Intent(context, MissedReadingService.class));
     }
 
     @Override
     public String getMenuName() {
         return menu_name;
     }
-    
+
     void EnableControls(boolean enabled) {
         layoutTimeBetween.setEnabled(enabled);
         timeInstructions.setEnabled(enabled);
@@ -137,16 +137,16 @@ public class MissedReadingActivity extends ActivityWithMenu {
         viewSnoozeTime.setEnabled(enabled);
         viewReraiseTime.setEnabled(enabled);
     }
-    
+
     void enableAllControls() {
         boolean enableAlert = checkboxEnableAlert.isChecked();
-        if(!enableAlert) {
+        if (!enableAlert) {
             EnableControls(false);
         } else {
             EnableControls(true);
         }
         boolean allDay = checkboxAllDay.isChecked();
-        if(allDay) {
+        if (allDay) {
             layoutTimeBetween.setVisibility(View.GONE);
             timeInstructions.setVisibility(View.GONE);
         } else {
@@ -155,12 +155,10 @@ public class MissedReadingActivity extends ActivityWithMenu {
 
         boolean enableReraise = checkboxEnableReraise.isChecked();
         bgMissedReraiseSec.setEnabled(enableReraise);
-        
+
     }
-    
-   
-    
-    
+
+
     public void addListenerOnButtons() {
         checkboxAllDay.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             //          @Override
@@ -175,7 +173,7 @@ public class MissedReadingActivity extends ActivityWithMenu {
                 enableAllControls();
             }
         });
-        
+
         checkboxEnableReraise.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             //          @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -183,12 +181,12 @@ public class MissedReadingActivity extends ActivityWithMenu {
             }
         });
 
-        
+
         View.OnClickListener startTimeListener = new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                TimePickerDialog mTimePicker = new TimePickerDialog(mContext, AlertDialog.THEME_HOLO_DARK, new TimePickerDialog.OnTimeSetListener() {
+                TimePickerDialog mTimePicker = new TimePickerDialog(mContext, android.R.style.Theme_Material_Dialog_Alert, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                         startHour = selectedHour;
@@ -200,13 +198,13 @@ public class MissedReadingActivity extends ActivityWithMenu {
                 mTimePicker.show();
 
             }
-        } ;
-        
+        };
+
         View.OnClickListener endTimeListener = new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                TimePickerDialog mTimePicker = new TimePickerDialog(mContext, AlertDialog.THEME_HOLO_DARK, new TimePickerDialog.OnTimeSetListener() {
+                TimePickerDialog mTimePicker = new TimePickerDialog(mContext, android.R.style.Theme_Material_Dialog_Alert, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                         endHour = selectedHour;
@@ -219,18 +217,18 @@ public class MissedReadingActivity extends ActivityWithMenu {
 
             }
         };
-        
+
         viewTimeStart.setOnClickListener(startTimeListener);
         timeInstructionsStart.setOnClickListener(startTimeListener);
         viewTimeEnd.setOnClickListener(endTimeListener);
         timeInstructionsEnd.setOnClickListener(endTimeListener);
 
     }
-    
+
     public void setTimeRanges() {
         timeInstructions.setVisibility(View.VISIBLE);
         layoutTimeBetween.setVisibility(View.VISIBLE);
-        viewTimeStart.setText(EditAlertActivity.timeFormatString(mContext,startHour, startMinute));
+        viewTimeStart.setText(EditAlertActivity.timeFormatString(mContext, startHour, startMinute));
         viewTimeEnd.setText(EditAlertActivity.timeFormatString(mContext, endHour, endMinute));
     }
 

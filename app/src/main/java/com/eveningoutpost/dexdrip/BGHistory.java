@@ -1,5 +1,7 @@
 package com.eveningoutpost.dexdrip;
 
+import static com.eveningoutpost.dexdrip.xdrip.gs;
+
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.SharedPreferences;
@@ -61,9 +63,9 @@ public class BGHistory extends ActivityWithMenu {
 
 
         Bundle bundle = getIntent().getExtras();
-        long initTime = System.currentTimeMillis()-1000*60*60*24; //yesterday
+        long initTime = System.currentTimeMillis() - 1000 * 60 * 60 * 24; //yesterday
         if (bundle != null) {
-            initTime = bundle.getLong(OPEN_ON_TIME_KEY,initTime);
+            initTime = bundle.getLong(OPEN_ON_TIME_KEY, initTime);
         }
 
         date1 = new GregorianCalendar();
@@ -118,9 +120,9 @@ public class BGHistory extends ActivityWithMenu {
         });
 
         String[] vals = new String[14];
-        vals[0] = 1 + " day";
-        for (int i = 1; i< vals.length; i++ ){
-            vals[i] = (i+1) + " days";
+        vals[0] = 1 + " " + gs(R.string.unit_day);
+        for (int i = 1; i < vals.length; i++) {
+            vals[i] = (i + 1) + " " + gs(R.string.unit_days);
         }
 
         daysSpinner.setAdapter(new ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, vals));
@@ -300,6 +302,4 @@ public class BGHistory extends ActivityWithMenu {
         return super.onOptionsItemSelected(item);
     }
 
-
-
-    }
+}

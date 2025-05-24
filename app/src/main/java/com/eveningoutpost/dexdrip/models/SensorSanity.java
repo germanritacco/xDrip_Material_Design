@@ -8,9 +8,8 @@ import com.eveningoutpost.dexdrip.utils.DexCollectionType;
 
 /**
  * Created by jamorham on 02/03/2018.
- *
+ * <p>
  * Checks for whether sensor data is within a sane range
- *
  */
 
 public class SensorSanity {
@@ -71,13 +70,13 @@ public class SensorSanity {
             else if (raw_value > DEXCOM_MAX_RAW) state = false;
         }
 
-        if (!state) {
+        /*if (!state) {
             if (JoH.ratelimit("sanity-failure", 20)) {
                 final String msg = "Sensor Raw Data Sanity Failure: " + raw_value;
                 UserError.Log.e(TAG, msg);
                 JoH.static_toast_long(msg);
             }
-        }
+        }*/
 
         return state;
     }
@@ -104,9 +103,9 @@ public class SensorSanity {
         PersistentStore.setString(PREF_LIBRE_SENSOR_UUID, "");
         PersistentStore.setString(PREF_LIBRE_SN, "");
     }
-    
+
     public static boolean checkLibreSensorChangeIfEnabled(final String sn) {
-        if( Home.get_is_libre_whole_house_collector() && Sensor.currentSensor() != null) {
+        if (Home.get_is_libre_whole_house_collector() && Sensor.currentSensor() != null) {
             Log.e(TAG, "Stopping sensor because in libre whold house coverage sensor must be stopped.");
             Sensor.stopSensor();
         }
@@ -118,7 +117,7 @@ public class SensorSanity {
         Log.i(TAG, "checkLibreSensorChange called currentSerial = " + currentSerial);
         if ((currentSerial == null) || currentSerial.length() < 4) return false;
         final Sensor this_sensor = Sensor.currentSensor();
-        if(this_sensor == null || this_sensor.uuid == null|| this_sensor.uuid.length() < 4) {
+        if (this_sensor == null || this_sensor.uuid == null || this_sensor.uuid.length() < 4) {
             Log.i(TAG, "no senosr open, deleting everything");
             PersistentStore.setString(PREF_LIBRE_SENSOR_UUID, "");
             PersistentStore.setString(PREF_LIBRE_SN, "");
@@ -127,15 +126,15 @@ public class SensorSanity {
         final String lastSn = PersistentStore.getString(PREF_LIBRE_SN);
         final String last_uuid = PersistentStore.getString(PREF_LIBRE_SENSOR_UUID);
         Log.i(TAG, "checkLibreSensorChange Initial values: lastSn = " + lastSn + " last_uuid = " + last_uuid);
-        if(lastSn.length() < 4 || last_uuid.length() < 4) {
+        if (lastSn.length() < 4 || last_uuid.length() < 4) {
             Log.i(TAG, "lastSn or last_uuid not valid, writing current values.");
             PersistentStore.setString(PREF_LIBRE_SENSOR_UUID, this_sensor.uuid);
             PersistentStore.setString(PREF_LIBRE_SN, currentSerial);
             return false;
         }
         // Here we have the data that we need to start verifying.
-        if(lastSn.equals(currentSerial)) {
-            if(this_sensor.uuid.equals(last_uuid)) {
+        if (lastSn.equals(currentSerial)) {
+            if (this_sensor.uuid.equals(last_uuid)) {
                 // all well
                 Log.i(TAG, "checkLibreSensorChange returning false 1");
                 return false;
@@ -150,7 +149,7 @@ public class SensorSanity {
         } else {
             // We have a new sensorid. So physical sensors have changed.
             // verify uuid have also changed.
-            if(this_sensor.uuid.equals(last_uuid)) {
+            if (this_sensor.uuid.equals(last_uuid)) {
                 // We need to stop the sensor.
                 Log.e(TAG, String.format("Different sensor serial number for same sensor uuid: %s :: %s vs %s", last_uuid, lastSn, currentSerial));
                 Sensor.stopSensor();
@@ -162,7 +161,7 @@ public class SensorSanity {
 
             } else {
                 // This is the first time we see this sensor, update our uuid and current serial.
-                Log.i(TAG, "This is the first time we see this sensor uuid = " +  this_sensor.uuid);
+                Log.i(TAG, "This is the first time we see this sensor uuid = " + this_sensor.uuid);
                 PersistentStore.setString(PREF_LIBRE_SENSOR_UUID, this_sensor.uuid);
                 PersistentStore.setString(PREF_LIBRE_SN, currentSerial);
                 return false;

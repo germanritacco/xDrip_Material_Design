@@ -7,8 +7,10 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.DisplayMetrics;
+import com.eveningoutpost.dexdrip.R;
 import com.eveningoutpost.dexdrip.models.UserError.Log;
 import android.view.View;
+import androidx.core.content.ContextCompat;
 
 /**
  * Created by adrian on 30/06/15.
@@ -67,11 +69,11 @@ public class ChartView extends View {
 
             Log.d("DrawStats", "in,low, high degree: " + inDeg + " " + lowDeg + " " + highDeg);
 
-            myPaint.setColor(android.graphics.Color.RED);
+            myPaint.setColor(ContextCompat.getColor(getContext(), R.color.colorRedv2));
             canvas.drawArc(rect, -90, lowDeg, true, myPaint);
-            myPaint.setColor(Color.GREEN);
+            myPaint.setColor(ContextCompat.getColor(getContext(), R.color.colorGreenv2));
             canvas.drawArc(rect, -90 + lowDeg, inDeg, true, myPaint);
-            myPaint.setColor(Color.YELLOW);
+            myPaint.setColor(ContextCompat.getColor(getContext(), R.color.colorYellowv2));
             canvas.drawArc(rect, -90 + lowDeg + inDeg, highDeg, true, myPaint);
         }
 

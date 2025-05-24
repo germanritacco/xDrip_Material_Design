@@ -1,0 +1,14 @@
+Fondo Oscuro
+#121212
+
+Fondo Claro
+#1F1F1F
+
+Color Icono Menu
+#CAC4D0
+
+Color gris de iconos home
+#B6B6B6
+
+Cambiar color fondo boton
+android:backgroundTint="@color/colorButton"
