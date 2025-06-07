@@ -1640,43 +1640,43 @@ public class Ob1G5CollectionService extends G5BaseService {
 
         switch (bleScanException.getReason()) {
             case BleScanException.BLUETOOTH_NOT_AVAILABLE:
-                text = "Bluetooth is not available";
+                text = gs(R.string.bluetooth_not_available);
                 break;
             case BleScanException.BLUETOOTH_DISABLED:
-                text = "Enable bluetooth and try again";
+                text = gs(R.string.bluetooth_disabled);
                 break;
             case BleScanException.LOCATION_PERMISSION_MISSING:
-                text = "On Android 6.0+ location permission is required. Implement Runtime Permissions";
+                text = gs(R.string.location_permission_missing);
                 break;
             case BleScanException.LOCATION_SERVICES_DISABLED:
-                text = "Location services needs to be enabled on Android 6.0+";
+                text = gs(R.string.location_services_disabled);
                 break;
             case BleScanException.SCAN_FAILED_ALREADY_STARTED:
-                text = "Scan with the same filters is already started";
+                text = gs(R.string.scan_failed_already_started);
                 break;
             case BleScanException.SCAN_FAILED_APPLICATION_REGISTRATION_FAILED:
-                text = "Failed to register application for bluetooth scan";
+                text = gs(R.string.scan_failed_application_registration_failed);
                 break;
             case BleScanException.SCAN_FAILED_FEATURE_UNSUPPORTED:
-                text = "Scan with specified parameters is not supported";
+                text = gs(R.string.scan_failed_feature_unsupported);
                 break;
             case BleScanException.SCAN_FAILED_INTERNAL_ERROR:
-                text = "Scan failed due to internal error";
+                text = gs(R.string.scan_failed_internal_error);
                 break;
             case BleScanException.SCAN_FAILED_OUT_OF_HARDWARE_RESOURCES:
-                text = "Scan cannot start due to limited hardware resources";
+                text = gs(R.string.scan_failed_out_of_hardware_resources);
                 break;
             case BleScanException.UNDOCUMENTED_SCAN_THROTTLE:
                 text = String.format(
                         Locale.getDefault(),
-                        "Android 7+ does not allow more scans. Try in %d seconds",
+                        gs(R.string.undocumented_scan_throttle),
                         secondsTill(bleScanException.getRetryDateSuggestion())
                 );
                 break;
             case BleScanException.UNKNOWN_ERROR_CODE:
             case BleScanException.BLUETOOTH_CANNOT_START:
             default:
-                text = "Unable to start scanning";
+                text = gs(R.string.bluetooth_cannot_start);
                 break;
         }
         UserError.Log.w(TAG, text + " " + bleScanException);
@@ -1934,7 +1934,7 @@ public class Ob1G5CollectionService extends G5BaseService {
 
         if (is_failed && !was_failed) {
             final PendingIntent pi = PendingIntent.getActivity(xdrip.getAppContext(), G5_SENSOR_FAILED, JoH.getStartActivityIntent(Home.class), PendingIntent.FLAG_UPDATE_CURRENT);
-            JoH.showNotification(state.getText(), "Sensor FAILED", pi, G5_SENSOR_FAILED, true, true, false);
+            JoH.showNotification(state.getText(), gs(R.string.sensor_failed), pi, G5_SENSOR_FAILED, true, true, false);
             UserError.Log.ueh(TAG, "Native Sensor is now marked FAILED: " + state.getExtendedText());
         }
         // we can't easily auto-cancel a failed notice as auto-restart may mean the user is not aware of it?
@@ -2146,17 +2146,17 @@ public class Ob1G5CollectionService extends G5BaseService {
         final List<StatusItem> l = new ArrayList<>();
 
         if (!DexSyncKeeper.isReady(transmitterID)) {
-            l.add(new StatusItem("Hunting Transmitter", "Stay on this page", CRITICAL));
+            l.add(new StatusItem(gs(R.string.sync_keeper), gs(R.string.sync_keeper_value), CRITICAL));
         }
 
         if (isVolumeSilent() && !isDeviceLocallyBonded()) {
-            l.add(new StatusItem("Turn Sound On!", "You will not hear pairing request with volume set low or do not disturb enabled!", CRITICAL));
+            l.add(new StatusItem(gs(R.string.turn_sound_on), gs(R.string.turn_sound_on_value), CRITICAL));
         }
 
         l.add(new StatusItem(gs(R.string.phone_service_state), lastState + (BlueJayEntry.isPhoneCollectorDisabled() ? "\nDisabled by BlueJay option" : ""), msSince(lastStateUpdated) < 300000 ? (lastState.startsWith("Got data") ? Highlight.GOOD : NORMAL) : (isWatchRunning() ? Highlight.GOOD : CRITICAL)));
         if (last_scan_started > 0) {
             final long scanning_time = msSince(last_scan_started);
-            l.add(new StatusItem("Time scanning", niceTimeScalar(scanning_time), scanning_time > MINUTE_IN_MS * 5 ? (scanning_time > MINUTE_IN_MS * 10 ? BAD : NOTICE) : NORMAL));
+            l.add(new StatusItem(gs(R.string.scanning_time), niceTimeScalar(scanning_time), scanning_time > MINUTE_IN_MS * 5 ? (scanning_time > MINUTE_IN_MS * 10 ? BAD : NOTICE) : NORMAL));
         }
         if (lastScanError != null) {
             l.add(new StatusItem(gs(R.string.scan_error), lastScanError, BAD));
@@ -2166,7 +2166,7 @@ public class Ob1G5CollectionService extends G5BaseService {
         }
 
         if (hardResetTransmitterNow) {
-            l.add(new StatusItem("Hard Reset", "Attempting - please wait", Highlight.CRITICAL));
+            l.add(new StatusItem(gs(R.string.hard_reset),  gs(R.string.hard_reset_value), Highlight.CRITICAL));
         }
 
         if (transmitterID != null) {
@@ -2181,8 +2181,8 @@ public class Ob1G5CollectionService extends G5BaseService {
             l.add(new StatusItem(gs(R.string.last_connected), gs(R.string.ago) + " " + niceTimeScalar(msSince(static_last_connected))));
         }
 
-        if ((!lastState.startsWith("Service Stopped")) && (!lastState.startsWith("Not running")))
-            l.add(new StatusItem(gs(R.string.brain_state), state.getString() + (error_count > 1 ? " Errors: " + error_count : ""), error_count > 1 ? NOTICE : error_count > 4 ? BAD : NORMAL));
+        if ((!lastState.startsWith("Serv-ice Stopped")) && (!lastState.startsWith("Not running")))
+            l.add(new StatusItem(gs(R.string.brain_state), state.getString() + (error_count > 1 ? " " + gs(R.string.errors) + ": " + error_count : ""), error_count > 1 ? NOTICE : error_count > 4 ? BAD : NORMAL));
 
         if (lastUsableGlucosePacketTime != 0) {
             if (msSince(lastUsableGlucosePacketTime) < MINUTE_IN_MS * 15) {
@@ -2196,20 +2196,20 @@ public class Ob1G5CollectionService extends G5BaseService {
         }
 
         if (max_wakeup_jitter > 5000) {
-            l.add(new StatusItem("Slowest Wakeup ", niceTimeScalar(max_wakeup_jitter), max_wakeup_jitter > Constants.SECOND_IN_MS * 10 ? CRITICAL : NOTICE));
+            l.add(new StatusItem(gs(R.string.slowest_wakeup), niceTimeScalar(max_wakeup_jitter), max_wakeup_jitter > Constants.SECOND_IN_MS * 10 ? CRITICAL : NOTICE));
         }
 
         if (JoH.buggy_samsung) {
-            l.add(new StatusItem("Buggy handset", "Using workaround", max_wakeup_jitter < TOLERABLE_JITTER ? Highlight.GOOD : BAD));
+            l.add(new StatusItem(gs(R.string.buggy_handset),  gs(R.string.buggy_handset_value), max_wakeup_jitter < TOLERABLE_JITTER ? Highlight.GOOD : BAD));
         }
 
         final String tx_id = getTransmitterID();
 
         if (Pref.getBooleanDefaultFalse("wear_sync") &&
                 Pref.getBooleanDefaultFalse("enable_wearG5")) {
-            l.add(new StatusItem("Watch Service State", lastStateWatch));
+            l.add(new StatusItem(gs(R.string.watch_service_state), lastStateWatch));
             if (static_last_timestamp_watch > 0) {
-                l.add(new StatusItem("Watch got Glucose", JoH.niceTimeSince(static_last_timestamp_watch) + " ago"));
+                l.add(new StatusItem(gs(R.string.watch_service_state_value), JoH.niceTimeSince(static_last_timestamp_watch)));
             }
         }
         final String sensorCode = getCurrentSensorCode();
@@ -2220,8 +2220,8 @@ public class Ob1G5CollectionService extends G5BaseService {
         }
 
         if (get_engineering_mode() || FirmwareCapability.isTransmitterPreemptiveRestartCapable(getTransmitterID())) {
-            l.add(new StatusItem("Preemptive restarts", !FirmwareCapability.isTransmitterPreemptiveRestartCapable(getTransmitterID()) ? "Not capable" :
-                    (Pref.getBooleanDefaultFalse("ob1_g5_preemptive_restart") ? "Enabled" : "Disabled")
+            l.add(new StatusItem(gs(R.string.preemptive_restarts), !FirmwareCapability.isTransmitterPreemptiveRestartCapable(getTransmitterID()) ? gs(R.string.not_capable) :
+                    (Pref.getBooleanDefaultFalse("ob1_g5_preemptive_restart") ? gs(R.string.pref_title_api_enabled) : gs(R.string.disabled))
                             + (Ob1G5StateMachine.useExtendedTimeTravel() ? " (extended)" : "")));
         }
 
@@ -2330,7 +2330,7 @@ public class Ob1G5CollectionService extends G5BaseService {
         }
 
         if (vr1 != null && get_engineering_mode() && vr1.max_inactive_days > 0) {
-            l.add(new StatusItem("Shelf Life", "" + vr1.inactive_days + " / " + vr1.max_inactive_days));
+            l.add(new StatusItem(gs(R.string.shelf_life), "" + vr1.inactive_days + " / " + vr1.max_inactive_days));
         }
 
         if ((bt != null) && (last_battery_query > 0)) {
@@ -2346,7 +2346,7 @@ public class Ob1G5CollectionService extends G5BaseService {
             if (vr != null) {
                 final String battery_status = TransmitterStatus.getBatteryLevel(vr.status).toString();
                 if (!battery_status.equals("OK"))
-                    l.add(new StatusItem("Transmitter Status", battery_status, BAD));
+                    l.add(new StatusItem(gs(R.string.transmitter_status), battery_status, BAD));
             }
             Highlight TX_dys_highlight = NORMAL; // Set the default transmitter days highlight to normal
             final int TX_dys = DexTimeKeeper.getTransmitterAgeInDays(tx_id); // Transmitter days
@@ -2370,7 +2370,7 @@ public class Ob1G5CollectionService extends G5BaseService {
             l.add(new StatusItem(gs(R.string.voltage_b), parsedBattery.voltageB(), parsedBattery.voltageBWarning() ? BAD : NORMAL));
             if (vr != null && FirmwareCapability.isFirmwareResistanceCapable(vr.firmware_version_string)) {
                 if (parsedBattery.resistance() != 0) {
-                    l.add(new StatusItem("Resistance", parsedBattery.resistance(), parsedBattery.resistanceStatus().highlight));
+                    l.add(new StatusItem(gs(R.string.resistance), parsedBattery.resistance(), parsedBattery.resistanceStatus().highlight));
                 }
             }
             if (vr != null && FirmwareCapability.isFirmwareTemperatureCapable(vr.firmware_version_string)) {
@@ -2379,7 +2379,7 @@ public class Ob1G5CollectionService extends G5BaseService {
                 }
             }
         } else {
-            l.add(new StatusItem("Battery Info Unavailable", "Click to trigger update", NORMAL, "long-press",
+            l.add(new StatusItem(gs(R.string.battery_info_unavailable), gs(R.string.battery_info_unavailable_value), NORMAL, "long-press",
                     new Runnable() {
                         @Override
                         public void run() {

@@ -1,5 +1,9 @@
 package com.eveningoutpost.dexdrip.g5model;
 
+import static com.eveningoutpost.dexdrip.xdrip.gs;
+
+import com.eveningoutpost.dexdrip.R;
+
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
@@ -79,7 +83,7 @@ public class SessionStartRxMessage extends BaseMessage {
             case 0x03:
                 return "Invalid";
             case 0x04:
-                return "Clock not synchronized or other error"; // probably
+                return gs(R.string.clock_error); // probably
             case 0x05:
                 return "OK G6"; // probably
             case 0x06:

@@ -118,9 +118,9 @@ public class SnoozeActivity extends ActivityWithMenu {
 
     static String getNameFromTime(int time) {
         if (time < 120) {
-            return time + " minutes";
+            return time + " " + gs(R.string.unit_minutes);
         }
-        return (time / 60.0) + " hours";
+        return (time / 60.0) + " " + gs(R.string.unit_hours);
     }
 
     static int getTimeFromSnoozeValue(int pickedNumber) {
@@ -374,7 +374,7 @@ public class SnoozeActivity extends ActivityWithMenu {
         } else {
             sendRemoteSnooze.setVisibility(View.GONE);
             if(!aba.ready_to_alarm()) {
-                status = MessageFormat.format("Active alert exists named \"{0}\" {1,choice,0#Alert will rerise at|1#Alert snoozed until} {2,time} ({3} minutes left)",
+                status = MessageFormat.format(gs(R.string.active_alert_message),
                         activeBgAlert.name, aba.is_snoozed ? 1 : 0 , new Date(aba.next_alert_at),(aba.next_alert_at - now) / 60000);
             } else {
                 status = getString(R.string.active_alert_exists_named)+" \"" + activeBgAlert.name + "\" "+getString(R.string.bracket_not_snoozed);

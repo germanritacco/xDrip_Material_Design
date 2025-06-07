@@ -317,7 +317,7 @@ public class SystemStatusFragment extends Fragment {
         if (activeBluetoothDevice != null) {
             current_device.setText(activeBluetoothDevice.name);
         } else {
-            current_device.setText("None Set");
+            current_device.setText(gs(R.string.none_set));
         }
 
         String collection_method = prefs.getString("dex_collection_method", "BluetoothWixel");
@@ -400,7 +400,8 @@ public class SystemStatusFragment extends Fragment {
 
                             if (transmitterIdLastTwo.equals(deviceNameLastTwo)) {
                                 final String fw = G5CollectionService.getFirmwareVersionString(defaultTransmitter.transmitterId);
-                                connection_status.setText(device.getName() + " Authed" + ((fw != null) ? ("\n" + fw) : ""));
+                                connection_status.setText(device.getName() + " " + gs(R.string.authed) + ((fw != null) ? (" " + fw) : ""));
+                                // connection_status.setText(device.getName() + " " + gs(R.string.authed) + ((fw != null) ? ("\n" + fw) : ""));
                                 break;
                             }
 
@@ -539,7 +540,7 @@ public class SystemStatusFragment extends Fragment {
                                     try {
                                         Method m = device.getClass().getMethod("removeBond", (Class[]) null);
                                         m.invoke(device, (Object[]) null);
-                                        notes.append("\nG5 Transmitter unbonded, switch device mode to prevent re-pairing to G5.");
+                                        notes.append("\n" + gs(R.string.dexcom_unbonded));
                                     } catch (Exception e) {
                                         Log.e("SystemStatus", e.getMessage(), e);
                                     }

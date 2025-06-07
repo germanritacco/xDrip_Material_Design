@@ -744,7 +744,7 @@
     <string name="low_level_value">Low level diagnostic/prototype value</string>
     <string name="transmitter_id">ID of your Dexcom Transmitter, e.g. 12AB3</string>
     <string name="advanced_g5_settings">Advanced Dexcom settings for rare situations</string>
-    <string name="g5_debug_settings">Dex Debug Settings</string>
+    <string name="g5_debug_settings">Dexcom Debug Settings</string>
     <string name="g5_scan_constantly">Some devices work better when scanning constantly, others do not. If reading is reliable when this setting is not selected, you should have improved battery life. Normally best to keep this disabled</string>
     <string name="scan_for_g5_constantly">Scan constantly</string>
     <string name="g5_force_ui_thread">This is crucial for some Android devices to properly connect, but can cause missed readings when other UI intensive activities are in use.</string>
@@ -1006,7 +1006,7 @@
     <string name="channel_name">Foreground Service</string>
     <string name="code_accepted">Code accepted</string>
     <string name="invalid_or_unsupported_code">Invalid or unsupported code!</string>
-    <string name="g6_sensor_code">G6 Sensor Code</string>
+    <string name="g6_sensor_code">Dexcom Sensor Code</string>
     <string name="please_enter_printed_calibration_code">Please enter the printed calibration code number, 4 digits, e.g. 5678</string>
     <string name="enable_update_checks">Enable update checks?</string>
     <string name="you_can_easily_roll_back_dialog_msg">With xDrip you can easily roll back to previous versions just by re-running the APK installer for the old version in your Downloads folder if you don\'t like the new version.\n\nWould you like to enable update checks?</string>
@@ -1401,7 +1401,7 @@
     <string name="summary_clfollow_download_meals">Download meals from CareLink</string>
     <string name="title_clfollow_download_notifications">Notifications</string>
     <string name="summary_clfollow_download_notifications">Download notifications from CareLink</string>
-    <string name="title_ob1_options">OB1 Dex Collector Settings</string>
+    <string name="title_ob1_options">OB1 Dexcom Collector Settings</string>
     <string name="summary_use_ob1_g5_collector_service">Complete re-write, should work on Android 4.4 - 9, supports native mode and more</string>
     <string name="title_use_ob1_g5_collector_service">Use the OB1 Collector</string>
     <string name="summary_ob1_g5_use_transmitter_alg">Use the transmitter\'s internal algorithm to calculate glucose values when possible.</string>
@@ -1966,9 +1966,9 @@
     <string name="speak">Speak</string>
     <string name="graph_note">Graph Note</string>
     <string name="reminder_alternate_title">Reminder alternate title</string>
-    <string name="default_xdrip_reminder_sound">Default xDrip+ reminder sound</string>
+    <string name="default_xdrip_reminder_sound">Default xDrip+ Sound</string>
     <string name="custom_audio_file">Custom Audio file</string>
-    <string name="android_ringtone_alarm">Android Ringtone/Alarm</string>
+    <string name="android_ringtone_alarm">System Sound</string>
     <string name="first_successful_connection_to_transmitter">"First successful connection to transmitter %1$s"</string>
     <string name="first_successful_connection_to_transmitter_em">"First successful connection to transmitter %1$s with mac %2$s"</string>
     <string name="sensor_expiring">Sensor expiring</string>
@@ -2038,7 +2038,7 @@
     <string name="scan_device_bt">Starting Scanning\nMake sure meter is turned on - For pairing hold the meter power button until it flashes blue</string>
     <string name="dexcom_status">Dexcom Status</string>
     <string name="classic_status_page">Classic Status Page</string>
-    <string name="g6_status">G6/G7/One/One+ Collector/Transmitter Status</string>
+    <string name="g6_status">Dexcom Collector/Transmitter Status</string>
     <string name="cloud_queues">Cloud Uploader Queues</string>
     <string name="phone_service_state">Phone Service State</string>
     <string name="phone_service_got_needed">Got needed</string>
@@ -2097,6 +2097,60 @@
     <string name="wake_up">Wake Up</string>
     <string name="gvi">GVI:</string>
     <string name="pgs">PGS:</string>
+    <string name="active_alert_message">Active alert exists named \"{0}\" {1,choice,0#Alert will rerise at|1#Alert snoozed until} {2,time} ({3} minutes left)</string>
+    <string name="bluetooth_not_available">Bluetooth is not available</string>
+    <string name="bluetooth_disabled">Enable bluetooth and try again</string>
+    <string name="location_permission_missing">On Android 6.0+ location permission is required. Implement Runtime Permissions</string>
+    <string name="location_services_disabled">Location services needs to be enabled on Android 6.0+</string>
+    <string name="scan_failed_already_started">Scan with the same filters is already started</string>
+    <string name="scan_failed_application_registration_failed">Failed to register application for bluetooth scan</string>
+    <string name="scan_failed_feature_unsupported">Scan with specified parameters is not supported</string>
+    <string name="scan_failed_internal_error">Scan failed due to internal error</string>
+    <string name="scan_failed_out_of_hardware_resources">Scan cannot start due to limited hardware resources</string>
+    <string name="undocumented_scan_throttle">Android 7+ does not allow more scans. Try in %d seconds</string>
+    <string name="bluetooth_cannot_start">Unable to start scanning</string>
+    <string name="sync_keeper">Hunting Transmitter</string>
+    <string name="sync_keeper_value">Stay on this page</string>
+    <string name="turn_sound_on">Turn Sound On!</string>
+    <string name="turn_sound_on_value">You will not hear pairing request with volume set low or do not disturb enabled!</string>
+    <string name="scanning_time">Time scanning</string>
+    <string name="hard_reset">Hard Reset</string>
+    <string name="hard_reset_value">Attempting, please wait</string>
+    <string name="errors">Errors</string>
+    <string name="slowest_wakeup">Slowest Wakeup</string>
+    <string name="buggy_handset">Buggy handset</string>
+    <string name="buggy_handset_value">Using workaround</string>
+    <string name="watch_service_state">Watch Service State</string>
+    <string name="watch_service_state_value">Watch got Glucose ago</string>
+    <string name="battery_info_unavailable">Battery Info Unavailable</string>
+    <string name="battery_info_unavailable_value">Click to trigger update</string>
+    <string name="resistance">Resistance</string>
+    <string name="transmitter_status">Transmitter Status</string>
+    <string name="shelf_life">Shelf Life</string>
+    <string name="preemptive_restarts">Preemptive restarts</string>
+    <string name="not_capable">Not capable</string>
+    <string name="disabled">Disabled</string>
+    <string name="none_set">None Set</string>
+    <string name="authed">Authed</string>
+    <string name="dexcom_unbonded">Dexcom Transmitter unbonded, switch device mode to prevent re-pairing to Dexcom.</string>
+    <string name="status_scan_devide">Starting Scanning\nMake sure meter is turned on.\nTo pair a new meter, refer to the device manual.</string>
+    <string name="stopped_scanning">Stopped Scanning</string>
+    <string name="glucose_record">Glucose Record</string>
+    <string name="paired">Paired</string>
+    <string name="sensor_reporting_failed">Sensor reporting failed</string>
+    <string name="dexcom_sensor_failed">DEXCOM SENSOR FAILED</string>
+    <string name="sensor_failed_start">Sensor Failed Start</string>
+    <string name="sensor_failed">Sensor FAILED</string>
+    <string name="session_stopped_ok">Session Stopped Successfully</string>
+    <string name="clock_error">Clock not synchronized or other error</string>
+    <string name="session_failed_start">Session Start Failed</string>
+    <string name="start_dexcom_sensor">Start Dexcom Sensor</string>
+
+
+
+
+
+
 
 
 </resources>

@@ -226,15 +226,15 @@
     <string name="extra_alerts_xdrip_plus">Alertas adicionales (xDrip+)</string>
     <string name="persistent_high_alert">Alerta alta persistente</string>
     <string name="persistent_high_alert_enable">Activar</string>
-    <string name="title_persistent_high_threshold">Límite</string>
+    <string name="title_persistent_high_threshold">Umbral</string>
     <string name="the_value_must_be_between_min_and_max">El valor debe estar entre %1$s y %2$s</string>
-    <string name="forecasted_low_alert">Alerta de baja predicha</string>
+    <string name="forecasted_low_alert">Alerta de baja pronosticada</string>
     <string name="setting_pref_to_max">Ajustar al máximo</string>
     <string name="pref_was_greater_than_max">%1$s se estableció a un valor mayor que el máximo permitido. Se ha cambiado al máximo.</string>
     <string name="setting_pref_to_min">Ajustar al mínimo</string>
     <string name="pref_was_less_than_min">%1$s se estableció a un valor menor que el mínimo permitido. Se ha cambiado al mínimo.</string>
     <string name="extrapolate_data_to_try_to_predict_lows">Extrapolar datos para tratar de predecir bajadas</string>
-    <string name="alarm_at_forecasted_low_mins">Alarma en minutos bajas predichas</string>
+    <string name="alarm_at_forecasted_low_mins">Alarma de baja pronosticada en (minutos)</string>
     <string name="other_xdrip_plus_alerts">Otras alertas xDrip+</string>
     <string name="xdrip_plus_display_settings">xDrip+ Ajustes de pantalla</string>
     <string name="display_customisations">Personalizaciones de pantalla</string>
@@ -346,7 +346,7 @@
     <string name="enter_blood_glucose_value">Introduzca Valor de glucosa en sangre</string>
     <string name="this_does_not_get_used_for_anything_its_just_to_keep_track_of_differences_for_algorithem_improvement_purposes">Esto no se utiliza para nada, es sólo para mantener un registro de las diferencias con fines de mejora del algoritmo</string>
     <string name="no_active_alert_exists">No existe ninguna alerta activa</string>
-    <string name="active_alert_exists_named">Nombre de Alerta existente</string>
+    <string name="active_alert_exists_named">Alarma activa</string>
     <string name="bracket_not_snoozed">(No silenciada)</string>
     <string name="all_alerts_disabled_until">"Todas las alertas desactivadas hasta "</string>
     <string name="low_alerts_disabled_until">"Alertas de hipo desactivadas hasta "</string>
@@ -429,10 +429,10 @@
     <string name="choose_sound_used_for_persistent_high_alarm">Elija el sonido de la alarma para el valor alto persistente.</string>
     <string name="persistent_high_sound">Sonido de valor Alto Persistente</string>
     <string name="forecast_lows">Bajas Previsión</string>
-    <string name="raise_alarm_on_forecast_low">Dar la alarma en el pronóstico de baja</string>
-    <string name="notify_when_predicted_low_time_reaches_threshold">Notificar cuando predijo el tiempo de baja alcanza el umbral</string>
+    <string name="raise_alarm_on_forecast_low">Activar alarma de bajo pronosticado</string>
+    <string name="notify_when_predicted_low_time_reaches_threshold">Notificar cuando el tiempo del valor bajo pronosticado alcance el umbral</string>
     <string name="predicted_low_sound">Sonido de Baja pronosticada</string>
-    <string name="choose_sound_used_for_predicted_low_alarm">Permite seleccionar el sonido utilizado para la alarma de valo Bajo pronosticado.</string>
+    <string name="choose_sound_used_for_predicted_low_alarm">Permite seleccionar el sonido utilizado para la alarma de valor Bajo pronosticado.</string>
     <string name="notify_when_parakeet_device_stops_checking_in">Notificar cuando el dispositivo Patakeet deje de registrarse</string>
     <string name="parakeet_related_alerts">Alertas relacionadas con Parakeet</string>
     <string name="raise_parakeet_notification_silently_when_charging">Activar la notificación en silenciosa de Parakeet al cargar</string>
@@ -525,7 +525,7 @@
     <string name="handset_group_security_key">Sincronizar usando la clave de seguridad del móvil</string>
     <string name="handset_sync_grouping_key">Auricular clave de sincronización agrupación</string>
     <string name="alert_name_colon">Nombre de alerta:</string>
-    <string name="threshold_colon">Límite:</string>
+    <string name="threshold_colon">Umbral:</string>
     <string name="default_snooze_colon">Repetir por defecto:</string>
     <string name="re_raise_every_x_minutes_if_unaknowledged">Reenviar cada \'x\' minutos\nsi no se ha reconocido:</string>
     <string name="alert_tone_colon">Tono de alerta:</string>
@@ -617,7 +617,7 @@
     <string name="reset_bluetooth">Resetear Bluetooth apagándolo y encendiéndolo si no hay comunicación en 20 minutos</string>
     <string name="bluetooth_watchdog">Vigilante Bluetooth</string>
     <string name="reset_bluetooth_g5">Reinicializar Bluetooth apagándolo y encendiéndolo para intentar que G5 siga funcionando. Sin esto, el colector de G5 puede fallar.</string>
-    <string name="g5_bluetooth_watchdog">Vigilante Dex Bluetooth</string>
+    <string name="g5_bluetooth_watchdog">Vigilante Dexcom Bluetooth</string>
     <string name="close_gatt">Si el vigilante del Bluetooth se activa frecuentemente puede intentar desactivar esta opción para ver si ayuda</string>
     <string name="older_bluetooth_wakelocks">Wakelocks Bluetooth más antiguos que pueden consumir más batería pero que pueden ser necesarios para la recepción Bluetooth</string>
     <string name="reset_bluetooth_on_off">Reinicia el Bluetooth apagándolo y encendiéndolo cada pocos minutos. Seleccione esta opción sólo si estás realizando pruebas. Puede interrumpir cualquier otra cosa que utilice Bluetooth.</string>
@@ -712,7 +712,7 @@
     <string name="low_level_value">Valor de nivel bajo de diagnóstico/prototipo</string>
     <string name="transmitter_id">ID del transmisor Dexcom, ej: 12AB3</string>
     <string name="advanced_g5_settings">Configuraciones avanzadas de Dexcom para situaciones poco comunes</string>
-    <string name="g5_debug_settings">Configuración de depuración G5/G6/One</string>
+    <string name="g5_debug_settings">Configuración de depuración Dexcom</string>
     <string name="g5_scan_constantly">Algunos dispositivos funcionan mejor cuando buscan constantemente, otros no. Si la lectura es fiable cuando ésta configuración está desactivada, la duración de la batería debería aumentar. Normalmente es mejor mantener esto desactivo</string>
     <string name="scan_for_g5_constantly">Buscar el G5 constantemente</string>
     <string name="g5_force_ui_thread">Esto es crucial para que algunos dispositivos Android se conecten correctamente, pero puede causar que se pierdan lecturas cuando otras actividades intensivas de la interfaz del usuario estén en uso.</string>
@@ -750,7 +750,7 @@
     <string name="dexcom_test_mode_serial">Número de serie de 10 caracteres del modo de prueba</string>
     <string name="glucose_meters">Glucometros</string>
     <string name="glucose_meter_options">Opciones para glucometros inalambricos</string>
-    <string name="auto_connect_to_meter">Conectar y recuperar automáticamente los datos de un medidor de glucosa conforme a la norma, como el Contour Next One</string>
+    <string name="auto_connect_to_meter">Conectar y recuperar automáticamente los datos de un medidor de glucosa compatible con el estándar.</string>
     <string name="summary_use_nfc_meter">Descargar registros de glucosa del medidor NFC cuando xDrip está abierto</string>
     <string name="title_use_nfc_meter">Usar función NFC</string>
     <string name="use_bluetooth_meter">Usar glucometro Bluetooth</string>
@@ -970,7 +970,7 @@
     <string name="channel_name">Servicio en primer plano</string>
     <string name="code_accepted">Código aceptado</string>
     <string name="invalid_or_unsupported_code">Código no válido o no soportado!</string>
-    <string name="g6_sensor_code">Código del Sensor G6</string>
+    <string name="g6_sensor_code">Código del Sensor Dexcom</string>
     <string name="please_enter_printed_calibration_code">Introduzca el número del código de calibración impreso, 4 dígitos, por ejemplo: 5678</string>
     <string name="enable_update_checks">¿Habilitar comprobación de actualización?</string>
     <string name="you_can_easily_roll_back_dialog_msg">Con xDrip puedes volver fácilmente a las versiones anteriores con solo volver a ejecutar el instalador APK de la versión anterior en su carpeta de Descargas si no le gusta la nueva versión.\n\n¿Desea habilitar la comprobación de actualizaciones?</string>
@@ -1345,7 +1345,7 @@
     <string name="summary_clfollow_download_meals">Descargar comidas de CareLink</string>
     <string name="title_clfollow_download_notifications">Notificaciones</string>
     <string name="summary_clfollow_download_notifications">Descargar notificaciones de CareLink</string>
-    <string name="title_ob1_options">Configuración del colector OB1 G5/G6</string>
+    <string name="title_ob1_options">Configuración del colector OB1 Dexcom</string>
     <string name="summary_use_ob1_g5_collector_service">Reescritura completa, debería funcionar en Android 4.4-9, soporta modo nativo y más</string>
     <string name="title_use_ob1_g5_collector_service">Utilizar colector OB1</string>
     <string name="summary_ob1_g5_use_transmitter_alg">Utilizar algoritmo interno del transmisor para calcular valores de glucosa cuando sea posible.</string>
@@ -1369,7 +1369,7 @@
     <string name="summary_ob1_initiate_bonding_flag">El receptor OB1 puede iniciar la vinculación.</string>
     <string name="title_ob1_initiate_bonding_flag">Permitir que OB1 inicie vinculación</string>
     <string name="title_old_g5_options">Configuración del colector G5 antiguo</string>
-    <string name="title_g5g6_battery_options">Opciones de batería G5/G6/One</string>
+    <string name="title_g5g6_battery_options">Opciones de batería Dexcom</string>
     <string name="title_g5_battery_warning_level">Ajustar nivel de advertencia de la batería</string>
     <string name="title_plugins_and_features">\"Plug-ins\" y Características</string>
     <string name="title_color_heart_rate1">Monitor de ritmo cardíaco</string>
@@ -1381,8 +1381,8 @@
     <string name="title_xdrip_plus_graph_display_settings">Ajustes del Gráfico</string>
     <string name="summary_show_basal_line">Mostrar información de ROF desde el estado externo</string>
     <string name="title_show_basal_line">Mostrar ROF basal</string>
-    <string name="summary_show_g_prediction">Mostrar puntos de glucemia predictiva G6/G7</string>
-    <string name="title_show_g_prediction">Predicción G6/G7</string>
+    <string name="summary_show_g_prediction">Mostrar puntos de glucemia predictiva Dexcom</string>
+    <string name="title_show_g_prediction">Predicción Dexcom</string>
     <string name="summary_show_smb_icons">Despejar gráfico usando iconos de tratamiento para bolos pequeños</string>
     <string name="title_show_smb_icons">Mostrar iconos de micro bolos</string>
     <string name="summary_show_medtrum_secondary">Mostrar puntos de glucemia alternativos</string>
@@ -1484,8 +1484,8 @@
     <string name="category_falling_rising_bg">Glucemia Subiendo/Bajando</string>
     <string name="category_alert_prefs">Preferencias de alerta (para estas alertas)</string>
     <string name="summary_persistent_high_alert">Cuando está por encima del nivel alto durante mucho tiempo y no baja</string>
-    <string name="summary_persistent_high_threshold_link">Cuando se activa, el valor alto es el límite.\nCuando se desactiva, el límite es el valor especificado a continuación.</string>
-    <string name="title_persistent_high_threshold_link">Límite: Valor alto</string>
+    <string name="summary_persistent_high_threshold_link">Cuando se activa, el valor alto es el umbral.\nCuando se desactiva, el umbral es el valor especificado a continuación.</string>
+    <string name="title_persistent_high_threshold_link">Umbral: Valor alto</string>
     <string name="note_search_button">BUSCAR</string>
     <string name="all_note_button">TODO</string>
     <string name="title_full_screen_mode">Modo de pantalla completa</string>
@@ -1905,9 +1905,9 @@
     <string name="speak">Hablar</string>
     <string name="graph_note">Nota gráfica</string>
     <string name="reminder_alternate_title">Título alternativo de recordatorio</string>
-    <string name="default_xdrip_reminder_sound">Sonido de recordatorio xDrip+ por defecto</string>
-    <string name="custom_audio_file">Archivo de audio por defecto</string>
-    <string name="android_ringtone_alarm">Tono de Android / Alarma</string>
+    <string name="default_xdrip_reminder_sound">Sonido xDrip por defecto</string>
+    <string name="custom_audio_file">Archivo audio personalizado</string>
+    <string name="android_ringtone_alarm">Sonido de sistema</string>
     <string name="first_successful_connection_to_transmitter">"Primera conexión exitosa con el transmisor %1$s"</string>
     <string name="first_successful_connection_to_transmitter_em">"Primera conexión exitosa con el transmisor %1$s con mac %2$s"</string>
     <string name="sensor_expiring">Sensor caduca</string>
@@ -1922,7 +1922,6 @@
     <string name="high_alert_notification">"Alerta Glucosa Alta</string>
     <string name="low_alert_notification">Alerta Glucosa Baja</string>
     <string name="pref_I_understand_title">ENTIENDO Y ESTOY DE ACUERDO</string>
-    <string name="dexcom_transmitter">"Transmisor G6/G7/One/One+ "</string>
     <string name="sync_follower">Seguidor de xDrip+</string>
     <string name="libre_parched_app">Libre (App parcheada)</string>
     <string name="nightscout_follower">Seguidor de Nightscout</string>
@@ -1946,34 +1945,20 @@
     <string name="treatment_calibration_ask">Preguntarme cada vez</string>
     <string name="treatment_calibration_never">Nunca usarlas</string>
     <string name="treatment_calibration_always">Siempre usarlas</string>
-    <string name="alert_type_system">Sonido de sistema</string>
-    <string name="alert_type_custom">Archivo audio personalizado</string>
-    <string name="alert_type_default">Sonido xDrip por defecto</string>
     <string name="block_extremely">Enviar incluso señales extremadamente ruidosas</string>
     <string name="block_extreme">Bloquear solo ruido extremo</string>
     <string name="block_very_high">Bloquear ruido muy alto y peor</string>
     <string name="block_high">Bloquear ruido alto y peor</string>
-    <string name="show_trend_arrow">Mostrar flecha gráfica de tendencia</string>
     <string name="arrow_expressive">Flecha Expresiva</string>
     <string name="arrow_simple_white">Flecha Simple Blanca</string>
     <string name="arrow_simple_color">Flecha Simple Color</string>
     <string name="Arrow_candy_cane">Bastón de Caramelo</string>
     <string name="pref_I_understand_summery">xDrip+ NO DEBE UTILIZARSE PARA TOMAR DECISIONES MÉDICAS. ES SOLO UNA HERRAMIENTA DE INVESTIGACIÓN Y SE PROPORCIONA \"TAL CUAL\", SIN GARANTÍA DE NINGÚN TIPO, YA SEA EXPRESA O IMPLÍCITA, INCLUYENDO, PERO NO LIMITADO A, LAS GARANTÍAS IMPLÍCITAS DE COMERCIABILIDAD Y APTITUD PARA UN PROPÓSITO PARTICULAR. TODO EL RIESGO RELACIONADO CON LA CALIDAD Y EL RENDIMIENTO DEL PROGRAMA RECAE EN USTED. SI EL PROGRAMA RESULTA DEFECTUOSO, USTED ASUME EL COSTO DE TODOS LOS SERVICIOS, REPARACIONES O CORRECCIONES NECESARIOS.</string>
     <string name="importanttext">NO utilice ni confíe en este software ni en los materiales asociados para ningún propósito o decisión médica.\n\nNO confíe en este sistema para alarmas en tiempo real o datos críticos en tiempo oportuno.\n\nNO utilice ni confíe en este sistema para decisiones de tratamiento ni como sustituto del juicio profesional en atención médica.\n\nTodo el software y los materiales se han proporcionado únicamente con fines informativos como una prueba de concepto para explorar posibilidades de investigación futura.\n\nNo se hacen afirmaciones de idoneidad para ningún propósito y todo se proporciona "TAL CUAL". Cualquier parte del sistema puede fallar en cualquier momento.\n\nSiempre busque el consejo de un profesional de la salud calificado para cualquier pregunta médica.\n\nSiempre siga las instrucciones de su sensor de glucosa u otros dispositivos del fabricante cuando utilice cualquier equipo; no deje de usar el lector o receptor correspondiente, salvo que su médico lo indique.\n\nEste software no está asociado ni respaldado por ningún fabricante de equipos, y todas las marcas registradas pertenecen a sus respectivos propietarios.\n\nEl uso de este software es completamente bajo su propio riesgo.\n\nLos desarrolladores no han cobrado ningún cargo por el uso de este software.\n\nEste es un proyecto de código abierto que ha sido creado por voluntarios. El código fuente se publica de forma gratuita y abierta para que lo inspeccione y evalúe.\n\nAl utilizar este software y/o sitio web, usted acepta que tiene más de 18 años y que ha leído, entendido y aceptado todo lo anterior.\n</string>
-    <string name="wake_screen">Activar pantalla</string>
-    <string name="wake_screen_summary">Activar la pantalla durante las alertas. Podría desbloquear dispositivos que no tienen bloqueo de pantalla habilitado.</string>
-    <string name="avoid_scanning">Evitar escanear</string>
-    <string name="avoid_scanning_summary">Evitar escanear tanto como sea posible (reduce el uso de batería)</string>
     <string name="summary_dex_specified_slot" translatable="false">Especifique el espacio del transmisor manualmente; configurarlo incorrectamente evitará que se reciban lecturas.</string>
     <string name="title_dex_specified_slot" translatable="false">Número de espacio manual</string>
     <string name="how_far_back">¿Hasta cuándo?</string>
     <string name="nightscout_backfill_summary">Seleccione la fecha del registro más antiguo para enviar a Nightscout. ¡Use con precaución! </string>
-    <string name="tidepool_charging_title">Sólo durante la carga</string>
-    <string name="tidepool_charging_summary">Subir datos solo durante la carga</string>
-    <string name="tidepool_wifi_title">Sólo en Wifi</string>
-    <string name="tidepool_wifi_summary">Subir datos solo cuando estés conectado a una red sin medidor como Wifi</string>
-    <string name="tidepool_treatments_title">No subir tratamientos</string>
-    <string name="tidepool_treatments_summary">Subir únicamente datos de CGM para evitar duplicados con la carga manual de la bomba</string>
     <string name="tidepool_auth_title">Nueva autenticación</string>
     <string name="tidepool_auth_summary">Usar método de autenticación OpenID 2023</string>
     <string name="nfc_meter_title">Usar medidor NFC</string>
@@ -1981,7 +1966,7 @@
     <string name="scan_device_bt">"Iniciando escaneo\nVerifique que el medidor esté encendido. Para el emparejamiento, mantén presionado el botón de encendido del medidor hasta que parpadee en azul."</string>
     <string name="dexcom_status">Estado de Dexcom</string>
     <string name="classic_status_page">Estado General</string>
-    <string name="g6_status">Estado del Colector/Transmisor G6/G7/One/One+</string>
+    <string name="g6_status">Estado del Colector/Transmisor Dexcom</string>
     <string name="cloud_queues">Colas de subida a la nube</string>
     <string name="phone_service_state">Estado servicio Smartphone</string>
     <string name="phone_service_got_needed">Recibido a las</string>
@@ -2040,4 +2025,79 @@
     <string name="wake_up">Despertando</string>
     <string name="gvi">Índice de Variabilidad Glucémica:</string>
     <string name="pgs">Estado Glucémico del Paciente:</string>
+    <string name="active_alert_message">Alarma \"{0}\" activa. {1,choice,0#La alerta se volverá a activar a las|1#Alerta aplazada hasta} {2,time} ({3} minutos restantes)</string>
+    <string name="bluetooth_not_available">Bluetooth no está disponible</string>
+    <string name="bluetooth_disabled">Activa el Bluetooth e inténtalo nuevamente</string>
+    <string name="location_permission_missing">En Android 6.0 o superior se requiere permiso de ubicación. Implementa permisos en tiempo de ejecución</string>
+    <string name="location_services_disabled">Los servicios de ubicación deben estar activados en Android 6.0 o superior</string>
+    <string name="scan_failed_already_started">Ya se ha iniciado un escaneo con los mismos filtros</string>
+    <string name="scan_failed_application_registration_failed">Error al registrar la aplicación para el escaneo Bluetooth</string>
+    <string name="scan_failed_feature_unsupported">El escaneo con los parámetros especificados no es compatible</string>
+    <string name="scan_failed_internal_error">El escaneo falló debido a un error interno</string>
+    <string name="scan_failed_out_of_hardware_resources">No se puede iniciar el escaneo por falta de recursos de hardware</string>
+    <string name="undocumented_scan_throttle">Android 7+ no permite más escaneos. Inténtalo en %d segundos</string>
+    <string name="bluetooth_cannot_start">No se puede iniciar el escaneo</string>
+    <string name="sync_keeper">Buscando transmisor</string>
+    <string name="sync_keeper_value">Permanecer en esta página</string>
+    <string name="turn_sound_on">¡Activa el sonido!</string>
+    <string name="turn_sound_on_value">¡No escucharás la solicitud de emparejamiento si el volumen está bajo o el modo No molestar está activado!</string>
+    <string name="scanning_time">Tiempo de escaneo</string>
+    <string name="hard_reset_value">Intentando, por favor espere</string>
+    <string name="errors">Errores</string>
+    <string name="slowest_wakeup">Reactivación más lenta</string>
+    <string name="buggy_handset">Teléfono con errores</string>
+    <string name="buggy_handset_value">Usando solución alternativa</string>
+    <string name="watch_service_state">Estado del servicio del SmartWatch</string>
+    <string name="watch_service_state_value">El SmartWatch recibió la glucosa hace</string>
+    <string name="battery_info_unavailable">Información de batería no disponible</string>
+    <string name="battery_info_unavailable_value">Toca para actualizar</string>
+    <string name="resistance">Resistencia</string>
+    <string name="transmitter_status">Estado del transmisor</string>
+    <string name="shelf_life">Vida útil</string>
+    <string name="preemptive_restarts">Reinicios preventivos</string>
+    <string name="not_capable">No compatible</string>
+    <string name="disabled">Desactivado</string>
+    <string name="none_set">No establecido</string>
+    <string name="authed">Conectado</string>
+    <string name="dexcom_unbonded">Transmisor Dexcom desvinculado, cambia el modo del dispositivo para evitar el reemparejamiento con Dexcom.</string>
+    <string name="status_scan_devide">Iniciando escaneo\nAsegúrate de que el medidor esté encendido.\nPara emparejar un nuevo medidor, consulta el manual del dispositivo.</string>
+    <string name="stopped_scanning">Escaneo detenido</string>
+    <string name="glucose_record">Registro de glucosa</string>
+    <string name="paired">Emparejado</string>
+    <string name="sensor_reporting_failed">Error en la comunicación con el sensor</string>
+    <string name="dexcom_sensor_failed">ERROR DEL SENSOR DEXCOM</string>
+    <string name="sensor_failed_start">Fallo al iniciar el sensor</string>
+    <string name="sensor_failed">Error en el sensor</string>
+    <string name="session_stopped_ok">Sesión finalizada correctamente</string>
+    <string name="clock_error">Reloj no sincronizado u otro error</string>
+    <string name="session_failed_start">Fallo al iniciar la sesión</string>
+    <string name="start_dexcom_sensor">Iniciar sensor Dexcom</string>
+    <string name="summary_forecast_low_threshold_link">Cuando se activa, el valor bajo es el umbral.\nCuando se desactiva, el umbral es el valor especificado a continuación.</string>
+    <string name="title_forecast_low_threshold_link">Umbral: valor bajo</string>
+    <string name="summary_warn_nightscout_multi_site_upload_failure">xDrip vacía la cola de carga incluso si solo uno de los sitios carga con éxito, dejando otros incompletos. Esta opción te notifica para que puedas completar las cargas manualmente si es necesario.</string>
+    <string name="title_warn_nightscout_multi_site_upload_failure">Alerta por fallo de carga en múltiples sitios</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </resources>

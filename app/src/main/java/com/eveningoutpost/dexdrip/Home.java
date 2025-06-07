@@ -3575,7 +3575,8 @@ public class Home extends ActivityWithMenu implements ActivityCompat.OnRequestPe
 
     public void checkForUpdate(MenuItem myitem) {
         if (JoH.ratelimit("manual-update-check", 5)) {
-            toast(getString(R.string.checking_for_update));
+            JoH.static_toast_long(gs(R.string.checking_for_update));
+            // toast(getString(R.string.checking_for_update));
             UpdateActivity.last_check_time = -1;
             UpdateActivity.checkForAnUpdate(getApplicationContext(), true);
         }

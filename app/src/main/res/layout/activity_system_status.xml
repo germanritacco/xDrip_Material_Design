@@ -128,6 +128,7 @@
                 app:showIfTrue="@{ms.bluetooth()}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
                 android:orientation="horizontal"
                 android:paddingTop="10dp">
 
@@ -140,9 +141,9 @@
 
                 <TextView
                     android:id="@+id/connection_status"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
+                    android:paddingBottom="5dp"
                     android:paddingLeft="5dp"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
             </LinearLayout>
@@ -201,8 +202,8 @@
                 android:layout_gravity="center_horizontal"
                 android:paddingTop="10dp"
                 android:text="@string/other_notes"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="14sp" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                />
 
             <TextView
                 android:id="@+id/other_notes"
@@ -235,7 +236,6 @@
                         android:layout_height="match_parent"
                         android:layout_margin="5dp"
                         android:layout_weight="1"
-                        android:backgroundTint="@color/colorButton"
                         android:text="@string/restart_collector" />
 
                     <Button
@@ -246,7 +246,6 @@
                         android:layout_height="match_parent"
                         android:layout_margin="5dp"
                         android:layout_weight="1"
-                        android:backgroundTint="@color/colorButton"
                         android:text="@string/forget_device"
                         app:showIfTrue="@{ms.bluetooth()}" />
                 </LinearLayout>

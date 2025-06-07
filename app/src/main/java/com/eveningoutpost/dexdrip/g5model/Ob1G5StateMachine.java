@@ -736,7 +736,7 @@ public class Ob1G5StateMachine {
                                     parent.lastSensorStatus = parent.lastSensorState.getExtendedText();
                                 }
                             } else {
-                                final String msg = "Session Start Failed: " + session_start.message();
+                                final String msg = gs(R.string.session_failed_start) + ": " + session_start.message();
                                 parent.msg(msg);
                                 UserError.Log.ueh(TAG, msg);
                                 JoH.showNotification(devName() + " Start Failed", msg, null, Constants.G5_START_REJECT, true, true, false);
@@ -782,7 +782,7 @@ public class Ob1G5StateMachine {
                             final SessionStopRxMessage session_stop = (SessionStopRxMessage) data_packet.msg;
                             if (session_stop.isOkay()) {
                                 // TODO persist this
-                                final String msg = "Session Stopped Successfully: " + JoH.dateTimeText(session_stop.getSessionStart()) + " " + JoH.dateTimeText(session_stop.getSessionStop());
+                                final String msg = gs(R.string.session_stopped_ok) + ": " + JoH.dateTimeText(session_stop.getSessionStart()) + " " + JoH.dateTimeText(session_stop.getSessionStop());
                                 parent.msg(msg);
                                 UserError.Log.ueh(TAG, msg);
                                 if (parent.lastSensorState.sensorStarted()) {
@@ -1276,7 +1276,7 @@ public class Ob1G5StateMachine {
                     UserError.Log.wtf(TAG, "Cannot start G6 sensor as calibration code not set!");
                 } else {
                     UserError.Log.ueh(TAG, "Starting G6 sensor using calibration code: " + code);
-                    enqueueUniqueCommand(new SessionStartTxMessage(when, DexTimeKeeper.getDexTime(getTransmitterID(), when), code), "Start G6 Sensor");
+                    enqueueUniqueCommand(new SessionStartTxMessage(when, DexTimeKeeper.getDexTime(getTransmitterID(), when), code), gs(R.string.start_dexcom_sensor));
                 }
 
             } else {
@@ -1544,7 +1544,7 @@ public class Ob1G5StateMachine {
             // TODO this is duplicated in processCalibrationState()
             if (glucose.calibrationState().sensorFailed() && Sensor.isActive()) {
                 if (JoH.pratelimit("G5 Sensor Failed", 3600 * 3)) {
-                    JoH.showNotification(devName() + " SENSOR FAILED", "Sensor reporting failed", null, Constants.G5_SENSOR_ERROR, true, true, false);
+                    JoH.showNotification(gs(R.string.dexcom_sensor_failed), gs(R.string.sensor_reporting_failed), null, Constants.G5_SENSOR_ERROR, true, true, false);
                 }
             }
         }

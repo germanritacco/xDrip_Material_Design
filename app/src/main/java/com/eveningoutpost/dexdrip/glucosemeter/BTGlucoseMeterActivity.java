@@ -36,6 +36,7 @@ import com.eveningoutpost.dexdrip.utils.LocationHelper;
 import java.util.ArrayList;
 
 import static com.eveningoutpost.dexdrip.services.BluetoothGlucoseMeter.start_forget;
+import static com.eveningoutpost.dexdrip.xdrip.gs;
 
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
@@ -377,7 +378,7 @@ public class BTGlucoseMeterActivity extends ListActivityWithMenu {
             }
 
             viewHolder.deviceName.setText(deviceName);
-            viewHolder.deviceAddress.setText(device.address + (is_bonded ? "   " + "Paired" : ""));
+            viewHolder.deviceAddress.setText(device.address + (is_bonded ? "   " + gs(R.string.paired) : ""));
             return view;
         }
     }

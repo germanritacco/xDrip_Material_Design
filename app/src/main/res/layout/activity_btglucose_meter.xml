@@ -20,7 +20,7 @@
         android:layout_alignParentStart="true"
         android:id="@+id/btg_scan_status"
         android:layout_alignParentEnd="true"
-        android:layout_height="70dp"
+        android:layout_height="wrap_content"
         android:textColor="@color/yellow100" />
 
     <View

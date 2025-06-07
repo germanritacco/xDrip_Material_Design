@@ -39,7 +39,7 @@ public enum CalibrationState {
     SensorFailed4(0x13, "Sensor Failed 4"),
     SensorFailed5(0x14, "Sensor Failed 5"),
     SensorFailed6(0x15, "Sensor Failed 6"),
-    SensorFailedStart(0x16, "Sensor Failed Start"),
+    SensorFailedStart(0x16, gs(R.string.sensor_failed_start)),
     SensorFailedStart2(0x17, "Sensor Failed Start 2"),
     SensorExpired(0x18, gs(R.string.sensor_expired_2)),
     SensorFailed7(0x19, "Sensor Failed 7"), // apparently not a failure state

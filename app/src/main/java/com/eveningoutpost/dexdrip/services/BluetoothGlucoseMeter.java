@@ -59,6 +59,7 @@ import static com.eveningoutpost.dexdrip.glucosemeter.VerioHelper.VERIO_F7A2_WRI
 import static com.eveningoutpost.dexdrip.glucosemeter.VerioHelper.VERIO_F7A3_NOTIFICATION;
 import static com.eveningoutpost.dexdrip.models.CalibrationRequest.isSlopeFlatEnough;
 import static com.eveningoutpost.dexdrip.utilitymodels.BgGraphBuilder.unitized_string_with_units_static;
+import static com.eveningoutpost.dexdrip.xdrip.gs;
 
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
@@ -696,7 +697,7 @@ public class BluetoothGlucoseMeter extends Service {
                 if (JoH.quietratelimit("mark-meter-device-success", 10)) {
                     markDeviceAsSuccessful(gatt);
                 }
-                statusUpdate("Glucose Record: " + JoH.dateTimeText((gtb.time - ct.timediff) + gtb.offsetMs()) + "\n" + unitized_string_with_units_static(gtb.mgdl));
+                statusUpdate(gs(R.string.glucose_record) + ": " + JoH.dateTimeText((gtb.time - ct.timediff) + gtb.offsetMs()) + "\n" + unitized_string_with_units_static(gtb.mgdl));
 
                 if (playSounds() && JoH.ratelimit("bt_meter_data_in", 1))
                     JoH.playResourceAudio(R.raw.bt_meter_data_in);
@@ -721,7 +722,7 @@ public class BluetoothGlucoseMeter extends Service {
                 if (gtb != null) {
                     // if this was a BG reading we could process (offset already pre-calculated in time) - not robust against meter clock changes
                     markDeviceAsSuccessful(gatt);
-                    statusUpdate("Glucose Record: " + JoH.dateTimeText((gtb.time + gtb.offsetMs())) + "\n" + unitized_string_with_units_static(gtb.mgdl));
+                    statusUpdate(gs(R.string.glucose_record) + ": " + JoH.dateTimeText((gtb.time + gtb.offsetMs())) + "\n" + unitized_string_with_units_static(gtb.mgdl));
 
                     if (playSounds() && JoH.ratelimit("bt_meter_data_in", 1))
                         JoH.playResourceAudio(R.raw.bt_meter_data_in);
@@ -1026,7 +1027,7 @@ public class BluetoothGlucoseMeter extends Service {
 
     private void scanLeDevice(final boolean enable) {
         final boolean force_old = true;
-        statusUpdate(enable ? "Starting Scanning" + "\nMake sure meter is turned on - For pairing hold the meter power button until it flashes blue" : "Stopped Scanning");
+        statusUpdate(enable ? gs(R.string.status_scan_devide) : gs(R.string.stopped_scanning));
         if (enable) {
             JoH.runOnUiThreadDelayed(new Runnable() {
                 @Override
