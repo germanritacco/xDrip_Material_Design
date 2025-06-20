@@ -1959,8 +1959,6 @@
     <string name="title_dex_specified_slot" translatable="false">Número de espacio manual</string>
     <string name="how_far_back">¿Hasta cuándo?</string>
     <string name="nightscout_backfill_summary">Seleccione la fecha del registro más antiguo para enviar a Nightscout. ¡Use con precaución! </string>
-    <string name="tidepool_auth_title">Nueva autenticación</string>
-    <string name="tidepool_auth_summary">Usar método de autenticación OpenID 2023</string>
     <string name="nfc_meter_title">Usar medidor NFC</string>
     <string name="nfc_meter_summary">Descargar registros de glucosa del medidor NFC cuando xDrip está abierto</string>
     <string name="scan_device_bt">"Iniciando escaneo\nVerifique que el medidor esté encendido. Para el emparejamiento, mantén presionado el botón de encendido del medidor hasta que parpadee en azul."</string>

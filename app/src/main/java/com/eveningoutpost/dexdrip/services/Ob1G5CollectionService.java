@@ -2178,10 +2178,11 @@ public class Ob1G5CollectionService extends G5BaseService {
         }
 
         if (static_last_connected > 0) {
-            l.add(new StatusItem(gs(R.string.last_connected), gs(R.string.ago) + " " + niceTimeScalar(msSince(static_last_connected))));
+            long since = msSince(static_last_connected);
+            l.add(new StatusItem(gs(R.string.last_connected), gs(R.string.ago) + " " + niceTimeScalar(since), since < MINUTE_IN_MS * 5 ? Highlight.NORMAL : NOTICE));
         }
 
-        if ((!lastState.startsWith("Serv-ice Stopped")) && (!lastState.startsWith("Not running")))
+        if ((!lastState.startsWith("Service Stopped")) && (!lastState.startsWith("Not running")))
             l.add(new StatusItem(gs(R.string.brain_state), state.getString() + (error_count > 1 ? " " + gs(R.string.errors) + ": " + error_count : ""), error_count > 1 ? NOTICE : error_count > 4 ? BAD : NORMAL));
 
         if (lastUsableGlucosePacketTime != 0) {

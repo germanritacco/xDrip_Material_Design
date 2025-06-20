@@ -328,11 +328,6 @@
                     android:key="tidepool_no_treatments"
                     android:summary="@string/summary_tidepool_upload_no_treatment"
                     android:title="@string/title_tidepool_upload_no_treatment" />
-                <CheckBoxPreference
-                    android:defaultValue="false"
-                    android:key="tidepool_new_auth"
-                    android:summary="@string/tidepool_auth_summary"
-                    android:title="@string/tidepool_auth_title" />
 
             </PreferenceScreen>
 

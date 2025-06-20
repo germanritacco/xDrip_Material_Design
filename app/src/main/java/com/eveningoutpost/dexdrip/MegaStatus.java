@@ -171,11 +171,7 @@ public class MegaStatus extends FloatingLocaleActivityWithScreenshot {
                 addAsection(G4_STATUS, "Bluetooth Collector Status");
             }
             if (dexCollectionType.equals(DexcomG5)) {
-                if (Pref.getBooleanDefaultFalse(Ob1G5CollectionService.OB1G5_PREFS)) {
-                    addAsection(gs(R.string.dexcom_status), gs(R.string.g6_status));
-                } else {
-                    addAsection(G5_STATUS, "G5 Collector and Transmitter Status");
-                }
+                addAsection(gs(R.string.dexcom_status), gs(R.string.g6_status));
             } else if (dexCollectionType.equals(Medtrum)) {
                 addAsection(MEDTRUM_STATUS, "Medtrum A6 Status");
             }
