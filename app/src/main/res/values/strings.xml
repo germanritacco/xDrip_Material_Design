@@ -2145,6 +2145,7 @@
     <string name="clock_error">Clock not synchronized or other error</string>
     <string name="session_failed_start">Session Start Failed</string>
     <string name="start_dexcom_sensor">Start Dexcom Sensor</string>
+    <string name="got_data_from">Got data from</string>
 
 
 

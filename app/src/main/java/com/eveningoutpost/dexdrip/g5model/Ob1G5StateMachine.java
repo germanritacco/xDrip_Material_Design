@@ -806,7 +806,7 @@ public class Ob1G5StateMachine {
                             if (glucose.usable()) {
                                 parent.msg("Got " + devName() + " glucose");
                             } else {
-                                parent.msg("Got data from " + devName());
+                                parent.msg(gs(R.string.got_data_from) + " " + devName());
                             }
 
                             glucoseRxCommon(glucose, parent, connection);
@@ -820,7 +820,7 @@ public class Ob1G5StateMachine {
                             if (eglucose.usable()) {
                                 parent.msg("Got G6 glucose");
                             } else {
-                                parent.msg("Got data from G6");
+                                parent.msg(gs(R.string.got_data_from) + " G6");
                             }
 
                             glucoseRxCommon(eglucose, parent, connection);
