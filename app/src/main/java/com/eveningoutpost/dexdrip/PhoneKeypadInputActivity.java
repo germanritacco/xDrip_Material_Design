@@ -2,8 +2,10 @@ package com.eveningoutpost.dexdrip;
 
 import static com.eveningoutpost.dexdrip.Home.startHomeWithExtra;
 
+import android.app.TimePickerDialog;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.eveningoutpost.dexdrip.models.JoH;
 import com.eveningoutpost.dexdrip.utilitymodels.PersistentStore;
@@ -23,6 +26,7 @@ import com.eveningoutpost.dexdrip.wearintegration.WatchUpdaterService;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -46,6 +50,8 @@ public class PhoneKeypadInputActivity extends BaseActivity {
             bloodtesttabbutton, timetabbutton, speakbutton;
 
     private static String currenttab = "insulin-1";
+    private static String previoustab = "insulin-1";
+    private static String previousAppend = "";
     private static final String LAST_TAB_STORE = "phone-keypad-treatment-last-tab";
     private static final String TAG = "KeypadInput";
     private static Map<String, String> values = new HashMap<String, String>();
@@ -54,6 +60,7 @@ public class PhoneKeypadInputActivity extends BaseActivity {
     private Insulin insulinProfile2 = null;
     private Insulin insulinProfile3 = null;
     private LinearLayout insulinTypesSection = null;
+    private String timeValue = "";
 
     private final boolean multipleInsulins = MultipleInsulins.isEnabled();
 
@@ -189,6 +196,7 @@ public class PhoneKeypadInputActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 currenttab = currenttab.split("-")[0] + "-1";
+                previoustab = currenttab;
                 updateTab();
             }
         });
@@ -197,6 +205,7 @@ public class PhoneKeypadInputActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 currenttab = currenttab.split("-")[0] + "-2";
+                previoustab = currenttab;
                 updateTab();
             }
         });
@@ -205,6 +214,7 @@ public class PhoneKeypadInputActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 currenttab = currenttab.split("-")[0] + "-3";
+                previoustab = currenttab;
                 updateTab();
             }
         });
@@ -260,6 +270,7 @@ public class PhoneKeypadInputActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 currenttab = "bloodtest";
+                previoustab = currenttab;
                 updateTab();
             }
         });
@@ -267,6 +278,7 @@ public class PhoneKeypadInputActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 currenttab = "insulin-1";
+                previoustab = currenttab;
                 updateTab();
             }
         });
@@ -274,6 +286,7 @@ public class PhoneKeypadInputActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 currenttab = "carbs";
+                previoustab = currenttab;
                 updateTab();
             }
         });
@@ -367,17 +380,18 @@ public class PhoneKeypadInputActivity extends BaseActivity {
             return;
         }
 
+        /*
         if (isInvalidTime()) {
             Log.d(TAG, "Time value is invalid - not processing button click");
             return;
         }
-
 
         // Add the dot to the time if it is missing
         String timeValue = getValue("time");
         if (timeValue.length() > 2 && !timeValue.contains(".")) {
             timeValue = timeValue.substring(0, timeValue.length() - 2) + "." + timeValue.substring(timeValue.length() - 2);
         }
+        */
 
         String mystring = "";
         double units = 0;
@@ -476,6 +490,7 @@ public class PhoneKeypadInputActivity extends BaseActivity {
                         multiButton2.setBackgroundColor(onColor);
                         if (insulinProfile2 == null) {
                             currenttab = "insulin-1";
+                            previoustab = currenttab;
                             updateTab();
                         } else
                             insulinprofile = insulinProfile2.getName();
@@ -484,24 +499,53 @@ public class PhoneKeypadInputActivity extends BaseActivity {
                         multiButton3.setBackgroundColor(onColor);
                         if (insulinProfile3 == null) {
                             currenttab = "insulin-2";
+                            previoustab = currenttab;
                             updateTab();
                         } else
                             insulinprofile = insulinProfile3.getName();
                         break;
                 }
                 append = " " + getString(R.string.units) + (multipleInsulins ? (" " + insulinprofile) : "");
+                previousAppend = append;
                 break;
             case "carbs":
                 carbstabbutton.setBackgroundColor(onColor);
                 append = " g " + getString(R.string.carbs);
+                previousAppend = append;
                 break;
             case "bloodtest":
                 bloodtesttabbutton.setBackgroundColor(onColor);
                 append = " " + bgUnits;
+                previousAppend = append;
                 break;
             case "time":
                 timetabbutton.setBackgroundColor(onColor);
-                append = " " + getString(R.string.when);
+
+                // New Time Picker Code
+
+                // Get Current Time
+                Calendar calendar = Calendar.getInstance();
+                int currentHour = calendar.get(Calendar.HOUR_OF_DAY);
+                int currentMinute = calendar.get(Calendar.MINUTE);
+
+                TimePickerDialog mTimePicker = new TimePickerDialog(this,
+                        android.R.style.Theme_Material_Dialog_Alert,
+                        new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                                timeValue = String.format(Locale.getDefault(), "%02d.%02d", selectedHour, selectedMinute);
+                            }
+                        },
+                        currentHour,
+                        currentMinute,
+                        DateFormat.is24HourFormat(this)
+                );
+                //mTimePicker.setTitle(getString(R.string.select_time));
+                mTimePicker.show();
+
+                append = previousAppend;
+                currenttab = previoustab;
+                updateTab();
                 break;
         }
         String value = getValue(currenttab);
@@ -509,11 +553,8 @@ public class PhoneKeypadInputActivity extends BaseActivity {
         // show green tick
         boolean showSubmitButton;
 
-        if (isInvalidTime())
-            showSubmitButton = false;
-
-        else if (currenttab.equals("time"))
-            showSubmitButton = value.length() > 0 && (isNonzeroValueInTab("bloodtest") || isNonzeroValueInTab("carbs") || isNonzeroValueInTab("insulin-1") || isNonzeroValueInTab("insulin-2") || isNonzeroValueInTab("insulin-3"));
+        if (currenttab.equals("time"))
+            showSubmitButton = (isNonzeroValueInTab("bloodtest") || isNonzeroValueInTab("carbs") || isNonzeroValueInTab("insulin-1") || isNonzeroValueInTab("insulin-2") || isNonzeroValueInTab("insulin-3"));
         else
             showSubmitButton = isNonzeroValueInTab(currenttab);
 
@@ -529,6 +570,7 @@ public class PhoneKeypadInputActivity extends BaseActivity {
             // snap back to insulin-1 tab if we have saved position on multiple insulins tabs
             if (currenttab.equals("insulin-2") || currenttab.equals("insulin-3")) {
                 currenttab = "insulin-1";
+                previoustab = currenttab;
             }
         }
         updateTab();
