@@ -2075,5 +2075,8 @@
     <string name="summary_warn_nightscout_multi_site_upload_failure">xDrip vacía la cola de carga incluso si solo uno de los sitios carga con éxito, dejando otros incompletos. Esta opción te notifica para que puedas completar las cargas manualmente si es necesario.</string>
     <string name="title_warn_nightscout_multi_site_upload_failure">Alerta por fallo de carga en múltiples sitios</string>
     <string name="got_data_from">Datos recibidos de</string>
+    <string name="title_collector_in_foreground">Colector en primer plano</string>
+    <string name="summary_compact_ongoing_notification">Activar para ocultar el gráfico en la notificación y mostrar solo el valor actual de glucosa.</string>
+    <string name="title_compact_ongoing_notification">Notificación Persistente Compacta</string>
 
 </resources>

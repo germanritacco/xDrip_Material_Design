@@ -1581,8 +1581,8 @@
                     android:defaultValue="true"
                     android:dependency="engineering_mode"
                     android:key="use_proper_ongoing"
-                    android:summary="Use proper ongoing notification. Disabling this causes collector problems on Android 8+"
-                    android:title="Proper ongoing" />
+                    android:summary="@string/proper_ongoing_summary"
+                    android:title="@string/proper_ongoing_title" />
                 <CheckBoxPreference
                     android:defaultValue="false"
                     android:key="external_blukon_algorithm"
