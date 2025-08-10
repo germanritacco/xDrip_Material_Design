@@ -235,13 +235,14 @@ android {
 
     applicationVariants.all { variant ->
         variant.outputs.all { output ->
-            def appName = "xDrip+"
+            def appName = "xDrip-plus"
             def buildType = variant.buildType.name
             def flavorName = variant.flavorName ? "-${variant.flavorName}" : ""
             def versionName = variant.versionName
-            def versionCode = variant.versionCode
+            // def versionCode = variant.versionCode
 
-            outputFileName = "${appName}${flavorName}-${buildType}-v${versionName}(${versionCode}).apk"
+            // outputFileName = "${appName}${flavorName}-${buildType}-v${versionName}(${versionCode}).apk"
+            outputFileName = "${appName}${flavorName}-${buildType}-v${versionName}.apk"
         }
     }
 
