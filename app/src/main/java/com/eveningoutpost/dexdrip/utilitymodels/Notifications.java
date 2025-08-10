@@ -70,6 +70,7 @@ public class Notifications extends IntentService {
     //public static boolean bg_vibrate;
    // public static boolean bg_lights;
    // public static boolean bg_sound;
+    public static boolean compact_persistent_notification;
     public static boolean bg_sound_in_silent;
     public static String bg_notification_sound;
 
@@ -172,6 +173,7 @@ public class Notifications extends IntentService {
         smart_snoozing = prefs.getBoolean("smart_snoozing", true);
         smart_alerting = prefs.getBoolean("smart_alerting", true);
         bg_ongoing = prefs.getBoolean("run_service_in_foreground", false);
+        compact_persistent_notification = Pref.getBooleanDefaultFalse("compact_persistent_notification");
     }
 
 /*
@@ -310,7 +312,7 @@ public class Notifications extends IntentService {
         final long start = end - (60000 * 60 * 3) - (60000 * 10);
         BgGraphBuilder bgGraphBuilder = new BgGraphBuilder(context, start, end);
         //BgGraphBuilder bgGraphBuilder = new BgGraphBuilder(context);
-        if (bg_ongoing && (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN)) {
+        if (bg_ongoing) {
             bgOngoingNotification(bgGraphBuilder);
         }
         if (prefs.getLong("alerts_disabled_until", 0) > new Date().getTime()) {
@@ -594,51 +596,49 @@ public class Notifications extends IntentService {
         //final Notification.Builder b = new Notification.Builder(mContext); // temporary fix until ONGOING CHANNEL is silent by default on android 8+
         final Notification.Builder b;
         if (useOngoingChannel() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            b = new Notification.Builder(mContext, NotificationChannels.LOW_BRIDGE_BATTERY_CHANNEL);
+            b = new Notification.Builder(mContext, NotificationChannels.ONGOING_CHANNEL);
             b.setSound(null);
         } else {
             b = new Notification.Builder(mContext);
         }
         b.setOngoing(Pref.getBoolean("use_proper_ongoing", true));
         try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                b.setGroup("xDrip ongoing");
-            }
+            b.setGroup("xDrip ongoing");
         } catch (Exception e) {
             //
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            b.setVisibility(Pref.getBooleanDefaultFalse("public_notifications") ? Notification.VISIBILITY_PUBLIC : Notification.VISIBILITY_PRIVATE);
-            b.setCategory(NotificationCompat.CATEGORY_SYSTEM);
-            b.setCategory(Notification.CATEGORY_SYSTEM);
-        }
+        b.setVisibility(Pref.getBooleanDefaultFalse("public_notifications") ? Notification.VISIBILITY_PUBLIC : Notification.VISIBILITY_PRIVATE);
+        b.setCategory(NotificationCompat.CATEGORY_STATUS);
         if (Pref.getBooleanDefaultFalse("high_priority_notifications")) {
-            b.setPriority(Notification.PRIORITY_MAX);
-            b.setPriority(NotificationCompat.PRIORITY_MAX);
+            b.setPriority(Notification.PRIORITY_HIGH);
         }
         final BestGlucose.DisplayGlucose dg = (use_best_glucose) ? BestGlucose.getDisplayGlucose() : null;
         final boolean use_color_in_notification = false; // could be preference option
         final SpannableString titleString = new SpannableString(lastReading == null ? gs(R.string.bg_reading_unavailable) : (dg != null) ? (dg.spannableString(dg.unitized + " " + dg.delta_arrow,use_color_in_notification))
                 : (lastReading.displayValue(mContext) + " " + lastReading.slopeArrow()));
-        b.setContentTitle(titleString)
-                .setContentText(gs(R.string.collection_service_running))
-                .setSmallIcon(R.drawable.rounded_invert_colors_24)
-                .setUsesChronometer(false);
+        if (!compact_persistent_notification) {
+            b.setContentTitle(titleString)
+                    .setContentText("xDrip Data collection service is running.")
+                    .setSmallIcon(R.drawable.ic_action_communication_invert_colors_on)
+                    .setUsesChronometer(false);
+        } else {
+            b.setSmallIcon(R.drawable.ic_action_communication_invert_colors_on)
+                    .setUsesChronometer(false);
+        }
 
         Bitmap numberIcon = null;
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            // in case the graphic crashes the system-ui we wont do it immediately after reboot so the
-            // user has a chance to disable the feature
-            if (SystemClock.uptimeMillis() > Constants.MINUTE_IN_MS * 15) {
-                if (NumberGraphic.numberIconEnabled()) {
-                    if ((dg != null) && (!dg.isStale())) {
-                        final Bitmap icon_bitmap = NumberGraphic.getSmallIconBitmap(dg.unitized);
-                        if (icon_bitmap != null) b.setSmallIcon(Icon.createWithBitmap(icon_bitmap));
-
-                    }
+        // in case the graphic crashes the system-ui we wont do it immediately after reboot so the
+        // user has a chance to disable the feature
+        if (SystemClock.uptimeMillis() > Constants.MINUTE_IN_MS * 15) {
+            if (NumberGraphic.numberIconEnabled()) {
+                if ((dg != null) && (!dg.isStale())) {
+                    final Bitmap icon_bitmap = NumberGraphic.getSmallIconBitmap(dg.unitized);
+                    if (icon_bitmap != null) b.setSmallIcon(Icon.createWithBitmap(icon_bitmap));
                 }
+            }
 
+            if (!compact_persistent_notification) {
                 if (NumberGraphic.largeWithArrowEnabled()) {
                     if ((dg != null) && (!dg.isStale())) {
                         numberIcon = NumberGraphic.getLargeWithArrowBitmap(dg.unitized, dg.delta_arrow);
@@ -652,26 +652,26 @@ public class Notifications extends IntentService {
         }
 
         if (lastReading != null) {
+            if (!compact_persistent_notification) {
 
-            b.setWhen(lastReading.timestamp);
-            b.setShowWhen(true);
+                b.setWhen(lastReading.timestamp);
+                b.setShowWhen(true);
 
-            final SpannableString deltaString = new SpannableString("Delta: " + ((dg != null) ? (dg.spannableString(dg.unitized_delta + (dg.from_plugin ? " "+context.getString(R.string.p_in_circle) : "")))
-                    : bgGraphBuilder.unitizedDeltaString(true, true)));
+                final SpannableString deltaString = new SpannableString("Delta: " + ((dg != null) ? (dg.spannableString(dg.unitized_delta + (dg.from_plugin ? " " + context.getString(R.string.p_in_circle) : "")))
+                        : bgGraphBuilder.unitizedDeltaString(true, true)));
 
-            b.setContentText(deltaString);
+                b.setContentText(deltaString);
 
-            notifiationBitmap = new BgSparklineBuilder(mContext)
-                    .setBgGraphBuilder(bgGraphBuilder)
-                    .showHighLine()
-                    .showLowLine()
-                    .setStart(System.currentTimeMillis() - 60000 * 60 * 3)
-                    .showAxes(true)
-                    .setBackgroundColor(getCol(X.color_notification_chart_background))
-                    .setShowFiltered(DexCollectionType.hasFiltered() && Pref.getBooleanDefaultFalse("show_filtered_curve"))
-                    .build();
+                notifiationBitmap = new BgSparklineBuilder(mContext)
+                        .setBgGraphBuilder(bgGraphBuilder)
+                        .showHighLine()
+                        .showLowLine()
+                        .setStart(System.currentTimeMillis() - 60000 * 60 * 3)
+                        .showAxes(true)
+                        .setBackgroundColor(getCol(X.color_notification_chart_background))
+                        .setShowFiltered(DexCollectionType.hasFiltered() && Pref.getBooleanDefaultFalse("show_filtered_curve"))
+                        .build();
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 Notification.DecoratedCustomViewStyle customViewStyle = new Notification.DecoratedCustomViewStyle();
 
                 iconBitmap = numberIcon != null ? numberIcon : new BgSparklineBuilder(mContext)
@@ -696,29 +696,12 @@ public class Notifications extends IntentService {
                 b.setStyle(customViewStyle)
                         .setCustomContentView(collapsedViews)
                         .setCustomBigContentView(expandedViews);
-            } else {
-                iconBitmap = numberIcon != null ? numberIcon : new BgSparklineBuilder(mContext)
-                        .setHeight(64)
-                        .setWidth(64)
-                        .setStart(System.currentTimeMillis() - 60000 * 60 * 3)
-                        .setBgGraphBuilder(bgGraphBuilder)
-                        .setBackgroundColor(getCol(X.color_notification_chart_background))
-                        .build();
-                b.setLargeIcon(iconBitmap);
-
-                Notification.BigPictureStyle bigPictureStyle = new Notification.BigPictureStyle();
-                bigPictureStyle.bigPicture(notifiationBitmap)
-                        .setSummaryText(deltaString)
-                        .setBigContentTitle(titleString);
-                b.setStyle(bigPictureStyle);
             }
         }
 
         b.setContentIntent(resultPendingIntent);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
-            b.setLocalOnly(true);
-            b.setOnlyAlertOnce(true);
-        }
+        b.setLocalOnly(true);
+        b.setOnlyAlertOnce(true);
         // strips channel ID if disabled
         return XdripNotification.build(b);
     }
@@ -905,8 +888,9 @@ public class Notifications extends IntentService {
     }
 
     public static void bgMissedAlert(Context context) {
-        long otherAlertReraiseSec = MissedReadingService.getOtherAlertReraiseSec(context, "bg_missed_alerts");
-        OtherAlert(context, "bg_missed_alerts", context.getString(R.string.bg_reading_missed_title), context.getString(R.string.bg_reading_missed) + "  (" + JoH.hourMinuteString() + "Hs)", missedAlertNotificationId, NotificationChannels.BG_MISSED_ALERT_CHANNEL, true, otherAlertReraiseSec);
+        final String type = "bg_missed_alerts";
+        long otherAlertReraiseSec = MissedReadingService.getOtherAlertReraiseSec(context, type);
+        OtherAlert(context, type, context.getString(R.string.bg_reading_missed_title), context.getString(R.string.bg_reading_missed) + "  (" + JoH.hourMinuteString() + "Hs)", missedAlertNotificationId, NotificationChannels.BG_MISSED_ALERT_CHANNEL, true, otherAlertReraiseSec);
     }
 
     public static void ob1SessionRestartRequested() {
