@@ -101,14 +101,22 @@ public class StatsActivity extends ActivityWithMenu {
         final Activity activity = this;
 
         JoH.runOnUiThreadDelayed(new Runnable() {
-            @Override
-            public void run() {
-                final ShowcaseView myShowcase = new ShowcaseView.Builder(activity)
-                        .setTarget(target).setStyle(R.style.CustomShowcaseTheme2).setContentTitle(title).setContentText("\n" + message).setShowcaseDrawer(new JamorhamShowcaseDrawer(getResources(), getTheme(), size1, size2)).singleShot(oneshot ? option : -1).build();
-                myShowcase.setBackgroundColor(Color.TRANSPARENT);
-                myShowcase.show();
-            }
-        }, 3000);
+                                     @Override
+                                     public void run() {
+                                         final ShowcaseView myShowcase = new ShowcaseView.Builder(activity)
+
+                                                 .setTarget(target)
+                                                 .setStyle(R.style.CustomShowcaseTheme2)
+                                                 .setContentTitle(title)
+                                                 .setContentText("\n" + message)
+                                                 .setShowcaseDrawer(new JamorhamShowcaseDrawer(getResources(), getTheme(), size1, size2))
+                                                 .singleShot(oneshot ? option : -1)
+                                                 .build();
+                                         myShowcase.setBackgroundColor(Color.TRANSPARENT);
+                                         myShowcase.show();
+                                     }
+                                 }
+                , 3000);
 
         // TextView tv = new TextView(this);
         //  tv.setText("Swipe left/right to switch between reports!");
@@ -189,54 +197,35 @@ public class StatsActivity extends ActivityWithMenu {
                 break;
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
-            ColorStateList csl = new ColorStateList(new int[][]{new int[0]}, new int[]{0xFF606060});
-            buttonTD.setBackgroundTintList(csl);
-            buttonYTD.setBackgroundTintList(csl);
-            button7d.setBackgroundTintList(csl);
-            button30d.setBackgroundTintList(csl);
-            button90d.setBackgroundTintList(csl);
-            csl = new ColorStateList(new int[][]{new int[0]}, new int[]{0xFFAA0000});
-            switch (state) {
-                case TODAY:
-                    buttonTD.setBackgroundTintList(csl);
-                    break;
-                case YESTERDAY:
-                    buttonYTD.setBackgroundTintList(csl);
-                    break;
-                case D7:
-                    button7d.setBackgroundTintList(csl);
-                    break;
-                case D30:
-                    button30d.setBackgroundTintList(csl);
-                    break;
-                case D90:
-                    button90d.setBackgroundTintList(csl);
-                    break;
-            }
-        } else {
-            buttonTD.setAlpha(0.5f);
-            buttonYTD.setAlpha(0.5f);
-            button7d.setAlpha(0.5f);
-            button30d.setAlpha(0.5f);
-            button90d.setAlpha(0.5f);
-            switch (state) {
-                case TODAY:
-                    buttonTD.setAlpha(1f);
-                    break;
-                case YESTERDAY:
-                    buttonYTD.setAlpha(1f);
-                    break;
-                case D7:
-                    button7d.setAlpha(1f);
-                    break;
-                case D30:
-                    button30d.setAlpha(1f);
-                    break;
-                case D90:
-                    button90d.setAlpha(1f);
-                    break;
-            }
+        ColorStateList csl = new ColorStateList(new int[][]{new int[0]}, new int[]{0xFF606060});
+        buttonTD.setBackgroundTintList(csl);
+        buttonYTD.setBackgroundTintList(csl);
+        button7d.setBackgroundTintList(csl);
+        button30d.setBackgroundTintList(csl);
+        button90d.setBackgroundTintList(csl);
+        TextView statsTimePeriodLabelText = findViewById(R.id.stats_time_period_label);
+        csl = new ColorStateList(new int[][]{new int[0]}, new int[]{0xFFAA0000});
+        switch (state) {
+            case TODAY:
+                buttonTD.setBackgroundTintList(csl);
+                statsTimePeriodLabelText.setText(R.string.today);
+                break;
+            case YESTERDAY:
+                buttonYTD.setBackgroundTintList(csl);
+                statsTimePeriodLabelText.setText(R.string.yesterday);
+                break;
+            case D7:
+                button7d.setBackgroundTintList(csl);
+                statsTimePeriodLabelText.setText(R.string.last_7_days);
+                break;
+            case D30:
+                button30d.setBackgroundTintList(csl);
+                statsTimePeriodLabelText.setText(R.string.last_30_days);
+                break;
+            case D90:
+                button90d.setBackgroundTintList(csl);
+                statsTimePeriodLabelText.setText(R.string.last_90_days);
+                break;
         }
     }
 
@@ -269,32 +258,35 @@ public class StatsActivity extends ActivityWithMenu {
         if (recreate) recreate();
     }
 
-    private void fullScreenHandler(boolean recreate) {
+    private void fullScreenHandler(boolean recreate)
+    {
         goFullScreen(Pref.getBooleanDefaultFalse(SHOW_STATISTICS_FULL_SCREEN), decorView);
         if ((recreate) && (!Pref.getBooleanDefaultFalse(SHOW_STATISTICS_FULL_SCREEN))) recreate();
     }
 
-    public void toggleStatisticsFullScreenMode(MenuItem m) {
+    public void toggleStatisticsFullScreenMode(MenuItem m)
+    {
         Pref.toggleBoolean(SHOW_STATISTICS_FULL_SCREEN);
         updateMenuChecked();
         fullScreenHandler(true);
     }
-
-    public void toggleStatisticsPrintingMode(MenuItem m) {
+    public void toggleStatisticsPrintingMode(MenuItem m)
+    {
         Pref.toggleBoolean(SHOW_STATISTICS_PRINT_COLOR);
         evaluateColors(true);
         updateMenuChecked();
     }
-
-    public void statisticsDisableFullScreen(View v) {
+    public void statisticsDisableFullScreen(View v)
+    {
         toggleStatisticsFullScreenMode(null);
     }
-
-    public void statisticsShare(View v) {
-        statisticsShare((MenuItem) null);
+    public void  statisticsShare(View v)
+    {
+      statisticsShare((MenuItem)null);
     }
 
-    public void statisticsShare(MenuItem m) {
+    public void statisticsShare(MenuItem m)
+    {
         try {
             if (checkPermissions()) {
                 final Activity context = this;
@@ -317,8 +309,13 @@ public class StatsActivity extends ActivityWithMenu {
 
     private boolean checkPermissions() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_PERMISSIONS_REQUEST_STORAGE_SCREENSHOT);
+            if (ContextCompat.checkSelfPermission(getApplicationContext(),
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        MY_PERMISSIONS_REQUEST_STORAGE_SCREENSHOT);
                 return false;
             }
         }

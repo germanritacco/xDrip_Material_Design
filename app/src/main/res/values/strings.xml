@@ -188,8 +188,7 @@
     <string name="signal_missed">Signal Missed</string>
     <string name="minutes_ago">{0, choice,0#{0, number, integer} Minutes ago|1#{0, number, integer} Minute ago|1&lt;{0, number, integer} Minutes ago}</string>
     <string name="expires_days">{0, choice,0#Sensor Expired!|1#Ends in {0, number} day|1&lt;Ends in {0, number} days}</string>
-    <string name="expires_at">Ends at {0}</string>
-    <string name="expires_on">Ends on {0}</string>
+    <string name="expires_at">Ends {0}</string>
     <string name="space_minutes_ago">" Minutes ago"</string>
     <string name="in_libre_all_house_mode_no_readings_collected_yet">"In Libre all house mode: no readings collected yet."</string>
     <string name="in_libre_all_house_mode_last_data_collected">"In Libre all house mode: Last reading "</string>
@@ -808,7 +807,7 @@
     <string name="calibrations_request_time_time_difference">How many hours between calibration requests</string>
     <string name="hours_between_calibrations">Hours between calibrations</string>
     <string name="calibrations_sound">Set sound used for calibration requests.</string>
-    <string name="override_silent_mode">Override Silent mode</string>
+    <string name="override_silent_mode">Override Silent Mode</string>
     <string name="not_override_silent_mode">No Alert in Silent Mode</string>
     <string name="even_when_charging">Even when charging</string>
     <string name="no_calibration_requests_charging">Uncheck to not ask for calibrations when phone is charging</string>
@@ -2152,4 +2151,9 @@
     <string name="proper_ongoing_title">Proper ongoing</string>
     <string name="proper_ongoing_summary">Use proper ongoing notification. Disabling this causes collector problems on Android 8+</string>
 
+    <string name="today">Today</string>
+    <string name="yesterday">Yesterday</string>
+    <string name="last_7_days">Last 7 days</string>
+    <string name="last_30_days">Last 30 days</string>
+    <string name="last_90_days">Last 90 days</string>
 </resources>
