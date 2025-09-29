@@ -532,7 +532,7 @@ public class Ob1G5CollectionService extends G5BaseService {
 
     private synchronized void initialize() {
         if (state == INIT) {
-            msg("Initializing");
+            msg(gs(R.string.initializing));
             static_connection_state = null;
             if (rxBleClient == null) {
                 //rxBleClient = RxBleClient.create(xdrip.getAppContext());

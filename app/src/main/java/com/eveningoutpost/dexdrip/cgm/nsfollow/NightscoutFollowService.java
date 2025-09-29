@@ -3,7 +3,9 @@ package com.eveningoutpost.dexdrip.cgm.nsfollow;
 import android.content.Intent;
 import android.os.IBinder;
 import android.os.PowerManager;
+
 import androidx.annotation.Nullable;
+
 import android.text.SpannableString;
 
 import com.eveningoutpost.dexdrip.models.BgReading;
@@ -34,11 +36,11 @@ import static com.eveningoutpost.dexdrip.xdrip.gs;
 
 /**
  * jamorham
- *
+ * <p>
  * Nightscout follower collection service
- *
+ * <p>
  * Handles Android wake up and polling schedule, decoupled from data transport
- *
+ * <p>
  * Extended by Asbjørn Aarrestad - asbjorn@aarrestad.com july 2019
  */
 public class NightscoutFollowService extends ForegroundService {
@@ -119,7 +121,7 @@ public class NightscoutFollowService extends ForegroundService {
 
     static void updateTreatmentDownloaded() {
         lastTreatment = Treatments.lastNotFromXdrip();
-        if(lastTreatment != null && lastTreatmentTime != lastTreatment.timestamp) {
+        if (lastTreatment != null && lastTreatmentTime != lastTreatment.timestamp) {
             treatmentReceivedDelay = JoH.msSince(lastTreatment.timestamp);
             lastTreatmentTime = lastTreatment.timestamp;
         }
@@ -183,7 +185,7 @@ public class NightscoutFollowService extends ForegroundService {
         // Status for treatments
         String ageLastTreatment = "n/a";
         String ageOfTreatmentWhenReceived = "n/a";
-        if(lastTreatment != null) {
+        if (lastTreatment != null) {
             long age = JoH.msSince(lastTreatment.timestamp);
             ageLastTreatment = JoH.niceTimeScalar(age);
             ageOfTreatmentWhenReceived = JoH.niceTimeScalar(treatmentReceivedDelay);
@@ -195,14 +197,14 @@ public class NightscoutFollowService extends ForegroundService {
         statuses.add(new StatusItem("Latest BG", ageLastBg + (lastBg != null ? " ago" : ""), bgAgeHighlight));
         statuses.add(new StatusItem("BG receive delay", ageOfBgLastPoll, ageOfLastBgPollHighlight));
 
-        if(NightscoutFollow.treatmentDownloadEnabled()) {
+        if (NightscoutFollow.treatmentDownloadEnabled()) {
             statuses.add(new StatusItem());
             statuses.add(new StatusItem("Latest Treatment", ageLastTreatment + (lastTreatment != null ? " ago" : "")));
             statuses.add(new StatusItem("Treatment receive delay", ageOfTreatmentWhenReceived));
         }
 
         statuses.add(new StatusItem());
-        statuses.add(new StatusItem("Last poll", lastPollText + (lastPoll > 0 ? " ago" : "")));
+        statuses.add(new StatusItem(gs(R.string.last_poll), (lastPoll > 0 ? gs(R.string.ago) + " " : "") + lastPollText));
         statuses.add(new StatusItem("Next poll in", JoH.niceTimeScalar(wakeup_time - JoH.tsl())));
         if (lastBg != null) {
             statuses.add(new StatusItem("Last BG time", JoH.dateTimeText(lastBg.timestamp)));

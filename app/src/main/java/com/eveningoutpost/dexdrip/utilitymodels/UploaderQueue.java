@@ -12,6 +12,7 @@ import com.activeandroid.annotation.Table;
 import com.activeandroid.query.Delete;
 import com.activeandroid.query.Select;
 import com.activeandroid.util.SQLiteUtils;
+import com.eveningoutpost.dexdrip.R;
 import com.eveningoutpost.dexdrip.models.BgReading;
 import com.eveningoutpost.dexdrip.models.BloodTest;
 import com.eveningoutpost.dexdrip.models.Calibration;
@@ -35,6 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.eveningoutpost.dexdrip.services.SyncService.startSyncService;
+import static com.eveningoutpost.dexdrip.xdrip.gs;
 
 /**
  * Created by jamorham on 15/11/2016.
@@ -123,7 +125,7 @@ public class UploaderQueue extends Model {
     @Column(name = "bitfield_complete", index = true)
     public long bitfield_complete;
 
-    //////////////////////////////////////////
+    /// ///////////////////////////////////////
 
     // patches and saves
     public Long saveit() {
@@ -144,7 +146,7 @@ public class UploaderQueue extends Model {
         return gson.toJson(this);
     }
 
-    //////////////////////////////////////////
+    /// ///////////////////////////////////////
 
     public static UploaderQueue newEntry(String action, Model obj) {
         UserError.Log.d(TAG, "new entry called");
@@ -192,15 +194,15 @@ public class UploaderQueue extends Model {
     }
 
     public static void newTransmitterDataEntry(String action, Model obj) {
-    	if(!Pref.getBooleanDefaultFalse("mongo_load_transmitter_data")) {
-    		return;
-    	}
-    	newEntry(action, obj);
-    	// For libre us sensors, we have a reading, it might not create a BG entry, but we still need
-    	// to upload it.
-    	startSyncService(3000); // sync in 3 seconds
+        if (!Pref.getBooleanDefaultFalse("mongo_load_transmitter_data")) {
+            return;
+        }
+        newEntry(action, obj);
+        // For libre us sensors, we have a reading, it might not create a BG entry, but we still need
+        // to upload it.
+        startSyncService(3000); // sync in 3 seconds
     }
-    
+
     // TODO remove duplicated functionality, replace with generic multi-purpose method
     public static UploaderQueue newEntryForWatch(String action, Model obj) {
         UserError.Log.d(TAG, "new entry called for watch");
@@ -439,7 +441,7 @@ public class UploaderQueue extends Model {
 
 
         if (last_query > 0)
-            l.add(new StatusItem("Last poll", JoH.niceTimeSince(last_query) + " ago", StatusItem.Highlight.NORMAL, "long-press",
+            l.add(new StatusItem(gs(R.string.last_poll), gs(R.string.ago) + " " + JoH.niceTimeSince(last_query), StatusItem.Highlight.NORMAL, "long-press",
                     new Runnable() {
                         @Override
                         public void run() {
@@ -531,7 +533,7 @@ public class UploaderQueue extends Model {
         ///
 
         if (NightscoutUploader.last_exception_count > 0) {
-            l.add(new StatusItem("REST-API problem\n" + JoH.dateTimeText(NightscoutUploader.last_exception_time) + " (" + NightscoutUploader.last_exception_count + ")", NightscoutUploader.last_exception, StatusItem.Highlight.BAD));
+            l.add(new StatusItem(gs(R.string.rest_api_problem) + "\n" + JoH.dateTimeText(NightscoutUploader.last_exception_time) + " (" + NightscoutUploader.last_exception_count + ")", NightscoutUploader.last_exception, StatusItem.Highlight.BAD));
         }
 
 
