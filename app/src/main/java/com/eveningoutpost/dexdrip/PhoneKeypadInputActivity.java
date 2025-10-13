@@ -520,14 +520,9 @@ public class PhoneKeypadInputActivity extends BaseActivity {
                 break;
             case "time":
                 timetabbutton.setBackgroundColor(onColor);
-
-                // New Time Picker Code
-
-                // Get Current Time
                 Calendar calendar = Calendar.getInstance();
                 int currentHour = calendar.get(Calendar.HOUR_OF_DAY);
                 int currentMinute = calendar.get(Calendar.MINUTE);
-
                 TimePickerDialog mTimePicker = new TimePickerDialog(this,
                         android.R.style.Theme_Material_Dialog_Alert,
                         new TimePickerDialog.OnTimeSetListener() {
@@ -542,7 +537,6 @@ public class PhoneKeypadInputActivity extends BaseActivity {
                 );
                 //mTimePicker.setTitle(getString(R.string.select_time));
                 mTimePicker.show();
-
                 append = previousAppend;
                 currenttab = previoustab;
                 updateTab();
@@ -561,11 +555,13 @@ public class PhoneKeypadInputActivity extends BaseActivity {
         mDialTextView.getBackground().setAlpha(showSubmitButton ? 255 : 0);
     }
 
-
     @Override
     protected void onResume() {
         final String savedtab = PersistentStore.getString(LAST_TAB_STORE);
-        if (savedtab.length() > 0) currenttab = savedtab;
+        if (savedtab.length() > 0) {
+            currenttab = savedtab;
+            previoustab = currenttab;
+        }
         if (!multipleInsulins) {
             // snap back to insulin-1 tab if we have saved position on multiple insulins tabs
             if (currenttab.equals("insulin-2") || currenttab.equals("insulin-3")) {
@@ -593,10 +589,8 @@ public class PhoneKeypadInputActivity extends BaseActivity {
                 visibleCount++;
             }
         }
-
         // Avoid division by 0
         if (visibleCount == 0) return;
-
         // Adjust the weight of visible buttons
         for (int i = 0; i < layout.getChildCount(); i++) {
             View child = layout.getChildAt(i);
