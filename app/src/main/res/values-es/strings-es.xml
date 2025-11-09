@@ -1734,6 +1734,7 @@
     <string name="neww">Nuevo</string>
     <string name="reschedule_with_new_timing">¿Reprogramar con nuevo tiempo?</string>
     <string name="what_type_of_alert">Seleccionar nueva fuente de sonido</string>
+    <string name="select_new_sound_source">Seleccionar nueva fuente de sonido</string>
     <string name="snooze_done">← Posponer / Hecho →</string>
     <string name="zero_value">Valor cero</string>
     <string name="adjust_dose">Ajustar dosis</string>

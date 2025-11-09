@@ -1794,6 +1794,7 @@
     <string name="old">Old</string>
     <string name="neww">New</string>
     <string name="reschedule_with_new_timing">Reschedule with new timing?</string>
+    <string name="select_new_sound_source">Select new sound source</string>
     <string name="snooze_done">← Snooze / Done →</string>
     <string name="zero_value">Zero value</string>
     <string name="adjust_dose">Adjust Dose</string>
@@ -1994,6 +1995,11 @@
     <string name="web_follower">Web Follower</string>
     <string name="companion_app">Companion App</string>
     <string name="careLink_follower">CareLink Follower</string>
+    <string name="alert_profile_high">High</string>
+    <string name="alert_profile_medium">Medium</string>
+    <string name="alert_profile_ascending">Ascending volume</string>
+    <string name="alert_profile_vibrate">Vibrate only</string>
+    <string name="alert_profile_silent">Silent</string>
     <string name="libre2_no_calibration">No calibration</string>
     <string name="libre2_calibration_raw">Calibrate based on raw</string>
     <string name="libre2_calibration_glucose">Calibrate based on glucose (experimental)</string>
@@ -2173,6 +2179,9 @@
     <string name="alert_reraise_value_too_big">Reraise Value must be less than snooze length</string>
     <string name="start_and_end_time_same">Alert start and end times cannot be equal.</string>
     <string name="what_type_of_alert">What type of sound?</string>
+    <string name="default_xdrip_reminder_sound">Default xDrip+ Sound</string>
+    <string name="custom_audio_file">Custom Audio file</string>
+    <string name="android_ringtone_alarm">System Sound</string>
     <string name="system_sound_alarm">System Sound</string>
     <string name="custom_sound_alarm">Custom Sound</string>
     <string name="default_xdrip_sound">Default xDrip+ Sound</string>
