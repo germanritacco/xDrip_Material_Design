@@ -1,5 +1,7 @@
 package com.eveningoutpost.dexdrip.models;
 
+import static com.eveningoutpost.dexdrip.utils.DexCollectionType.getBestCollectorHardwareName;
+
 import com.eveningoutpost.dexdrip.Home;
 import com.eveningoutpost.dexdrip.models.UserError.Log;
 import com.eveningoutpost.dexdrip.utilitymodels.PersistentStore;
@@ -8,8 +10,9 @@ import com.eveningoutpost.dexdrip.utils.DexCollectionType;
 
 /**
  * Created by jamorham on 02/03/2018.
- * <p>
+ *
  * Checks for whether sensor data is within a sane range
+ *
  */
 
 public class SensorSanity {
@@ -70,13 +73,13 @@ public class SensorSanity {
             else if (raw_value > DEXCOM_MAX_RAW) state = false;
         }
 
-        /*if (!state) {
+        if (!state && !getBestCollectorHardwareName().equals("G7")) {
             if (JoH.ratelimit("sanity-failure", 20)) {
                 final String msg = "Sensor Raw Data Sanity Failure: " + raw_value;
                 UserError.Log.e(TAG, msg);
                 JoH.static_toast_long(msg);
             }
-        }*/
+        }
 
         return state;
     }
@@ -103,7 +106,7 @@ public class SensorSanity {
         PersistentStore.setString(PREF_LIBRE_SENSOR_UUID, "");
         PersistentStore.setString(PREF_LIBRE_SN, "");
     }
-
+    
     public static boolean checkLibreSensorChangeIfEnabled(final String sn) {
         if (Home.get_is_libre_whole_house_collector() && Sensor.currentSensor() != null) {
             Log.e(TAG, "Stopping sensor because in libre whold house coverage sensor must be stopped.");

@@ -106,9 +106,9 @@ public class NotificationChannels {
     @TargetApi(26)
     private static String my_text_hash(NotificationChannel x) {
         String res = "";
-        if (x.getSound() != null) res += "\uD83C\uDFB5"; // �
+       /* if (x.getSound() != null) res += "\uD83C\uDFB5"; // �
         if (x.shouldVibrate()) res += "\uD83D\uDCF3"; // �
-        if (x.shouldShowLights()) res += "\uD83D\uDCA1"; // �
+        if (x.shouldShowLights()) res += "\uD83D\uDCA1"; // �*/
         res = (res.equals("")) ? res : "  " + res;
 
         int counter = 1;
