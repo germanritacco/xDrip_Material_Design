@@ -73,7 +73,7 @@ public class SensorSanity {
             else if (raw_value > DEXCOM_MAX_RAW) state = false;
         }
 
-        if (!state && !getBestCollectorHardwareName().equals("G7")) {
+        if (!state && !getBestCollectorHardwareName().equals("G7") && !getBestCollectorHardwareName().equals("G6 Native")) {
             if (JoH.ratelimit("sanity-failure", 20)) {
                 final String msg = "Sensor Raw Data Sanity Failure: " + raw_value;
                 UserError.Log.e(TAG, msg);

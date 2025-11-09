@@ -643,7 +643,7 @@ public class Calibration extends Model {
                     } else {
                         Log.d(TAG, "Follower mode or note so not processing calibration deeply");
                     }
-                } else if (!getBestCollectorHardwareName().equals("G7")) {
+                } else if (!getBestCollectorHardwareName().equals("G7") && !getBestCollectorHardwareName().equals("G6 Native")) {
                     // Only if we are not using newer devices, which are limited to native behavior
                     final String msg = "Sensor data fails sanity test - Cannot Calibrate! raw:" + bgReading.raw_data;
                     UserError.Log.e(TAG, msg);
