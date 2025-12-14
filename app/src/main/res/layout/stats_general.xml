@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#121212">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="statsview"
+            type="com.eveningoutpost.dexdrip.stats.FirstPageFragment.ViewStats"/>
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#121212">
 
     <ScrollView
         android:id="@+id/scrollView5"
@@ -80,6 +89,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:showIfTrue="@{statsview.viewAbsolutes}"
                 android:layout_gravity="left"
                 android:orientation="horizontal"
                 android:padding="5dp">
@@ -111,6 +121,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
+                app:showIfTrue="@{statsview.viewMedianBG}"
                 android:orientation="horizontal"
                 android:padding="5dp">
 
@@ -173,6 +184,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
+                app:showIfTrue="@{statsview.viewA1C}"
                 android:orientation="horizontal"
                 android:padding="5dp">
 
@@ -204,6 +216,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
+                app:showIfTrue="@{statsview.viewSD}"
                 android:orientation="horizontal"
                 android:padding="5dp">
 
@@ -235,6 +248,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
+                app:showIfTrue="@{statsview.viewRelSD}"
                 android:orientation="horizontal"
                 android:padding="5dp">
 
@@ -267,7 +281,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:orientation="horizontal"
-                android:padding="5dp">
+                android:padding="5dp"
+                app:showIfTrue="@{statsview.viewGviLine}">
 
                 <TextView
                     android:id="@+id/textView22"
@@ -298,7 +313,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:orientation="horizontal"
-                android:padding="5dp">
+                android:padding="5dp"
+                app:showIfTrue="@{statsview.viewPgsLine}">
 
                 <TextView
                     android:id="@+id/textView21"
@@ -326,4 +342,5 @@
         </LinearLayout>
     </ScrollView>
 
-</RelativeLayout>
+    </RelativeLayout>
+</layout>

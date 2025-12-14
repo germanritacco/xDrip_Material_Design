@@ -1205,9 +1205,6 @@ public class Home extends ActivityWithMenu implements ActivityCompat.OnRequestPe
 
         if (chart != null) {
             chart.setAlpha((float) 1);
-
-
-
         }
     }
     // jamorham voiceinput methods
@@ -2544,7 +2541,7 @@ public class Home extends ActivityWithMenu implements ActivityCompat.OnRequestPe
             if (predicted_low_in_mins > 1) {
                 lowPredictText.append(getString(R.string.low_predicted) + "\n" + getString(R.string.in) + ": " + (int) predicted_low_in_mins + getString(R.string.space_mins));
                 if (predicted_low_in_mins < low_predicted_alarm_minutes) {
-                    lowPredictText.setTextColor(Color.RED); // low front getting too close!
+                    lowPredictText.setTextColor(getCol(X.color_low_predicted_critical_note)); // low front getting too close!
                 } else {
                     final double previous_predicted_low_in_mins = (BgGraphBuilder.previous_low_occurs_at - now) / 60000;
                     if ((BgGraphBuilder.previous_low_occurs_at > 0) && ((previous_predicted_low_in_mins + 5) < predicted_low_in_mins)) {
@@ -2682,7 +2679,8 @@ public class Home extends ActivityWithMenu implements ActivityCompat.OnRequestPe
         if (!BgReading.doWeHaveRecentUsableData()) {
             long startedAt = Sensor.currentSensor().started_at;
             long computedStartedAt = SensorDays.get().getStart();
-            if (computedStartedAt > 0 && msSince(computedStartedAt) < HOUR_IN_MS * 3) {
+            if (computedStartedAt > 0) {
+                UserError.Log.d(TAG, "computedStartedAt " + JoH.dateTimeText(computedStartedAt));
                 startedAt = Math.min(computedStartedAt, startedAt);
             }
             final long warmUpMs = SensorDays.get().getWarmupMs();
@@ -3655,15 +3653,21 @@ public class Home extends ActivityWithMenu implements ActivityCompat.OnRequestPe
 
     public static void snackBar(int buttonString, String message, View.OnClickListener mOnClickListener, Activity activity) {
 
-        Snackbar.make(
+        // Store Snackbar in a variable
+        Snackbar snackbar = Snackbar.make(
+                        activity.findViewById(android.R.id.content),
+                        message, Snackbar.LENGTH_LONG)
+                .setAction(buttonString, mOnClickListener);
 
-                activity.findViewById(android.R.id.content),
-                message, Snackbar.LENGTH_LONG)
-                .setAction(buttonString, mOnClickListener)
-                .setActionTextColor(ContextCompat.getColor(activity, R.color.colorButton))
-                .setTextColor(Color.WHITE)
-                .setBackgroundTint(0xFF121212)
-                .show();
+        // Disable ALL CAPS on the action button
+        Button b = snackbar.getView().findViewById(com.google.android.material.R.id.snackbar_action);
+        if (b != null) b.setAllCaps(false);
+
+        // Maximum number of lines to wrap into
+        TextView t = snackbar.getView().findViewById(com.google.android.material.R.id.snackbar_text);
+        if (t != null) t.setMaxLines(5);
+
+        snackbar.show();
     }
 
     public static void staticBlockUI(Activity context, boolean state) {

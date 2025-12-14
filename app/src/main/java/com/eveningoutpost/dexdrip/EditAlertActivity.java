@@ -459,13 +459,9 @@ public class EditAlertActivity extends ActivityWithMenu {
         try {
             final DecimalFormat numberFormatter = getNumberFormatter(doMgdl);
             return numberFormatter.parse(str).doubleValue();
-        } catch (NumberFormatException nfe) {
+        } catch (NumberFormatException | ParseException nfe) {
             Log.e(TAG, "Invalid number", nfe);
-            Toast.makeText(getApplicationContext(), "Invalid number: " + str, Toast.LENGTH_LONG).show();
-            return Double.NaN;
-        } catch (ParseException e) {
-            Log.e(TAG, "Invalid number", e);
-            Toast.makeText(getApplicationContext(), "Invalid number: " + str, Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), xdrip.gs(R.string.invalid_number) + " " + str, Toast.LENGTH_LONG).show();
             return Double.NaN;
         }
     }
@@ -487,7 +483,7 @@ public class EditAlertActivity extends ActivityWithMenu {
             return Integer.parseInt(str);
         } catch (NumberFormatException nfe) {
             Log.e(TAG, "Invalid number", nfe);
-            Toast.makeText(getApplicationContext(), "Invalid number: " + str, Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), xdrip.gs(R.string.invalid_number) + " " + str, Toast.LENGTH_LONG).show();
             return null;
         }
     }
@@ -496,10 +492,17 @@ public class EditAlertActivity extends ActivityWithMenu {
 
         buttonSave.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // Check that values are ok.
-                double threshold = parseDouble(alertThreshold.getText().toString());
-                if (Double.isNaN(threshold))
+                double threshold;
+                try {
+                    // Check that values are ok.
+                    threshold = JoH.tolerantParseDouble(alertThreshold.getText().toString());
+                    if (Double.isNaN(threshold))
+                        return;
+
+                } catch (Exception e) {
+                    Toast.makeText(getApplicationContext(), R.string.error_with_value, Toast.LENGTH_LONG).show();
                     return;
+                }
 
                 threshold = unitsConvertFromDisp(threshold);
 

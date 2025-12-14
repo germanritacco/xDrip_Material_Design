@@ -123,7 +123,7 @@
     <string name="title_activity_save_logs">Guardar registros</string>
     <string name="title_activity_maps">Mapa Parakeet</string>
     <string name="title_activity_display_preferences">Preferencias de visualización</string>
-    <string name="export_submenu">Funciones de importación/exportación</string>
+    <string name="export_submenu">Importar/Exportar</string>
     <string name="action_resend_to_watch">Reenviar glucosa al reloj</string>
     <string name="action_open_watch_setting">Abrir ajustes de Wear</string>
     <string name="action_sync_watch_db">Reiniciar Wear DB</string>
@@ -182,10 +182,10 @@
     <string name="show_libre_trend">Mostrar tendencias del Libre</string>
     <string name="libre_15_minutes_graph">Gráfica de 15 minutos del Libre</string>
     <string name="libre_last_x_minutes_graph">Gráfica últimos %d minutos del Libre</string>
-    <string name="share_config_via_qr_code">Compartir ajustes a través de código QR</string>
+    <string name="share_config_via_qr_code">Compartir ajustes a través de QR</string>
     <string name="check_for_updated_version">Comprobar actualizaciones</string>
     <string name="current_version_is_up_to_date">No hay actualizaciones en el canal seleccionado</string>
-    <string name="send_feedback_to_developer">Enviar comentarios al desarrollador</string>
+    <string name="send_feedback_to_developer">Enviar comentarios</string>
     <string name="home_screen">Pantalla de inicio</string>
     <string name="event_logs">Registro de Eventos</string>
     <string name="calibration_graph">Gráfico de calibración</string>
@@ -1533,11 +1533,17 @@
     <string name="connection_status">Edo. de la Conexión:</string>
     <string name="range_in_high_low">Rango:\n(medio/alto/bajo)</string>
     <string name="absolute_s">Lecturas Absolutas:\n(medio/alto/bajo)</string>
+    <string name="absolute_s_pref">Lecturas Absolutas</string>
     <string name="median_bg">Glucosa Mediana:</string>
+    <string name="median_bg_pref">Glucosa Mediana</string>
     <string name="mean_bg">Glucosa Promedio:</string>
+    <string name="mean_bg_pref">Glucosa Promedio</string>
     <string name="hba1c_est">HbA1c estimada:</string>
+    <string name="hba1c_est_pref">HbA1c estimada</string>
     <string name="stddev">Desviación Estándar:</string>
+    <string name="stddev_pref">Desviación Estándar</string>
     <string name="relative_sd_cv">Coeficiente de Variación:</string>
+    <string name="relative_sd_cv_pref">Coeficiente de Variación</string>
     <string name="important_warning">¡Advertencia Importante!</string>
     <string name="i_agree">ACEPTO</string>
     <string name="backup_detected">Se detectó un respaldo</string>
@@ -1588,6 +1594,7 @@
     <string name="calibrate">Calibrar</string>
     <string name="confirm_delete">Confirmar el borrado</string>
     <string name="are_you_sure_you_want_to_delete_this_treatment">¿Está seguro de que quiere borrar este Tratamiento?</string>
+    <string name="toast_treatment_more_than_one_hour_in_the_future">xDrip no puede aceptar tratamientos más de una hora en el futuro.</string>
     <string name="no_data_received_from_master_yet">Aún no se reciben datos del maestro</string>
     <string name="last_from_master_">Último del maestro: </string>
     <string name="prepare_to_test">¡Prepárese para la prueba!</string>
@@ -2093,4 +2100,6 @@
     <string name="last_poll">Última consulta</string>
     <string name="scan_with_xdrip_settings_auto_configure"><![CDATA[Escanear con\nxDrip Settings -> Auto Configurar]]></string>
     <string name="could_not_create_qr_code">No se pudo crear el código QR</string>
+    <string name="error_with_value">Error con valor</string>
+    <string name="parameters">Parámetros</string>
 </resources>

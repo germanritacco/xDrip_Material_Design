@@ -1569,6 +1569,7 @@
     <string name="calibrate">Kalibrálás</string>
     <string name="confirm_delete">Törlés megerősítése</string>
     <string name="are_you_sure_you_want_to_delete_this_treatment">Biztosan törölni akarja ezt a kezelési jegyzetet?</string>
+    <string name="toast_treatment_more_than_one_hour_in_the_future">Az xDrip nem fogad el a jelenidőnél egy órával későbbi kezeléseket.</string>
     <string name="no_data_received_from_master_yet">Még nem érkezett adat a Master-től</string>
     <string name="last_from_master_">Utolsó a Mastertől: </string>
     <string name="prepare_to_test">Felkészülni a tesztre!</string>
@@ -1826,8 +1827,8 @@
     <string name="google_health_connect">Google Health Connect</string>
     <string name="google_health_connect_needs_perms">HIBA: A Health engedélyeket kér! - próbálja meg a beállítokban megint</string>
     <string name="carelink_auth_country_required">Ország kötelező!</string>
-    <string name="carelink_auth_status_authenticated">Azonosított állapot!</string>
-    <string name="carelink_auth_status_not_authenticated">Nincs azonosítva!</string>
+    <string name="carelink_auth_status_authenticated">Azonosítás sikeres!</string>
+    <string name="carelink_auth_status_not_authenticated">Azonosítás sikertelen!</string>
     <string name="carelink_auth_login_in_progress">Belépés folyamatban...</string>
     <string name="carelink_refresh_token_start">Hozzáférés megújítása</string>
     <string name="carelink_refresh_token_failed">Hozzáférés megújítása sikertelen! Majd újrapróbálja!</string>
