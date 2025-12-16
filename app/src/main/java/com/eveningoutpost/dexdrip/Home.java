@@ -40,6 +40,7 @@ import android.os.PowerManager;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.speech.RecognizerIntent;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
@@ -163,6 +164,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.internal.bind.DateTypeAdapter;
+
 import static com.eveningoutpost.dexdrip.utils.DexCollectionType.DexcomG5;
 
 import java.io.ByteArrayOutputStream;
@@ -676,7 +678,7 @@ public class Home extends ActivityWithMenu implements ActivityCompat.OnRequestPe
         return true;
     }
 
-    ////
+    /// /
 
     private void refreshStatusLine() {
         try {
@@ -1191,9 +1193,8 @@ public class Home extends ActivityWithMenu implements ActivityCompat.OnRequestPe
         thiscarbsnumber = 0;
         thisInsulinSumNumber = 0;
         insulinsumset = false;
-        for (int i = 0; i < MAX_INSULIN_PROFILES; i++)
-        {
-            Log.d(TAG,"INSULINSET: "+i+" "+thisinsulinnumber.length+" "+insulinset.length);
+        for (int i = 0; i < MAX_INSULIN_PROFILES; i++) {
+            Log.d(TAG, "INSULINSET: " + i + " " + thisinsulinnumber.length + " " + insulinset.length);
             thisinsulinnumber[i] = 0;
             insulinset[i] = false;
         }
@@ -1502,7 +1503,7 @@ public class Home extends ActivityWithMenu implements ActivityCompat.OnRequestPe
             case "carbs":
                 if (!carbsset && (thisnumber > 0)) {
                     thiscarbsnumber = thisnumber;
-                    textCarbohydrates.setText((int)thisnumber + " g carbs");
+                    textCarbohydrates.setText((int) thisnumber + " g carbs");
                     carbsset = true;
                     Log.d(TAG, "Carbs eaten: " + thisnumber);
                     btnCarbohydrates.setVisibility(View.VISIBLE);
@@ -1914,7 +1915,7 @@ public class Home extends ActivityWithMenu implements ActivityCompat.OnRequestPe
         NFControl.initNFC(this, false);
 
         if (get_follower() || get_master()) {
-           // GcmActivity.checkSync(this);
+            // GcmActivity.checkSync(this);
         }
 
         checkWifiSleepPolicy();
@@ -1988,7 +1989,7 @@ public class Home extends ActivityWithMenu implements ActivityCompat.OnRequestPe
         @Override
         public boolean onTouchEvent(MotionEvent ev) {
             if (ev.getAction() == MotionEvent.ACTION_MOVE) {
-                if (JoH.quietratelimit("viewport-intercept",5)) {
+                if (JoH.quietratelimit("viewport-intercept", 5)) {
                     UserError.Log.d("VIEWPORT", "Intercept gesture move event " + ev);
                 }
                 context.lastViewPortPan = tsl();
@@ -2019,7 +2020,7 @@ public class Home extends ActivityWithMenu implements ActivityCompat.OnRequestPe
 
         // inject our gesture handler if it hasn't already been done
         try {
-            val gestureDetector =  ChartTouchHandler.class.getDeclaredField("gestureDetector");
+            val gestureDetector = ChartTouchHandler.class.getDeclaredField("gestureDetector");
             gestureDetector.setAccessible(true);
             val chartTouchHandler = chart.getTouchHandler();
             val previewChartTouchHandler = previewChart.getTouchHandler();
@@ -2033,7 +2034,8 @@ public class Home extends ActivityWithMenu implements ActivityCompat.OnRequestPe
             if (!(previewActiveDetector instanceof InterceptingGestureHandler)) {
                 gestureDetector.set(previewChartTouchHandler, new InterceptingGestureHandler(this, previewActiveDetector));
             }
-        } catch (NullPointerException | NoSuchFieldException | IllegalAccessException | ClassCastException e) {
+        } catch (NullPointerException | NoSuchFieldException | IllegalAccessException |
+                 ClassCastException e) {
             UserError.Log.d(TAG, "Exception injecting touch handler: " + e);
         }
 
@@ -2174,7 +2176,7 @@ public class Home extends ActivityWithMenu implements ActivityCompat.OnRequestPe
     }
 
     private static void setHasLibreblock() {
-        has_libreblock =  LibreBlock.getLatestForTrend() != null;
+        has_libreblock = LibreBlock.getLatestForTrend() != null;
         has_libreblock_set = true;
     }
 
@@ -2301,10 +2303,10 @@ public class Home extends ActivityWithMenu implements ActivityCompat.OnRequestPe
         // always show at least the ideal number of hours
         float ideal_hours_to_show = DEFAULT_CHART_HOURS;
         // ... and rescale to accommodate predictions if not locked
-        if (! homeShelf.get("time_locked_always")) {
+        if (!homeShelf.get("time_locked_always")) {
             ideal_hours_to_show += bgGraphBuilder.getPredictivehours();
         }
-        float hours_to_show =  exactHoursSpecified ? hours : Math.max(hours, ideal_hours_to_show);
+        float hours_to_show = exactHoursSpecified ? hours : Math.max(hours, ideal_hours_to_show);
 
         UserError.Log.d(TAG, "VIEWPORT " + source + " moveviewport in setHours: asked " + hours + " vs auto " + ideal_hours_to_show + " = " + hours_to_show + " full chart width: " + bgGraphBuilder.hoursShownOnChart());
 
@@ -2609,9 +2611,9 @@ public class Home extends ActivityWithMenu implements ActivityCompat.OnRequestPe
         if (alreadyDisplayedBgInfoCommon) return; // with bluetooth and wifi, skip second time
         alreadyDisplayedBgInfoCommon = true;
 
-        if(get_is_libre_whole_house_collector()) {
+        if (get_is_libre_whole_house_collector()) {
             Long lastReading = PersistentStore.getLong("libre-reading-timestamp");
-            if(lastReading == 0) {
+            if (lastReading == 0) {
                 notificationText.setText(R.string.in_libre_all_house_mode_no_readings_collected_yet);
             } else {
                 int minutes = (int) (tsl() - lastReading) / (60 * 1000);
@@ -2686,7 +2688,7 @@ public class Home extends ActivityWithMenu implements ActivityCompat.OnRequestPe
             final long warmUpMs = SensorDays.get().getWarmupMs();
             final long now = tsl();
             if (startedAt + warmUpMs > now) {
-                double waitTime = (startedAt + warmUpMs - now) / (double)MINUTE_IN_MS;
+                double waitTime = (startedAt + warmUpMs - now) / (double) MINUTE_IN_MS;
                 // TODO better resource format string
                 notificationText.setText(getString(R.string.please_wait_while_sensor_warms_up) + JoH.qs(waitTime, 0) + getString(R.string.minutes_with_bracket));
                 showUncalibratedSlope();
@@ -3657,7 +3659,10 @@ public class Home extends ActivityWithMenu implements ActivityCompat.OnRequestPe
         Snackbar snackbar = Snackbar.make(
                         activity.findViewById(android.R.id.content),
                         message, Snackbar.LENGTH_LONG)
-                .setAction(buttonString, mOnClickListener);
+                .setAction(buttonString, mOnClickListener)
+                .setActionTextColor(ContextCompat.getColor(activity, R.color.colorButton))
+                .setTextColor(Color.WHITE)
+                .setBackgroundTint(0xFF121212);
 
         // Disable ALL CAPS on the action button
         Button b = snackbar.getView().findViewById(com.google.android.material.R.id.snackbar_action);
