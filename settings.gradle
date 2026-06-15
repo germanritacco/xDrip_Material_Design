@@ -1,4 +1,9 @@
+plugins {
+    id 'org.gradle.toolchains.foojay-resolver-convention' version '1.0.0'
+}
+include ':ipluginda'
 include ':app'
 include ':localeapi'
 include ':libkeks'
+include ':libglupro'
 include ':wear'

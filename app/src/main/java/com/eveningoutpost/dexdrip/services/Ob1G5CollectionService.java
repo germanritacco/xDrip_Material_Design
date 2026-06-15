@@ -1,12 +1,15 @@
 package com.eveningoutpost.dexdrip.services;
 
 import static com.eveningoutpost.dexdrip.Home.get_engineering_mode;
+import static com.eveningoutpost.dexdrip.cgm.dex.TxIdHelper.isTransmitterIdOkay;
+import static com.eveningoutpost.dexdrip.g5model.BatteryInfoRxMessage.battery0VException;
 import static com.eveningoutpost.dexdrip.g5model.BluetoothServices.Advertisement;
 import static com.eveningoutpost.dexdrip.g5model.BluetoothServices.ExtraData;
 import static com.eveningoutpost.dexdrip.g5model.BluetoothServices.Mask16;
 import static com.eveningoutpost.dexdrip.g5model.BluetoothServices.getUUIDName;
 import static com.eveningoutpost.dexdrip.g5model.CalibrationState.Ok;
 import static com.eveningoutpost.dexdrip.g5model.CalibrationState.Unknown;
+import static com.eveningoutpost.dexdrip.g5model.FirmwareCapability.isTransmitterModified;
 import static com.eveningoutpost.dexdrip.g5model.G6CalibrationParameters.getCurrentSensorCode;
 import static com.eveningoutpost.dexdrip.g5model.Ob1G5StateMachine.CLOSED_OK_TEXT;
 import static com.eveningoutpost.dexdrip.g5model.Ob1G5StateMachine.doKeepAlive;
@@ -21,6 +24,7 @@ import static com.eveningoutpost.dexdrip.models.JoH.joinBytes;
 import static com.eveningoutpost.dexdrip.models.JoH.msSince;
 import static com.eveningoutpost.dexdrip.models.JoH.niceTimeScalar;
 import static com.eveningoutpost.dexdrip.models.JoH.pratelimit;
+import static com.eveningoutpost.dexdrip.models.JoH.quietratelimit;
 import static com.eveningoutpost.dexdrip.models.JoH.tolerantHexStringToByteArray;
 import static com.eveningoutpost.dexdrip.models.JoH.tsl;
 import static com.eveningoutpost.dexdrip.models.JoH.upForAtLeastMins;
@@ -156,7 +160,7 @@ import lombok.val;
 
 
 /**
- * OB1 G5/G6 collector
+ * OB1 G5/G6/G7 collector
  * Created by jamorham on 16/09/2017.
  * <p>
  * App version is master, best to avoid editing wear version directly
@@ -184,7 +188,7 @@ public class Ob1G5CollectionService extends G5BaseService {
     private static volatile String transmitterID;
     private static volatile String transmitterMAC;
     private static volatile String historicalTransmitterMAC;
-    private static String transmitterIDmatchingMAC;
+    private static volatile String transmitterIDmatchingMAC;
 
     private static volatile String lastScanError = null;
     private static volatile int lastScanException = -1;
@@ -211,9 +215,9 @@ public class Ob1G5CollectionService extends G5BaseService {
     private static volatile Subscription scanSubscription;
     private static volatile Subscription connectionSubscription;
     private static volatile Subscription stateSubscription;
-    private Subscription discoverSubscription;
-    private RxBleDevice bleDevice;
-    private RxBleConnection connection;
+    private volatile Subscription discoverSubscription;
+    private volatile RxBleDevice bleDevice;
+    private volatile RxBleConnection connection;
     public volatile IPluginDA plugin;
 
     private PowerManager.WakeLock connection_linger;
@@ -340,7 +344,7 @@ public class Ob1G5CollectionService extends G5BaseService {
                         break;
                     case SCAN:
                         // no connection? lets try a restart
-                        if (msSince(static_last_connected) > 30 * 60 * 1000) {
+                        if (msSince(static_last_connected) > 30 * MINUTE_IN_MS) {
                             if (JoH.pratelimit("ob1-collector-restart", 1200)) {
                                 CollectionServiceStarter.restartCollectionServiceBackground();
                                 break;
@@ -438,7 +442,7 @@ public class Ob1G5CollectionService extends G5BaseService {
                         Ob1G5StateMachine.doReset(this, connection);
                         break;
                     case GET_DATA:
-                        if (hardResetTransmitterNow) {
+                        if (hardResetTransmitterNow && isTransmitterModified(getTransmitterID())) {
                             send_reset_command();
                             DexSyncKeeper.clear(transmitterID);
                         } else {
@@ -658,7 +662,6 @@ public class Ob1G5CollectionService extends G5BaseService {
                 }
 
                 unBondAllG7notCurrentAsNeeded();
-
                 msg(gs(R.string.connect_request));
                 if (state == CONNECT_NOW) {
                     if (connection_linger != null) JoH.releaseWakeLock(connection_linger);
@@ -754,6 +757,10 @@ public class Ob1G5CollectionService extends G5BaseService {
     }
 
     private synchronized void do_create_bond() {
+        if (!isBluetoothEnabled()) {
+            UserError.Log.e(TAG, "Bluetooth not enabled when attempting to create bond");
+            return;
+        }
         final boolean isDeviceLocallyBonded = isDeviceLocallyBonded();
         UserError.Log.d(TAG, "Attempting to create bond, device is : " + (isDeviceLocallyBonded ? "BONDED" : "NOT Bonded"));
 
@@ -892,8 +899,7 @@ public class Ob1G5CollectionService extends G5BaseService {
     private synchronized void checkAndEnableBT() {
         try {
             if (Pref.getBoolean("automatically_turn_bluetooth_on", true)) {
-                final BluetoothAdapter mBluetoothAdapter = ((BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE)).getAdapter();
-                if (!mBluetoothAdapter.isEnabled()) {
+                if (!isBluetoothEnabled()) {
                     if (JoH.ratelimit("g5-enabling-bluetooth", 30)) {
                         JoH.setBluetoothEnabled(this, true);
                         UserError.Log.e(TAG, "Enabling bluetooth");
@@ -906,10 +912,19 @@ public class Ob1G5CollectionService extends G5BaseService {
         }
     }
 
+    public boolean isBluetoothEnabled() {
+        final BluetoothAdapter mBluetoothAdapter = ((BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE)).getAdapter();
+        return mBluetoothAdapter != null && mBluetoothAdapter.isEnabled();
+    }
+
     public synchronized void unBond() {
 
         UserError.Log.d(TAG, "unBond() start");
         if (transmitterMAC == null) return;
+        if (!isBluetoothEnabled()) {
+            UserError.Log.e(TAG, "Bluetooth not enabled when attempting to unbond");
+            return;
+        }
 
         final BluetoothAdapter mBluetoothAdapter = ((BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE)).getAdapter();
 
@@ -953,7 +968,10 @@ public class Ob1G5CollectionService extends G5BaseService {
                 UserError.Log.d(TAG, "unBondAllG7notCurrent() no transmitter mac");
                 return;
             }
-
+            if (!isBluetoothEnabled()) {
+                UserError.Log.e(TAG, "unBondAllG7notCurrent() bluetooth not enabled");
+                return;
+            }
             final BluetoothAdapter mBluetoothAdapter = ((BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE)).getAdapter();
 
             final Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
@@ -1045,8 +1063,13 @@ public class Ob1G5CollectionService extends G5BaseService {
         }
     }
 
-    public static void clearPersistStore() {
+    public static void clearKeks() {
         PersistentStore.cleanupOld(KEKS_ONE);
+        Loader.getLocalInstance(Registry.get(KEKS), "9999");
+    }
+
+    public static void clearPersistStore() {
+        clearKeks();
         PersistentStore.cleanupOld(OB1G5_MACSTORE);
     }
 
@@ -1055,6 +1078,8 @@ public class Ob1G5CollectionService extends G5BaseService {
         expireFailures(true);
         transmitterID = null;
         transmitterMAC = null;
+        historicalTransmitterMAC = null;
+        transmitterIDmatchingMAC = null;
     }
 
     private void scheduleWakeUp(long future, final String info) {
@@ -1429,6 +1454,10 @@ public class Ob1G5CollectionService extends G5BaseService {
     }
 
     private boolean resetBondIfAllowed(boolean force) {
+        if (!isBluetoothEnabled()) {
+            UserError.Log.e(TAG, "Bluetooth is not enabled, cannot reset bond");
+            return false;
+        }
         if (Pref.getBoolean("ob1_g5_allow_resetbond", false)
                 && !specialPairingWorkaround()) {
             reset_bond(force);
@@ -1515,8 +1544,10 @@ public class Ob1G5CollectionService extends G5BaseService {
                     UserError.Log.d(TAG, "Got exception trying gatt refresh: " + e);
                 }
             } else {
-                UserError.Log.d(TAG, "Gatt refresh rate limited");
+                UserError.Log.d(TAG, "Gatt refresh block by preference");
             }
+        } else {
+            UserError.Log.d(TAG, "Gatt refresh rate limited");
         }
     }
 
@@ -1528,8 +1559,11 @@ public class Ob1G5CollectionService extends G5BaseService {
             static_last_connected = tsl();
             lastConnectFailed = false;
             preScanFailureMarker = false;
-
-            DexSyncKeeper.store(transmitterID, static_last_connected);
+            if (!shortTxId() || !DexSyncKeeper.isReady(transmitterID)) {
+                DexSyncKeeper.store(transmitterID, static_last_connected);
+            } else {
+                UserError.Log.d(TAG, "onConnectionReceived slc:" + ((static_last_connected / 1000) % 300) + " dsk:" + ((DexSyncKeeper.get(transmitterID) / 1000) % 300) + "   " + JoH.dateTimeText(DexSyncKeeper.anticipate(transmitterID)));
+            }
             // TODO check connection already exists - close etc?
             if (connection_linger != null) JoH.releaseWakeLock(connection_linger);
             connection = this_connection;
@@ -1791,6 +1825,7 @@ public class Ob1G5CollectionService extends G5BaseService {
                 try {
                     if (parcel_device.getAddress().equals(transmitterMAC)) {
                         msg(bondState(bond_state_extra).replace(" ", ""));
+
                         if (parcel_device.getBondState() == BluetoothDevice.BOND_BONDED) {
                             if (shortTxId()) {
                                 pairKeeper.add(getTransmitterID(), parcel_device.getAddress());
@@ -1818,6 +1853,9 @@ public class Ob1G5CollectionService extends G5BaseService {
                                 JoH.playResourceAudio(R.raw.bt_meter_connect);
                                 UserError.Log.uel(TAG, "Prompting user to notice pairing request with sound - On Android 8+ you have to manually pair when requested");
                             }
+                        }  else if (parcel_device.getBondState() == BluetoothDevice.BOND_NONE) {
+                                UserError.Log.uel(TAG, "Unbonded mac: " + transmitterMAC);
+                                clearKeks();
                         }
                     }
                 } catch (Exception e) {
@@ -2153,6 +2191,9 @@ public class Ob1G5CollectionService extends G5BaseService {
                         return Span.colorSpan(lastSensorState.getExtendedText(), lastSensorState.transitional() ? NOTICE.color() : lastSensorState.sensorFailed() ? CRITICAL.color() : BAD.color());
                     }
                 } else {
+                    if ((transmitterMAC == null || transmitterMAC.isEmpty()) && transmitterID != null) {
+                        return Span.colorSpan("Searching for " + transmitterID, NOTICE.color()); // TODO i18n + color?
+                    }
                     return Span.colorSpan("", NORMAL.color()); // non native blank
                 }
             } else {
@@ -2233,7 +2274,8 @@ public class Ob1G5CollectionService extends G5BaseService {
         }
 
         if (transmitterID != null) {
-            l.add(new StatusItem(gs(R.string.transmitter_id_status), transmitterID + ((transmitterMAC != null && get_engineering_mode()) ? "\n" + transmitterMAC : "")));
+            val txIdOk = isTransmitterIdOkay(transmitterID);
+            l.add(new StatusItem(gs(R.string.transmitter_id_status), transmitterID + ((transmitterMAC != null && get_engineering_mode()) ? "\n" + transmitterMAC : "") + (!txIdOk ? "\n" + gs(R.string.invalid_transmitter_id) : ""), txIdOk ? NORMAL : CRITICAL));
         }
 
         if (static_connection_state != null) {
@@ -2295,6 +2337,13 @@ public class Ob1G5CollectionService extends G5BaseService {
         try {
             if (vr1 != null) {
                 val known = FirmwareCapability.isKnownFirmware(vr1.firmware_version_string);
+                if (!known) {
+                    if (quietratelimit("log ob1 unknown firmware outer", 3600)) {
+                        if (pratelimit("log ob1 unknown firmware", 86400 * 7)) {
+                            JoH.logMessage("Unknown firmware: " + DexCollectionType.getBestCollectorHardwareName() + " " + vr1.firmware_version_string);
+                        }
+                    }
+                }
                 val unknown = !known ? (" " + "Unknown!" + "\n" + (UpdateActivity.testAndSetNightly(false) ? "Tap to report" : "Tap to use nightly version")) : "";
 
                 l.add(new StatusItem(gs(R.string.firmware_version), vr1.firmware_version_string + unknown, !known ? CRITICAL : NORMAL, !known ? "long-press" : null, !known ? (Runnable) Ob1G5CollectionService::handleUnknownFirmwareClick : null));
@@ -2302,7 +2351,7 @@ public class Ob1G5CollectionService extends G5BaseService {
                 if (vr1.version_code != 3 && get_engineering_mode()) {
                     l.add(new StatusItem("Compat Version", "" + vr1.version_code, NORMAL));
                 }
-                if (vr1.max_runtime_days != 110 && vr1.max_runtime_days != 112 && vr1.max_runtime_days != 0) {
+                if (vr1.max_runtime_days != 110 && vr1.max_runtime_days != 112 && vr1.max_runtime_days != 180 && vr1.max_runtime_days != 0) {
                     l.add(new StatusItem("Transmitter Life", "" + vr1.max_runtime_days + " " + gs(R.string.days)));
                 }
 
@@ -2317,7 +2366,7 @@ public class Ob1G5CollectionService extends G5BaseService {
 
         try {
             if (vr2 != null) {
-                if (vr2.typicalSensorDays != 10 && vr2.typicalSensorDays != 7 && vr2.typicalSensorDays != 15) {
+                if (vr2.typicalSensorDays != 10 && vr2.typicalSensorDays != 15 && vr2.typicalSensorDays != 60) {
                     l.add(new StatusItem("Sensor Period", niceTimeScalar(vr2.typicalSensorDays * DAY_IN_MS), Highlight.NOTICE));
                 }
 
@@ -2333,7 +2382,7 @@ public class Ob1G5CollectionService extends G5BaseService {
                     }
                 }
 
-                if (vr3 == null && vr2.version1 != 0 && vr2.warmupSeconds != 0 && vr2.warmupSeconds != 7200 && vr2.warmupSeconds != 1620) {
+                if (vr3 == null && vr2.version1 != 0 && vr2.warmupSeconds != 0 && vr2.warmupSeconds != 7200 && vr2.warmupSeconds != 1620 && vr2.warmupSeconds != 3600 && vr2.warmupSeconds != 3720) {
                     l.add(new StatusItem("Warm Up Time", niceTimeScalar(vr2.warmupSeconds * SECOND_IN_MS), Highlight.NOTICE));
                 }
 
@@ -2345,7 +2394,7 @@ public class Ob1G5CollectionService extends G5BaseService {
 
         try {
             if (vr3 != null) {
-                if (vr3.warmupSeconds != 7200) {
+                if (vr3.warmupSeconds != 7200 && vr3.warmupSeconds != 3600 && !isTransmitterModified(getTransmitterID())) {
                     l.add(new StatusItem("Warm Up Time", niceTimeScalar(vr3.warmupSeconds * SECOND_IN_MS), Highlight.NOTICE));
                 }
             }
@@ -2377,6 +2426,7 @@ public class Ob1G5CollectionService extends G5BaseService {
         }
 
         // battery details
+        boolean bat_request_shown_already = false;
         final BatteryInfoRxMessage bt = Ob1G5StateMachine.getBatteryDetails(tx_id);
         long last_battery_query = PersistentStore.getLong(G5_BATTERY_FROM_MARKER + tx_id);
         if (getBatteryStatusNow) {
@@ -2387,6 +2437,7 @@ public class Ob1G5CollectionService extends G5BaseService {
                             getBatteryStatusNow = false;
                         }
                     }));
+            bat_request_shown_already = true;
         }
 
         if (JoH.quietratelimit("update-g5-battery-warning", 10)) {
@@ -2400,13 +2451,25 @@ public class Ob1G5CollectionService extends G5BaseService {
         if ((bt != null) && (last_battery_query > 0)) {
             Ob1DexTransmitterBattery parsedBattery = new Ob1DexTransmitterBattery(tx_id, bt, vr);
 
-            l.add(new StatusItem(gs(R.string.battery_last_queried), gs(R.string.ago) + " " + JoH.niceTimeSince(last_battery_query), NORMAL, "long-press",
-                    new Runnable() {
-                        @Override
-                        public void run() {
-                            getBatteryStatusNow = true;
-                        }
-                    }));
+            if (!bat_request_shown_already) { // Only if we have not already requested an update.
+                if (battery0VException) {
+                    l.add(new StatusItem("Battery status unavailable", "tap to request update", NORMAL, "long-press",
+                            new Runnable() {
+                                @Override
+                                public void run() {
+                                    getBatteryStatusNow = true;
+                                }
+                            }));
+                } else {
+                    l.add(new StatusItem(gs(R.string.battery_last_queried), gs(R.string.ago) + " " + JoH.niceTimeSince(last_battery_query), NORMAL, "long-press",
+                            new Runnable() {
+                                @Override
+                                public void run() {
+                                    getBatteryStatusNow = true;
+                                }
+                            }));
+                }
+            }
             if (vr != null) {
                 final String battery_status = TransmitterStatus.getBatteryLevel(vr.status).toString();
                 if (!battery_status.equals("OK"))
@@ -2430,8 +2493,10 @@ public class Ob1G5CollectionService extends G5BaseService {
                 }
             }
             l.add(new StatusItem(gs(R.string.transmitter_days), parsedBattery.daysEstimate(), TX_dys_highlight));
-            l.add(new StatusItem(gs(R.string.voltage_a), parsedBattery.voltageA(), parsedBattery.voltageAWarning() ? BAD : NORMAL));
-            l.add(new StatusItem(gs(R.string.voltage_b), parsedBattery.voltageB(), parsedBattery.voltageBWarning() ? BAD : NORMAL));
+            if (!battery0VException) { // Only show voltages if they are not 0
+                l.add(new StatusItem(gs(R.string.voltage_a), parsedBattery.voltageA(), parsedBattery.voltageAWarning() ? BAD : NORMAL));
+                l.add(new StatusItem(gs(R.string.voltage_b), parsedBattery.voltageB(), parsedBattery.voltageBWarning() ? BAD : NORMAL));
+            }
             if (vr != null && FirmwareCapability.isFirmwareResistanceCapable(vr.firmware_version_string)) {
                 if (parsedBattery.resistance() != 0) {
                     l.add(new StatusItem(gs(R.string.resistance), parsedBattery.resistance(), parsedBattery.resistanceStatus().highlight));
@@ -2443,13 +2508,15 @@ public class Ob1G5CollectionService extends G5BaseService {
                 }
             }
         } else {
-            l.add(new StatusItem(gs(R.string.battery_info_unavailable), gs(R.string.battery_info_unavailable_value), NORMAL, "long-press",
-                    new Runnable() {
-                        @Override
-                        public void run() {
-                            getBatteryStatusNow = true;
-                        }
-                    }));
+            if (!bat_request_shown_already) { // Only if we have not already requested an update
+                l.add(new StatusItem(gs(R.string.battery_info_unavailable), gs(R.string.battery_info_unavailable_value), NORMAL, "long-press",
+                        new Runnable() {
+                            @Override
+                            public void run() {
+                                getBatteryStatusNow = true;
+                            }
+                        }));
+            }
         }
 
         return l;

@@ -18,6 +18,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.eveningoutpost.dexdrip.models.JoH;
 import com.eveningoutpost.dexdrip.utilitymodels.BgGraphBuilder;
 import com.eveningoutpost.dexdrip.utilitymodels.Pref;
 import com.eveningoutpost.dexdrip.stats.StatsResult;
@@ -59,6 +60,7 @@ public class BGHistory extends ActivityWithMenu {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bghistory);
+        JoH.fixActionBar(this);
         this.statisticsTextView = (TextView) findViewById(R.id.historystats);
 
 

@@ -53,6 +53,7 @@ public class AddCalibration extends AppCompatActivity implements NavigationDrawe
             finish();
         }
         setContentView(R.layout.activity_add_calibration);
+        JoH.fixActionBar(this);
         addListenerOnButton();
         automatedCalibration();
     }
@@ -207,11 +208,13 @@ public class AddCalibration extends AppCompatActivity implements NavigationDrawe
                             final double calValue = JoH.tolerantParseDouble(string_value);
 
                             if (!Home.get_follower()) {
+                                double bg = calValue;
+                                if (unit.compareTo("mgdl") != 0) {
+                                    bg = bg * Constants.MMOLL_TO_MGDL;
+                                }
+                                BloodTest.create(JoH.tsl() - (Constants.SECOND_IN_MS * 30), bg, "Add Calibration");
                                 if (DexCollectionType.hasDexcomRaw() && FirmwareCapability.isTransmitterRawIncapable(getTransmitterID())) { // Firefly only
-                                    double bg = calValue;
-                                    if (unit.compareTo("mgdl") != 0) {
-                                        bg = bg * Constants.MMOLL_TO_MGDL;
-                                    }
+
                                     JoH.clearCache();
                                     final Calibration Calibration = new Calibration();
                                     final Sensor sensor = Sensor.currentSensor();

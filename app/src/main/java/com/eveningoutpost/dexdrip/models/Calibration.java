@@ -298,7 +298,7 @@ public class Calibration extends Model {
             if ((bgReadings == null) || (bgReadings.size() != 3) || !isDataSuitableForDoubleCalibration() ){
 
             if (Ob1G5CollectionService.usingNativeMode()) {
-                JoH.static_toast_long(gs(R.string.send_test_transmitter));
+                JoH.static_toast_long(context.getString(R.string.sending_blood_tests_to_transmitter));
                 BloodTest.create(JoH.tsl() - (Constants.SECOND_IN_MS * 30), bg1, "Initial Calibration");
                 BloodTest.create(JoH.tsl(), bg2, "Initial Calibration");
 
@@ -628,7 +628,7 @@ public class Calibration extends Model {
                         bgReading.save();
                     }
 
-                    if ((!is_follower) && (!note_only)) {
+                    if ((!DexCollectionType.isAlwaysNativeCal()) && (!note_only)) {
                         BgSendQueue.handleNewBgReading(bgReading, "update", context);
                         // TODO probably should add a more fine grained prefs option in future
                         calculate_w_l_s(prefs.getBoolean("infrequent_calibration", false));
@@ -643,7 +643,7 @@ public class Calibration extends Model {
                     } else {
                         Log.d(TAG, "Follower mode or note so not processing calibration deeply");
                     }
-                } else if (!getBestCollectorHardwareName().equals("G7") && !getBestCollectorHardwareName().equals("G6 Native")) {
+                } else if (!getBestCollectorHardwareName().equals("G7")) {
                     // Only if we are not using newer devices, which are limited to native behavior
                     final String msg = "Sensor data fails sanity test - Cannot Calibrate! raw:" + bgReading.raw_data;
                     UserError.Log.e(TAG, msg);
@@ -651,7 +651,7 @@ public class Calibration extends Model {
                 }
             } else {
                 // we couldn't get a reading close enough to the calibration timestamp
-                if (!is_follower) {
+                if (!DexCollectionType.isAlwaysNativeCal()) {
                     JoH.static_toast(context, "No close enough reading for Calib (15 min)", Toast.LENGTH_LONG);
                 }
             }

@@ -50,11 +50,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
+import lombok.val;
 import okhttp3.CipherSuite;
 import okhttp3.Handshake;
 import okhttp3.Interceptor;
@@ -79,6 +81,8 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
+import static com.nightscout.core.barcode.NSBarcodeConfigKeys.API_CONFIG;
+import static com.nightscout.core.barcode.NSBarcodeConfigKeys.API_URI;
 import static com.eveningoutpost.dexdrip.utilitymodels.OkHttpWrapper.enableTls12OnPreLollipop;
 import static com.eveningoutpost.dexdrip.xdrip.gs;
 
@@ -174,14 +178,14 @@ public class NightscoutUploader {
     public NightscoutUploader(Context context) {
         mContext = context;
         prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
-        final OkHttpClient.Builder okHttp3Builder = enableTls12OnPreLollipop(new OkHttpClient.Builder());
+        final OkHttpClient.Builder okHttp3Builder = OkHttpWrapper.getClient().newBuilder()
+                .connectTimeout(CONNECTION_TIMEOUT, TimeUnit.MILLISECONDS)
+                .readTimeout(SOCKET_TIMEOUT, TimeUnit.MILLISECONDS)
+                .writeTimeout(SOCKET_TIMEOUT, TimeUnit.MILLISECONDS);
         if (UserError.ExtraLogTags.shouldLogTag(TAG, android.util.Log.VERBOSE)) {
             okHttp3Builder.addInterceptor(new SSLHandshakeInterceptor());
         }
         if (USE_GZIP) okHttp3Builder.addInterceptor(new GzipRequestInterceptor());
-        okHttp3Builder.connectTimeout(CONNECTION_TIMEOUT, TimeUnit.MILLISECONDS);
-        okHttp3Builder.writeTimeout(SOCKET_TIMEOUT, TimeUnit.MILLISECONDS);
-        okHttp3Builder.readTimeout(SOCKET_TIMEOUT, TimeUnit.MILLISECONDS);
         client = okHttp3Builder.build();
         enableRESTUpload = prefs.getBoolean("cloud_storage_api_enable", false);
         enableMongoUpload = prefs.getBoolean("cloud_storage_mongodb_enable", false);
@@ -242,6 +246,10 @@ public class NightscoutUploader {
     }
 
     public static String uuid_to_id(String uuid) {
+        if (uuid.contains(":")) {
+            // convert non-standard uuids to compatible ones
+            return CipherUtils.getMD5(uuid).substring(0, 24);
+        }
         if (uuid.length() == 24) return uuid; // already converted
         if (uuid.length() < 24) {
             // convert non-standard uuids to compatible ones
@@ -529,7 +537,7 @@ public class NightscoutUploader {
         long firstInconsistentMultiSiteUploadTime = PersistentStore.getLong(TAG + "_firstInconsistentMultiSiteUploadTime"); // Updating the local representation of the last inconsistent upload time
         if (PersistentStore.getBoolean(TAG + "_inconsistentMultiSteUpload")) { // If there has been a failure to upload and the queue has been cleared
             if (Pref.getBooleanDefaultFalse("warn_nightscout_multi_site_upload_failure")) { // Issue notification only if enabled
-                JoH.showNotification(gs(R.string.title_nightscout_upload_failure_backfill_required), null, null, Constants.NIGHTSCOUT_ERROR_NOTIFICATION_ID, null, false, false, null, null, gs(R.string.nightscout_upload_failure_backfill_required, JoH.dateTimeText(firstInconsistentMultiSiteUploadTime)), true);
+                JoH.showNotification(xdrip.gs(R.string.title_nightscout_upload_failure_backfill_required), null, null, Constants.NIGHTSCOUT_ERROR_NOTIFICATION_ID, null, false, false, null, null, xdrip.gs(R.string.nightscout_upload_failure_backfill_required, JoH.dateTimeText(firstInconsistentMultiSiteUploadTime)), true);
             }
             UserError.Log.uel(TAG, "Inconsistent Multi-site Nightscout upload - Backfill recommended - First failure: " + JoH.dateTimeText(firstInconsistentMultiSiteUploadTime));
             PersistentStore.setBoolean(TAG + "_inconsistentMultiSteUpload", false); // We have notified.  Clearing the flag
@@ -1462,5 +1470,14 @@ public class NightscoutUploader {
                 }
             };
         }
+    }
+
+    public static String getJsonFromSetting(String setting) {
+        val split = setting.trim().split(" ");
+        val hm = new HashMap<String, Object>();
+        val ep = new HashMap<String, String[]>();
+        ep.put(API_URI, split);
+        hm.put(API_CONFIG, ep);
+        return JoH.defaultGsonInstance().toJson(hm);
     }
 }
