@@ -2192,7 +2192,7 @@ public class Ob1G5CollectionService extends G5BaseService {
                     }
                 } else {
                     if ((transmitterMAC == null || transmitterMAC.isEmpty()) && transmitterID != null) {
-                        return Span.colorSpan("Searching for " + transmitterID, NOTICE.color()); // TODO i18n + color?
+                        return Span.colorSpan(gs(R.string.searching_for) + " " + transmitterID, NOTICE.color()); // TODO i18n + color?
                     }
                     return Span.colorSpan("", NORMAL.color()); // non native blank
                 }

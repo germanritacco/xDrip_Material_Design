@@ -2118,4 +2118,7 @@
     <string name="invalid_transmitter_id">ID transmisor no válida</string>
     <string name="fixed_version">Versión arreglada:</string>
     <string name="title_language">Lenguaje</string>
+    <string name="aod_chip_style_title">Usar estilo chip en AOD</string>
+    <string name="aod_chip_style_summary">Mostrar chip de notificación y pantalla de bloqueo. Solo Android 16+</string>
+    <string name="searching_for">Buscando</string>
 </resources>

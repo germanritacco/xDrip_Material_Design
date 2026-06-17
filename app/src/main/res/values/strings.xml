@@ -2288,4 +2288,9 @@
     <string name="click">Click</string>
     <string name="to_use_this_instead">to use this instead?</string>
     <string name="the_transmitter_id_you_have_entered_is_incorrect">The transmitter ID or pairing code you have entered is incorrect and would not work.\n\nPlease double-check the details and try again.</string>
+    <string name="aod_chip_style_title">Use AOD chip style</string>
+    <string name="aod_chip_style_summary">Display notification chip and lockscreen notification. Android 16+ only</string>
+    <string name="searching_for">Searching for</string>
+
+
 </resources>
